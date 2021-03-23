@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Header from '../partials/Header';
+import Menu from '../partials/Menu';
 import HeroHome from '../partials/HeroHome';
 import FeaturesHome from '../partials/Features';
 import FeaturesBlocks from '../partials/FeaturesBlocks';
@@ -13,17 +14,20 @@ function Home() {
     <div className="flex flex-col min-h-screen overflow-hidden">
 
       {/*  Site header */}
-      <Header />
+       <Header/>
 
       {/*  Page content */}
       <main className="flex-grow">
+        
 
         {/*  Page sections */}
+       <Menu/>
+
         <HeroHome />
-        <FeaturesHome />
+        {/* <FeaturesHome /> */}
         <FeaturesBlocks />
-        <Testimonials />
-        <Newsletter />
+        {/* <Testimonials /> */}
+        {/* <Newsletter /> */}
 
       </main>
 

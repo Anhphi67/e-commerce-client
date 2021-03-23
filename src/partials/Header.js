@@ -35,9 +35,16 @@ function Header() {
               </svg>
             </Link>
           </div>
-
+         
           {/* Site navigation */}
-          <nav className="flex flex-grow">
+          <nav className="flex">
+          <form className="w-full lg:w-auto">
+                  <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0">
+                    <input type="text" className="w-full appearance-none bg-white border border-gray-700 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500" placeholder="Search..." aria-label="Search..." />
+                    <a className="btn text-white bg-blue-600 hover:bg-blue-700 shadow" href="#0">Search</a>
+                  </div>
+                </form>
+
             <ul className="flex flex-grow justify-end flex-wrap items-center">
               <li>
                 <Link to="/signin" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
