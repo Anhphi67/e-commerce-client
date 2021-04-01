@@ -15,6 +15,7 @@ import List from './pages/ListProduct';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
 
@@ -53,6 +54,9 @@ function App() {
         </Route>
         <Route path="/list">
           <List />
+        </Route>
+        <Route path="/detail">
+          <ProductDetails />
         </Route>
       </Switch>
     </>

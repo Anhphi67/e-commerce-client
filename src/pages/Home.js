@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Header from '../partials/Header';
-import Menu from '../partials/Menu';
+import Menu from '../partials/Dropdown';
 import HeroHome from '../partials/HeroHome';
 import FeaturesHome from '../partials/Features';
 import FeaturesBlocks from '../partials/FeaturesBlocks';
@@ -17,7 +17,7 @@ function Home() {
        <Header/>
 
       {/*  Page content */}
-      <main className="flex-grow">
+      <main className="flex-grow mt-20  mx-auto px-5 sm:px-6">
         
 
         {/*  Page sections */}

@@ -1,0 +1,49 @@
+.imgproduct1{
+    max-width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    height:13rem;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.imgproduct2{
+    max-width: 80%;
+    margin-left: 10%;
+    height:13rem;
+    border-radius: 2px;
+    cursor: pointer;
+    display: none;
+}
+.imgproduct1_hiden{
+    display: none;
+}
+.buttonnext{
+    position: absolute  !important;
+    top: 3.5rem;
+    right: -10px;
+    border: none !important;
+
+}
+
+.MuiGridListTile-tile:hover{
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+.MuiAccordionSummary-content.Mui-expanded{
+    margin: 0 0 !important;
+    min-height: 45px;
+}
+.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
+    padding: 0  !important;
+}
+.breakcrum{
+    border-bottom: dotted gray;
+}
+.buttonpri{
+    outline: none;
+    border: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 1rem !important;
+    max-width: 1rem;
+}

@@ -1,0 +1,79 @@
+[
+    {
+        "id": 1,
+        "title": "Product 1",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Product 2",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Product 3",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "./images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Product 4",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Product 5",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Product 6",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 7,
+        "title": "Product 7",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 8,
+        "title": "Product 8",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 9,
+        "title": "Product 9",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 10,
+        "title": "Product 10",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 11,
+        "title": "Product 11",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    }
+]

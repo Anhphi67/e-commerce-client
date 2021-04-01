@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "title": "Product 1",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Product 2",
+        "Desc": "Sản phẩm như lol",
+        "price": "250,000",
+        "image": "../images/truyen-thong-minh-duong.jpg"
+    }
+]

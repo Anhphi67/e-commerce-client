@@ -1,20 +1,14 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import React from 'react';
+// import './App.scss';
+import Dropdown from '../partials/Dropdown';
 
 
-export default function Menu({ fixed }) {
-  const [menuOpen, setMenuOpen] = React.useState(false);
+function Menu() {
   return (
-    <div className="container max-w-6xl mx-auto px-5 sm:px-6 mt-20 flex">
+    <div className="container  mx-auto px-5 sm:px-6 mt-20 flex">
       <Dropdown title="Select movie" className="w-auto shadow-xs border-gray-400 border-2 "  />
     </div>
-     </section>
-     
-    </>
   );
 }
+
+export default Menu;

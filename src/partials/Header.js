@@ -1,7 +1,86 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from '@material-ui/core/styles';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Badge from '@material-ui/core/Badge';
+
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+  },
+
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.common.white,
+      },
+    },
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '8ch',
+    },
+  },
+  
+}))(MenuItem);
+
+const useStyles = makeStyles((theme) => ({
+  header: {
+    width:'40rem',
+  },
+  input:{
+    width:'30rem',
+  },
+  buttonsearch:{
+    padding:'16px'
+  }
+ 
+
+}));
+
+
 
 function Header() {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
 
   const [top, setTop] = useState(true);
 
@@ -12,11 +91,11 @@ function Header() {
     };
     window.addEventListener('scroll', scrollHandler);
     return () => window.removeEventListener('scroll', scrollHandler);
-  }, [top]);  
+  }, [top]);
 
   return (
     <header className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && 'bg-white blur shadow-lg'}`}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-6">
+      <div className=" mx-auto px-5 sm:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
 
           {/* Site branding */}
@@ -35,27 +114,67 @@ function Header() {
               </svg>
             </Link>
           </div>
-         
+
           {/* Site navigation */}
           <nav className="flex">
-          <form className="w-full lg:w-auto">
-                  <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0">
-                    <input type="text" className="w-full appearance-none bg-white border border-gray-700 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500" placeholder="Search..." aria-label="Search..." />
-                    <a className="btn text-white bg-blue-600 hover:bg-blue-700 shadow" href="#0">Search</a>
-                  </div>
-                </form>
+            <form className={classes.header}>
+              <TextField className={classes.input} id="outlined-basic" label="Search" variant="outlined" />
+              <Button
+                startIcon={<SearchIcon />}
+                className={classes.buttonsearch}
+              >
+                Search
+</Button>
+            </form>
 
             <ul className="flex flex-grow justify-end flex-wrap items-center">
               <li>
-                <Link to="/signin" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
+                <Button
+                  startIcon={<AssignmentIcon />}
+                >
+                  Theo dõi đơn hàng
+</Button>
               </li>
               <li>
-                <Link to="/signup" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
-                  <span>Sign up</span>
-                  <svg className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
-                  </svg>                  
-                </Link>
+                <Button
+                  startIcon={ <Badge badgeContent={4} color="primary">
+                  <ShoppingCartIcon/>
+                </Badge>}
+                >
+                  Giỏ hàng
+</Button>
+              </li>
+              <li>
+                <div>
+                  <Button
+
+                    onClick={handleClick}
+                    endIcon={<ExpandMoreIcon/>}
+                  >
+                    Tài khoản
+      </Button>
+                  <StyledMenu
+                    id="customized-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <StyledMenuItem>
+                      <ListItemIcon>
+                        <ArrowForwardIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText primary="Đăng nhập" />
+                    </StyledMenuItem>
+                    <StyledMenuItem>
+                      <ListItemIcon>
+                        <PersonAddIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText primary="Đăng ký" />
+                    </StyledMenuItem>
+
+                  </StyledMenu>
+                </div>
               </li>
             </ul>
 
