@@ -4,11 +4,10 @@
 .imgproduct{
     max-width: 80%;
     height:30rem;
-    border-radius: 2px;
     cursor: pointer;
 }
 .imgproduct:hover{
-    max-width: 100%;
+    max-width: 95%;
     height:30rem;
     border-radius: 2px;
     cursor: pointer;
@@ -18,9 +17,9 @@
     margin-left: 10%;
     margin-top: 5%;
     height:8.5rem;
-    border-radius: 2px;
     cursor: pointer;
 }
+
 /* .buttonpri{
     outline: none;
     border: none;

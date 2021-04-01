@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     width:'30rem',
   },
   buttonsearch:{
-    padding:'16px'
+    padding:'8px 8px'
   }
  
 
@@ -118,7 +118,7 @@ function Header() {
           {/* Site navigation */}
           <nav className="flex">
             <form className={classes.header}>
-              <TextField className={classes.input} id="outlined-basic" label="Search" variant="outlined" />
+              <TextField className={classes.input} size="small" id="outlined-basic" label="Search" variant="outlined" />
               <Button
                 startIcon={<SearchIcon />}
                 className={classes.buttonsearch}

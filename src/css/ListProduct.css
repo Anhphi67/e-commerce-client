@@ -38,12 +38,3 @@
 .breakcrum{
     border-bottom: dotted gray;
 }
-.buttonpri{
-    outline: none;
-    border: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 1rem !important;
-    max-width: 1rem;
-}

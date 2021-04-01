@@ -21,7 +21,7 @@ function Testimonials() {
         </svg>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className=" mx-auto px-4 sm:px-6">
         <div className="py-12 md:py-20">
 
           {/* Section header */}
