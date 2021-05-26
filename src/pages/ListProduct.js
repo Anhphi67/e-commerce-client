@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-import Footer from '../partials/Footer';
-import Header from '../partials/Header';
-import Menu from '../partials/Menu';
+import React, { useState, useEffect } from 'react';
+import Layout from "../partials/Layout";
+import instance from "../https";
+
 import { GridList, GridListTile } from '@material-ui/core';
-import tileData from '../pages/data.json';
-import img1 from '../images/truyen-thong-minh-duong.jpg';
-import img2 from '../images/hinh-nen-bien-dep-cho-may-tinh-1.jpg';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -20,7 +17,13 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Tooltip from '@material-ui/core/Tooltip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from '@material-ui/core/Link';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams,
+  Link
+} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -54,42 +57,85 @@ const useStyles = makeStyles((theme) => ({
 
 
 function List() {
+  
+  let { id } = useParams();
   const [page, setPage] = React.useState(1);
+  const [list, setList] = React.useState([]);
+  const [category, setCategory] = React.useState({});
+  useEffect(() => {
+    const fetchData = async () => {
+      instance.get(
+        'https://localhost:44377/api/Product/GetUiList?Page='+page+'&RowsPerPage=12&ProductCategoryId='+id+'',
+      ).then(res => {
+        setList(res.data.result.results);
+      })
+      .catch(err => {
+          alert(err.response.data.errors)
+      })
+      instance.get(
+        'https://localhost:44377/api/ProductCategory/'+id+'',
+      ).then(res => {
+        setCategory(res.data);
+      })
+      .catch(err => {
+          alert(err.response.data.errors)
+      })
+    };
+    fetchData();
+  }, [id,page]);
+
+  function AddToCart(id){
+    var obj ={
+      "quantity": 1,
+      "productId": id
+    }
+      instance.post(
+        'https://localhost:44377/api/Cart', obj
+      ).then(res => {
+          alert("Thêm sản phẩm vào giỏ hàng thành công")
+      })
+        .catch(err => {
+          alert(err.response.data.errors)
+        })
+  }
   const handleChange = (event, value) => {
     setPage(value);
   };
   const top100Films = [
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
-    { title: "Schindler's List", year: 1993 },
+    { title: 'Theo giá', year: 1994 },
+    { title: 'Ngày tạo', year: 1972 },
+    { title: 'Theo Tên', year: 1974 },
   ];
+  const formatter = new Intl.NumberFormat({
+    style: 'currency',
+    currency: 'VND',
+    minimumFractionDigits: 0
+  })
+  
+  var link = "https://localhost:44377/api/UploadPicture/ShowPicture?name="
 
   const classes = useStyles();
+
+  
+
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
-
-      {/*  Site header */}
-      <Header />
-
-      {/*  Page content */}
+<div className="flex flex-col min-h-screen overflow-hidden">
+<Layout>
       <main className="flex-grow">
-        <Menu />
         <div className="w-full flex mx-auto px-4 sm:px-6 ">
           <div className="w-1/4 h-auto mr-2 pt-10">
           </div>
           <div className="flex w-3/4 h-auto justify-between breakcrum pb-2">
             <div className="pt-2 ">
               <Breadcrumbs aria-label="breadcrumb">
-                <Link color="inherit" href="/">
+                <Link color="inherit" to={"/"}>
                   Trang chủ
       </Link>
-                <Link color="inherit" href="/getting-started/installation/" >
-                  Tiêu đề
+                <Link color="inherit" to={"/list/id/"+category.id} >
+                {
+                  category.name
+                }
       </Link>
-                <Typography color="textPrimary">Breadcrumb</Typography>
               </Breadcrumbs>
             </div>
             <div className="flex">
@@ -101,7 +147,7 @@ function List() {
                 options={top100Films}
                 getOptionLabel={(option) => option.title}
                 style={{ width: 200 }}
-                renderInput={(params) => <TextField {...params} variant="outlined" />}
+                renderInput={(params) => <TextField {...params} size="small" variant="outlined" />}
               />
             </div>
           </div>
@@ -164,34 +210,32 @@ function List() {
 
             </div>
             <div className="w-3/4 h-auto ">
-              <GridList cellHeight={360} className={classes.content} cols={3}>
-                {tileData.map((tile) => (
-                  <GridListTile key={tile.image} cols={tile.cols || 1}>
+              <GridList cellHeight={360} className={classes.content} cols={4}>
+                {list.map((item) => (
+                  <GridListTile key={item.id} cols={item.cols || 1}>
                     <div className="text-center">
-                      <div className="flex">
-                        {/* <Button
-                          variant="outlined"
-                          className="buttonpri"
-                          startIcon={<KeyboardArrowLeftIcon style={{ fontSize: 35 }} />}
-                        >
-                      </Button> */}
-                        <img className="imgproduct1" src={img1} alt={tile.title} />
-                        <img className="imgproduct2" src={img2} alt={tile.title} />
-                        {/* <Button
-                          variant="outlined"
-                          className="buttonnext"
-                          startIcon={<KeyboardArrowRightIcon style={{ fontSize: 35 }}/>}
-                        >
-                      </Button> */}
+                      <div className="">
+                        <div style={{display:item.isProductSale?"block":"none"}} className="discount-label gray"> <span>-30%</span>
+                         </div>
+                        {/* <img className="imgproduct1" src={img1} alt={item.title} /> */}
+                        <img className="imgproduct1" alt={item.name} src={link+item.avatarUrl}/>
                       </div>
-                      <div><span>{tile.title}</span></div>
-                      <div className="mt-5"><span className='font-bold text-red-600'>{tile.price} đ</span></div>
+                      <div className="elipisis pt-2">
+                        <Link  
+                              to={'/detail/id/' + item.id} >
+                              {item.name}
+                        </Link>
+                        </div>
+                      
+                      <div className="mt-5"><span className='font-bold text-red-600'>{formatter.format(item.oldPrice)} đ</span>
+                      </div>
                       <div>
-                        <Tooltip disableFocusListener disableTouchListener title={tile.Desc}>
+                        <Tooltip disableFocusListener disableTouchListener title={item.name}>
                           <Button
                             variant="outlined"
                             className={classes.button}
                             startIcon={<AddShoppingCartIcon />}
+                            onClick={event => AddToCart(item.id)}
                           >
                             Mua ngay
                       </Button>
@@ -210,9 +254,10 @@ function List() {
         </section>
 
       </main>
-      <Footer />
+      </Layout>
     </div>
-  );
+
+      );
 }
 
 export default List;

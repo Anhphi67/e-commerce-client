@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect,useHistory } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
@@ -15,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
+import store from "../store/index"
+import axios from 'axios';
 
 const StyledMenu = withStyles({
   paper: {
@@ -50,41 +49,45 @@ const StyledMenuItem = withStyles((theme) => ({
       width: '8ch',
     },
   },
-  
+
 }))(MenuItem);
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    width:'40rem',
+    width: '40rem',
   },
-  input:{
-    width:'30rem',
+  input: {
+    width: '30rem',
   },
-  buttonsearch:{
-    padding:'8px 8px'
+  buttonsearch: {
+    padding: '8px 8px'
   }
- 
-
 }));
 
-
-
 function Header() {
+  let history = useHistory();
+  const state = store.getState();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleClickLogin= (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
+    setAnchorEl1(null);
   };
-
-
+  function Logout(){
+    localStorage.setItem('token','')
+  }
   const [top, setTop] = useState(true);
 
-  // detect whether user has scrolled the page down by 10px 
+  // detect whether user has scrolled the page down by 10px
   useEffect(() => {
     const scrollHandler = () => {
       window.pageYOffset > 10 ? setTop(false) : setTop(true)
@@ -92,6 +95,20 @@ function Header() {
     window.addEventListener('scroll', scrollHandler);
     return () => window.removeEventListener('scroll', scrollHandler);
   }, [top]);
+
+  const instance = axios.create({
+    baseURL: 'https://localhost:44377/api/',
+    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("token") }
+  });
+  const [countCart, setcountCart] = React.useState(0);
+  useEffect(() => {
+      instance.get('https://localhost:44377/api/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100')
+      .then(response => {
+        setcountCart(response.data.result.totalCount)
+        return 
+      });
+    }, []);
+
 
   return (
     <header className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && 'bg-white blur shadow-lg'}`}>
@@ -137,19 +154,52 @@ function Header() {
               </li>
               <li>
                 <Button
-                  startIcon={ <Badge badgeContent={4} color="primary">
-                  <ShoppingCartIcon/>
-                </Badge>}
+                  startIcon={<Badge badgeContent={countCart} color="primary">
+                    <ShoppingCartIcon />
+                  </Badge>}
+                  onClick={()=>{
+                    history.push("/cart")
+                  }}
                 >
                   Giỏ hàng
 </Button>
               </li>
-              <li>
+              <li style={{ display: localStorage.getItem('token') != '' ? "block" : "none" }}>
+                <div>
+                  <Button
+
+                    onClick={handleClickLogin}
+                    endIcon={<ExpandMoreIcon />}
+                  >
+                    {state.todos.result&&state.todos.result.firstName +" "+ state.todos.result.lastName}
+                  </Button>
+                  <StyledMenu
+                    id="customized-menu"
+                    anchorEl={anchorEl1}
+                    keepMounted
+                    open={Boolean(anchorEl1)}
+                    onClose={handleClose}
+                  >
+                    <StyledMenuItem>
+                      <Link to={'/signin'} className="w-full">
+                        <ListItemText primary="Thông tin" />
+                      </Link>
+                    </StyledMenuItem>
+                    <StyledMenuItem>
+                      <Link to={'/signin'} onClick={Logout} className="w-full">
+                        <ListItemText primary="Đăng xuất" />
+                      </Link>
+                    </StyledMenuItem>
+
+                  </StyledMenu>
+                </div>
+              </li>
+              <li style={{ display: localStorage.getItem('token') == '' ? "block" : "none" }}>
                 <div>
                   <Button
 
                     onClick={handleClick}
-                    endIcon={<ExpandMoreIcon/>}
+                    endIcon={<ExpandMoreIcon />}
                   >
                     Tài khoản
       </Button>
@@ -161,21 +211,23 @@ function Header() {
                     onClose={handleClose}
                   >
                     <StyledMenuItem>
-                      <ListItemIcon>
-                        <ArrowForwardIcon fontSize="small" />
-                      </ListItemIcon>
-                      <ListItemText primary="Đăng nhập" />
+                      <Link to={'/signin'} className="w-full">
+                        {/* <ArrowForwardIcon fontSize="small" /> */}
+                        <ListItemText primary="Đăng nhập" />
+                      </Link>
                     </StyledMenuItem>
                     <StyledMenuItem>
-                      <ListItemIcon>
-                        <PersonAddIcon fontSize="small" />
-                      </ListItemIcon>
-                      <ListItemText primary="Đăng ký" />
+                      <Link to={'/signup'} className="w-full">
+                        {/* <PersonAddIcon fontSize="small" /> */}
+                        <ListItemText primary="Đăng ký" />
+
+                      </Link>
                     </StyledMenuItem>
 
                   </StyledMenu>
                 </div>
               </li>
+
             </ul>
 
           </nav>

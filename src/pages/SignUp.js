@@ -1,9 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { createStore } from 'redux'
+import { connect } from 'react-redux'
+
+// import {userLoginFetch} from '../redux/actions';
 
 import Header from '../partials/Header';
 
 function SignUp() {
+  function todos(state = [], action) {
+    switch (action.type) {
+      case 'User_Info':
+        return state.push(action.Obj)
+      default:
+        return state
+    }
+  }
+  const store = createStore(todos, [])
+  function addTodo(Obj) {
+    return {
+      type: 'User_Info',
+      Obj
+    }
+  }
+
+  const instance = axios.create({
+    baseURL: 'https://localhost:44377/api/',
+    timeout: 1000,
+    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("token") }
+  });
+
+
+  const [fname, setFName] = useState('')
+  const [lname, setLName] = useState('')
+  const [email, setEmail] = useState('')
+  const [passWord, setPassWord] = useState('')
+
+  function regiter(e) {
+    e.preventDefault();
+    var obj = {
+      "firstName": fname,
+      "lastName": lname,
+      "address": "string",
+      "email": email,
+      "password": passWord
+    }
+
+    const fetchData = async () => {
+      await axios.post(
+        'https://localhost:44377/api/AuthManagement/Register', obj
+      ).then(res => {
+        localStorage.setItem('token', res.data.token)
+        instance.get('/User/GetCurrentUserAsync')
+          .then(response => {
+            store.dispatch(addTodo(response.data))
+            console.log(store.getState())
+            return response.data;
+          })
+          alert("Tạo tài khoản thành công")
+          window.location = "/";
+
+
+      })
+        .catch(err => {
+          alert(err.response.data.errors)
+        })
+    };
+    fetchData();
+  }
+
+  useEffect(() => {
+
+  }, []);
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
@@ -26,26 +95,30 @@ function SignUp() {
               <div className="max-w-sm mx-auto">
                 <form>
                   <div className="flex flex-wrap -mx-3 mb-4">
-                    <div className="w-full px-3">
-                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="name">Name <span className="text-red-600">*</span></label>
-                      <input id="name" type="text" className="form-input w-full text-gray-800" placeholder="Enter your name" required />
+                    <div className="w-1/2 px-3">
+                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="name">First Name <span className="text-red-600">*</span></label>
+                      <input id="name" onChange={event => setFName(event.target.value)} type="text" className="form-input w-full text-gray-800" placeholder="First name" required />
+                    </div>
+                    <div className="w-1/2 px-3">
+                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="name">Last Name <span className="text-red-600">*</span></label>
+                      <input id="name" onChange={event => setLName(event.target.value)} type="text" className="form-input w-full text-gray-800" placeholder="Last name" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
-                      <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" required />
+                      <input id="email" onChange={event => setEmail(event.target.value)} type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
-                      <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
+                      <input id="password" onChange={event => setPassWord(event.target.value)} type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign up</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={regiter}>Sign up</button>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center mt-3">
@@ -94,4 +167,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default connect() (SignUp);

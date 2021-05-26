@@ -16,6 +16,8 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import ProductDetails from './pages/ProductDetails';
+import CartList from './pages/CartList';
+import Payment from './pages/Payment';
 
 function App() {
 
@@ -52,12 +54,19 @@ function App() {
         <Route path="/reset-password">
           <ResetPassword />
         </Route>
-        <Route path="/list">
+        <Route path="/list/id/:id">
           <List />
         </Route>
-        <Route path="/detail">
+        <Route path="/detail/id/:id">
           <ProductDetails />
         </Route>
+        <Route path="/cart">
+          <CartList />
+        </Route>
+        <Route path="/payment">
+          <Payment />
+        </Route>
+       
       </Switch>
     </>
   );

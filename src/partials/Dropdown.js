@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Menu.css';
 import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function Dropdown() {
   const [menus, setMenu] = React.useState({ result: [] });
@@ -9,7 +15,6 @@ function Dropdown() {
       const result = await axios(
         'https://localhost:44377/api/ProductCategory/GetUiList',
       );
-
       setMenu(result.data);
     };
 
@@ -18,12 +23,12 @@ function Dropdown() {
   return (
     <div className="navbar bg-white text-black shadow-lg">
       {menus.result.map(item => (
-        <div className="dropdown">
-          <button key={item.id} className="dropbtn shadow-sm">{item.name}
+        <div key={item.id} className="dropdown">
+          <button   className="dropbtn shadow-sm">{item.name}
           </button>
           <div className="dropdown-content">
             {item.subCategories.map(sub => (
-             <a>{sub.name}</a>
+             <Link  key={sub.id} to={'/list/id/' + sub.id}>{sub.name}</Link>
             ))}
           </div>
         </div>

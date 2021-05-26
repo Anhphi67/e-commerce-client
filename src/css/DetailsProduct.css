@@ -1,6 +1,3 @@
-.breakcrum{
-    border-bottom: dotted gray;
-}
 .imgproduct{
     max-width: 80%;
     height:30rem;
@@ -19,7 +16,6 @@
     height:8.5rem;
     cursor: pointer;
 }
-
 /* .buttonpri{
     outline: none;
     border: none;

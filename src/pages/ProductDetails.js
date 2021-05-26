@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import Footer from '../partials/Footer';
 import Header from '../partials/Header';
 import Menu from '../partials/Menu';
 import { GridList, GridListTile } from '@material-ui/core';
 import tileData from '../pages/data2.json';
-import img1 from '../images/truyen-thong-minh-duong.jpg';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import img1 from '../images/design.jpg';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from '@material-ui/core/Link';
 import NumberFormat from 'react-number-format';
 import '../css/DetailsProduct.css';
 import Rating from '@material-ui/lab/Rating';
@@ -33,6 +33,13 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 //
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams,
+  Link
+} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -95,8 +102,28 @@ function a11yProps(index) {
   };
 }
 function List() {
+   //get data
+   let { id } = useParams();
+   const [detail, setDetail] = React.useState([]);
+   const [imgUrl, setimgUrl] = React.useState("");
+   useEffect(() => {
+     const fetchData = async () => {
+       const result = await axios(
+         'https://localhost:44377/api/Product/GetDetail?id='+id+'',
+       );
+        
+       setDetail(result.data.result);
+       setParent(result.data.result.productCategory.id)
+       setGrandBr(result.data.result.productCategory.parentCategory.id)
+       setimgUrl("https://localhost:44377/api/UploadPicture/ShowPicture?name="+result.data.result.avatarUrl+"")
+     };
+ 
+     fetchData();
+   }, []);
+   //
+  const [grandBr, setGrandBr] = React.useState(1);
+  const [parent, setParent] = React.useState(1);
   const [count, setCount] = React.useState(1);
-  const [invisible, setInvisible] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [rate, setRate] = React.useState(2);
   const [raq, setRaq] = React.useState(true);
@@ -104,6 +131,26 @@ function List() {
     setValue(newValue);
   };
   const classes = useStyles();
+  const instance = axios.create({
+    baseURL: 'https://localhost:44377/api/',
+    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("token") }
+  });
+
+  function AddToCart(id){
+    var obj ={
+      "quantity": count,
+      "productId": id
+    }
+      instance.post(
+        'https://localhost:44377/api/Cart', obj
+      ).then(res => {
+          alert("Thêm sản phẩm vào giỏ hàng thành công")
+      })
+        .catch(err => {
+          alert(err.response.data.errors)
+        })
+  }
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/*  Site header */}
@@ -116,13 +163,16 @@ function List() {
           <div className="flex w-full h-auto justify-between breakcrum pb-2">
             <div className="pt-2 ">
               <Breadcrumbs aria-label="breadcrumb">
-                <Link color="inherit" href="/">
+                <Link color="inherit" to="/">
                   Trang chủ
       </Link>
-                <Link color="inherit" href="/getting-started/installation/" >
-                  Tiêu đề
+                <Link color="inherit" to="/" >
+                {detail.productCategory&&detail.productCategory&&detail.productCategory.parentCategory.name}
       </Link>
-                <Typography color="textPrimary">Breadcrumb</Typography>
+                <Link color="inherit" to={"/list/id/"+parent} >
+                {detail.productCategory&&detail.productCategory.name}
+                </Link>
+                <Typography color="textPrimary">{detail.name}</Typography>
               </Breadcrumbs>
             </div>
           </div>
@@ -130,14 +180,14 @@ function List() {
         <section className="bg-white-to-b from-gray-100 to-white">
           <div className=" w-full flex mx-auto px-4 sm:px-6">
             <div className="w-1/2 h-auto mr-2 pt-10">
-              <img className="imgproduct" src={img1} />
+            <img className="imgproduct2" alt={detail.name} src={imgUrl}/>
               <div className='flex'>
                 <GridList cellHeight={150} className={classes.content} cols={5}>
                   {tileData.map((tile) => (
                     <GridListTile key={tile.id} cols={tile.cols || 1}>
-                      <div className="text-center pb-4">
-                        <div className="flex">
-                          <img className="smallimage" src={img1} alt={tile.title} />
+                      <div key={tile.id} className="text-center pb-4">
+                        <div key={tile.id} className="flex">
+                          <img key={tile.id} className="smallimage" src={img1} alt={tile.title} />
                         </div>
                       </div>
                     </GridListTile>
@@ -146,11 +196,11 @@ function List() {
               </div>
             </div>
             <div className="w-1/2 h-auto ">
-              <span className="pt-8 font-bold text-xl" >Cờ Việt Nam - Single Sticker hình dán lẻ</span>
-              <div className=" text-red-600">
-                <NumberFormat thousandSeparator={true} className="font-bold" value={count * 25000} suffix=" VNĐ" />
+              <span className="pt-8 font-bold text-xl" >{detail.name}</span>
+              <div className=" text-red-600 mt-2">
+                <NumberFormat thousandSeparator={true} readOnly className="font-bold" value={count * detail.oldPrice} suffix=" VNĐ" />
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center mt-2 mb-2">
                 <ButtonGroup  >
                   <Button
                     aria-label="reduce"
@@ -175,6 +225,7 @@ function List() {
                   variant="outlined"
                   className={classes.button}
                   startIcon={<AddShoppingCartIcon />}
+                  onClick={event => AddToCart(detail.id)}
                 >
                   Mua ngay
                       </Button>
@@ -199,7 +250,7 @@ function List() {
                   <span>Có đặt in theo yêu cầu, đăng kí ngay</span>
                 </div>
               </div>
-              <div>
+              <div className="mt-4">
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                   <Tab className="font-bold" label="Chi tiết" {...a11yProps(0)} />
                   <Tab className="font-bold" label="Giao hàng và thanh toán" {...a11yProps(1)} />

@@ -24,6 +24,7 @@
     "react-jquery-plugin": "^1.1.7",
     "react-number-format": "^4.5.3",
     "react-onclickoutside": "^6.10.0",
+    "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.4.1",

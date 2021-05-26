@@ -1,21 +1,23 @@
 .imgproduct1{
-    max-width: 80%;
-    margin-left: 10%;
+    max-width: 100%;
     margin-top: 5%;
-    height:13rem;
-    border-radius: 2px;
+    height:10rem;
+    width: 16rem;
     cursor: pointer;
 }
 .imgproduct2{
-    max-width: 80%;
-    margin-left: 10%;
-    height:13rem;
-    border-radius: 2px;
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height:25rem;
     cursor: pointer;
-    display: none;
 }
 .imgproduct1_hiden{
     display: none;
+}
+.imgPayment{
+    width: 7rem;
+    height: 4rem;
 }
 .buttonnext{
     position: absolute  !important;
@@ -24,17 +26,124 @@
     border: none !important;
 
 }
-
-.MuiGridListTile-tile:hover{
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+.elipisis{
+    white-space: nowrap;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: auto;
 }
+/* .MuiGridListTile-tile:hover{
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+} */
 .MuiAccordionSummary-content.Mui-expanded{
     margin: 0 0 !important;
     min-height: 45px;
 }
-.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
+/* .MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
     padding: 0  !important;
-}
-.breakcrum{
+} */
+/* .breakcrum{
     border-bottom: dotted gray;
-}
+} */
+.discount-label {
+    padding:5px;
+    position:absolute;
+     float:left;
+     right:1%;
+     top:0%;
+   width:50px;
+   -webkit-border-radius:0 4px 0 4px;
+   -moz-border-radius:0 4px 0 4px;
+   border-radius:0 4px 4px 0;
+
+   }
+
+   .discount-label:after {
+
+       right: 100%;
+       border: solid transparent; content: " ";
+       height: 0;
+       width: 0;
+       position: absolute;
+       border-color: rgba(136, 183, 213, 0);
+
+       border-width: 20px;
+       top: 50%;
+       margin-top: -20px;}
+
+       .discount-label:before {
+     content: '';
+     z-index: 2;
+     position: absolute;
+     top: 42%;
+     right: 100%;
+     width: 7px;
+     height: 7px;
+     opacity: .95;
+     background: #ffffff;
+     border-radius: 7px;
+     -webkit-box-shadow: inset .5px 0 rgba(0, 0, 0, 0.6);
+     box-shadow: inset .5px 0 rgba(0, 0, 0, 0.6);
+
+   }
+
+
+       .discount-label span {
+         color:#ffffff;
+     font-size:20px;
+   text-align:center;
+     font-family:"Raleway",Helvetica;
+
+   }
+
+
+   .red{
+   background-color:#E80707;
+   }
+
+   .red:after{
+   border-right-color: #E80707;
+
+   }
+
+
+   .blue{
+   background-color:#1883DB;
+   }
+   .blue:after{
+   border-right-color: #1883DB;
+   }
+
+   .green{
+   background-color:#16B516;
+   }
+
+   .green:after{
+   border-right-color: #16B516;
+   }
+
+   .yellow{
+   background-color:#feaa00;
+   }
+
+   .yellow:after{
+   border-right-color: #feaa00;
+   }
+
+   .gray{
+   background-color:#737373;
+   }
+
+   .gray:after{
+   border-right-color: #737373;
+   }
+
+   .black{
+   background-color:#000;
+
+   }
+
+   .black:after{
+   border-right-color: #000;
+   }
