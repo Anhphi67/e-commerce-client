@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './Menu.css';
 import axios from 'axios';
 import {
   BrowserRouter as Router,
@@ -9,6 +8,7 @@ import {
 } from "react-router-dom";
 
 function Dropdown() {
+  const ref = React.useRef()
   const [menus, setMenu] = React.useState({ result: [] });
   useEffect(() => {
     const fetchData = async () => {
@@ -17,25 +17,41 @@ function Dropdown() {
       );
       setMenu(result.data);
     };
-
     fetchData();
   }, []);
   return (
-    <div className="navbar bg-white text-black shadow-lg">
-      {menus.result.map(item => (
-        <div key={item.id} className="dropdown">
-          <button   className="dropbtn shadow-sm">{item.name}
-          </button>
-          <div className="dropdown-content">
-            {item.subCategories.map(sub => (
-             <Link  key={sub.id} to={'/list/id/' + sub.id}>{sub.name}</Link>
-            ))}
+    <div className="w-full">
+      <div className="main-header header-sticky">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="d-flex  col-xl-12 col-lg-12 col-md-12">
+              <div className="main-menu f-right d-none d-lg-block">
+                <nav>
+                  <ul id="navigation">
+                    {menus.result.map(item => (
+                      <li key={item.id}>
+                        <Link className="pt-4 pb-4" to={'/list/id/' + item.id}> {item.name}</Link>
+                        <ul  style={{display:item.subCategories.length>0?"block":"none"}} className="submenu">
+                          {item.subCategories.map(sub => (
+                            <li key={sub.id}>
+                              <Link  to={'/list/id/' + sub.id}>{sub.name}</Link>
+                            </li>
+                          ))}
+                        </ul>
+
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div className="col-12">
+              <div className="mobile_menu d-block d-lg-none"></div>
+            </div>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 }
-
-
 export default Dropdown;

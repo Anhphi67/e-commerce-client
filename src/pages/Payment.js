@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import instance from "../https";
+import Layout from "../partials/Layout";
+
 
 import img1 from '../images/design.jpg';
 import Button from '@material-ui/core/Button';
@@ -16,8 +18,6 @@ import location from '../data/location.json';
 import NumberFormat from 'react-number-format';
 import store from "../store/index"
 
-
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -32,17 +32,16 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: "1rem !important",
     }
 }));
-var i
-var sum = 0
+
 function List() {
+    var i
+    var sum = 0
     const user = store.getState();
     const [name, setName] = React.useState(""); 
     const [email, setEmail] = React.useState(""); 
     const [phone, setPhone] = React.useState(""); 
     const [addr, setAddr] = React.useState(""); 
     const [addrfull, setAddrFull] = React.useState(""); 
-    // setName(user.todos.result.firstName +" "+ user.todos.result.lastName)
-
 
     const [value, setValue] = React.useState("1");
     const [districtList, setDistrictList] = React.useState([]);
@@ -86,7 +85,7 @@ function List() {
     const classes = useStyles();
     return (
         <div className="flex flex-col min-h-screen overflow-hidden">
-            {/* <Layout> */}
+            <Layout>
             <main className="flex-grow pt-5">
                 <div className="w-full flex mx-auto px-4 sm:px-6 ">
                     <div className="w-3/5 h-auto mr-20  ">
@@ -97,29 +96,27 @@ function List() {
                             </div>
                             <div className="pt-3">
                                 <div className="flex">
-                                    <TextField id="outlined-basic" fullWidth={true} value={user.todos.result&&user.todos.result.firstName +" "+ user.todos.result.lastName || ''} size="small" label="Họ và Tên" variant="outlined" />
+                                    <TextField id="outlined-basic" fullWidth={true} value={user.todos.result&&user.todos.result.firstName +" "+ user.todos.result.lastName || ''} onChange={e=>{setName(e.target.value)}} size="small" label="Họ và Tên" variant="outlined" />
                                 </div>
                                 <div className="flex pt-3">
-                                    <TextField id="outlined-basic" className="w-3/5 " value={user.todos.result&&user.todos.result.email || ''} size="small" label="Email" variant="outlined" />
-                                    <TextField id="outlined-basic" className="w-2/5" size="small" label="Số điện thoại" variant="outlined" />
+                                    <TextField id="outlined-basic" className="w-3/5 " value={user.todos.result&&user.todos.result.email || ''} size="small" onChange={e=>{setEmail(e.target.value)}} label="Email" variant="outlined" />
+                                    <TextField id="outlined-basic" className="w-2/5" size="small" onChange={e=>{setPhone(e.target.value)}} label="Số điện thoại" variant="outlined" />
                                 </div>
                                 <div className="pt-3">
                                     <div>
-                                        <TextField id="outlined-basic" fullWidth={true} size="small" label="Địa chỉ nhận hàng" variant="outlined" />
+                                        <TextField id="outlined-basic" fullWidth={true} onChange={e=>{setAddr(e.target.value)}} size="small" label="Địa chỉ nhận hàng" variant="outlined" />
                                     </div>
                                 </div>
                                 <div className="pt-3 flex">
                                     <div className="input-group w-full" onChange={e => renderDistrict(e.target.value)} >
                                         <select id="" className="form-select mt-1 block w-full pt-2 pb-2" id="">
                                             {location.map(item => (
-
                                                 <option key={item.Id} value={item.Id}>{item.Id} - {item.Name}</option>
                                             ))}
                                         </select>
 
                                     </div>
                                 </div>
-
                                 <div className="pt-3 flex">
                                     <div className="input-group w-1/2" onChange={e => renderVillage(e.target.value)} >
                                         <select id="" className="form-select mt-1 block w-full pt-2 pb-2" id="">
@@ -127,7 +124,6 @@ function List() {
                                                 <option key={item.Id} value={item.Id}>{item.Name}</option>
                                             ))}
                                         </select>
-
                                     </div>
                                     <div className="input-group w-1/2" >
                                         <select id="" className="form-select mt-1 block w-full pt-2 pb-2" id="">
@@ -137,6 +133,13 @@ function List() {
                                         </select>
                                     </div>
                                 </div>
+                                <div className="w-full flex mx-auto px-4 sm:px-6 justify-between">
+                        
+                    </div>
+                    <div className="pt-2 w-full">
+                        <textarea className="resize border rounded-md w-full" rows="4" cols="50" placeholder="Ghi chú (Bạn có thể ghi chú đơn hàng tại đây.)"></textarea>
+                        </div>
+
                                 <div className="pt-3">
                                     <FormControl component="fieldset">
                                         <FormLabel component="legend">Phương thức thanh toán</FormLabel>
@@ -247,7 +250,7 @@ function List() {
 
 
             </main>
-            {/* </Layout> */}
+            </Layout>
         </div>
 
     );

@@ -15,6 +15,8 @@ import PaymentIcon from '@material-ui/icons/Payment';
 import Payment from '../pages/Payment';
 import NumberFormat from 'react-number-format';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Link ,useHistory,Redirect } from 'react-router-dom';
+
 
 const TAX_RATE = 0.1;
 
@@ -35,6 +37,7 @@ const useStyles = makeStyles({
 var i ;
 
 function List() {
+let history = useHistory();
 const [reload, SetReLoad] = React.useState(true);
 function handleChange(){
     if (reload){
@@ -177,7 +180,7 @@ function handleChange(){
                                 variant="outlined"
                                 className={classes.button_payment}
                                 startIcon={<PaymentIcon />}
-                                onClick={()=>{setPayment(true)}}
+                                onClick={()=>{history.push("/payment")}}
                             >
                                 Thanh toán
                       </Button>
@@ -186,9 +189,9 @@ function handleChange(){
 
                 </main>
 
-                <div  style={{ display: ispayment  ? "block" : "none" }}>
+                {/* <div  style={{ display: ispayment  ? "block" : "none" }}>
                     <Payment/>
-                </div>
+                </div> */}
             </Layout>
         </div>
     );

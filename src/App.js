@@ -18,6 +18,7 @@ import ResetPassword from './pages/ResetPassword';
 import ProductDetails from './pages/ProductDetails';
 import CartList from './pages/CartList';
 import Payment from './pages/Payment';
+import ReactDOM from "react-dom";
 
 function App() {
 
