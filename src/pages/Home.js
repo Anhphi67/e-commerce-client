@@ -14,7 +14,7 @@ import Newsletter from '../partials/Newsletter';
 
 function Home() {
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
+    <div className="px-24 flex flex-col min-h-screen overflow-hidden">
       <>
       <Layout>
         <HeroHome />
