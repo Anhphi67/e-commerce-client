@@ -4,7 +4,7 @@ import HeroHome from '../partials/HeroHome';
 import FeaturesBlocks from '../partials/FeaturesBlocks';
 function Home() {
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
+    <div className="px-24 flex flex-col min-h-screen overflow-hidden">
       <>
       <Layout>
         <HeroHome />

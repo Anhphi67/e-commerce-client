@@ -1,4 +1,5 @@
 module.exports = {
+  important: true,
   purge: [
     'public/index.html',
     'src/**/*.js',

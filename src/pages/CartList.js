@@ -96,7 +96,7 @@ function handleChange(){
                         <span className=" font-bold">GIỎ HÀNG CỦA BẠN</span>
                     </div>
                     <section className="bg-white-to-b from-gray-100 to-white mx-auto px-4 sm:px-6">
-                        <TableContainer component={Paper}>
+                        <TableContainer component={Paper} className="shadow-none">
                             <Table className={classes.table} aria-label="spanning table">
                                 <TableHead>
                                     <TableRow>
