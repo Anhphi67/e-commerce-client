@@ -119,7 +119,7 @@ function List() {
 
 
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
+    <div className="px-24 flex flex-col min-h-screen overflow-hidden">
       <Layout>
         <main className="flex-grow">
           <div className="w-full flex mx-auto px-4 sm:px-6">

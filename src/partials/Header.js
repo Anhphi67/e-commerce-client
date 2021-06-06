@@ -154,7 +154,7 @@ function Header() {
               className="flex-1"
               size="small"
               id="outlined-basic"
-              label="Search"flat
+              label="Search"
               variant="outlined"
             />
             <Button startIcon={<SearchIcon />} className={classes.buttonsearch}>
