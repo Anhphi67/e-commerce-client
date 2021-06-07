@@ -1,7 +1,7 @@
 .imgproduct1{
     max-width: 100%;
     margin-top: 5%;
-    height:10rem;
+    height:15rem;
     width: 16rem;
     cursor: pointer;
 }
@@ -147,3 +147,15 @@
    .black:after{
    border-right-color: #000;
    }
+   .MuiPaper-elevation1{
+       box-shadow: none !important;
+   }
+   .MuiAccordionSummary-root.Mui-expanded {
+    min-height: 50px !important;
+    border-bottom: 1px solid gray;
+    
+}
+.MuiAccordionSummary-content.Mui-expanded {
+    display: flex;
+    align-items: center;
+}

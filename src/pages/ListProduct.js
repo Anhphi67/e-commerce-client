@@ -122,21 +122,24 @@ function List() {
     <div className="px-24 flex flex-col min-h-screen overflow-hidden">
       <Layout>
         <main className="flex-grow">
-          <div className="w-full flex mx-auto px-4 sm:px-6">
+          <div className="max-w-sm mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200 p-3">
+            <Breadcrumbs aria-label="breadcrumb">
+              <Link color="inherit" to={"/"}>
+                Trang chủ
+      </Link>
+              <Link color="inherit" to={"/list/id/" + category.id} >
+                {
+                  category.name
+                }
+              </Link>
+            </Breadcrumbs>
+          </div>
+          <div className="w-full flex mx-auto pt-2">
             <div className="w-1/4 h-auto mr-2 pt-10">
             </div>
-            <div className="flex w-3/4 h-auto justify-between breakcrum pb-2">
-              <div className="pt-2 ">
-                <Breadcrumbs aria-label="breadcrumb">
-                  <Link color="inherit" to={"/"}>
-                    Trang chủ
-      </Link>
-                  <Link color="inherit" to={"/list/id/" + category.id} >
-                    {
-                      category.name
-                    }
-                  </Link>
-                </Breadcrumbs>
+            <div className="flex w-3/4 h-auto justify-between breakcrum pb-2 border-b">
+              <div className="pt-2 font-bold">
+              In sticker
               </div>
               <div className="flex">
                 <Typography className="font-bold pt-2 pr-1">
@@ -155,8 +158,8 @@ function List() {
           </div>
 
 
-          <section className="bg-white-to-b from-gray-100 to-white">
-            <div className=" w-full flex mx-auto px-4 sm:px-6">
+          <section className="bg-white">
+            <div className=" w-full flex mx-auto">
               <div className="w-1/4 h-auto mr-2 pt-10">
                 <Accordion>
                   <AccordionSummary
