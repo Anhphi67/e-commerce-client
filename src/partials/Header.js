@@ -14,7 +14,8 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Badge from "@material-ui/core/Badge";
 import store from "../store/index";
 import axios from "axios";
-
+import { connect } from "react-redux";
+import { logout } from "../store/actions/auth";
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header() {
+function Header({ isLoggedIn, user, dispatch }) {
   let history = useHistory();
   const state = store.getState();
   const classes = useStyles();
@@ -78,7 +79,7 @@ function Header() {
     setAnchorEl1(null);
   };
   function Logout() {
-    localStorage.setItem("token", "");
+    dispatch(logout());
   }
   const [top, setTop] = useState(true);
 
@@ -184,74 +185,69 @@ function Header() {
                   Giỏ hàng
                 </Button>
               </li>
-              <li
-                style={{
-                  display:
-                    localStorage.getItem("token") != "" ? "block" : "none",
-                }}
-              >
-                <div>
-                  <Button
-                    onClick={handleClickLogin}
-                    endIcon={<ExpandMoreIcon />}
-                  >
-                    {state.todos.result &&
-                      state.todos.result.firstName +
-                        " " +
-                        state.todos.result.lastName}
-                  </Button>
-                  <StyledMenu
-                    id="customized-menu"
-                    anchorEl={anchorEl1}
-                    keepMounted
-                    open={Boolean(anchorEl1)}
-                    onClose={handleClose}
-                  >
-                    <StyledMenuItem>
-                      <Link to={"/signin"} className="w-full">
-                        <ListItemText primary="Thông tin" />
-                      </Link>
-                    </StyledMenuItem>
-                    <StyledMenuItem>
-                      <Link to={"/signin"} onClick={Logout} className="w-full">
-                        <ListItemText primary="Đăng xuất" />
-                      </Link>
-                    </StyledMenuItem>
-                  </StyledMenu>
-                </div>
-              </li>
-              <li
-                style={{
-                  display:
-                    localStorage.getItem("token") == "" ? "block" : "none",
-                }}
-              >
-                <div>
-                  <Button onClick={handleClick} endIcon={<ExpandMoreIcon />}>
-                    Tài khoản
-                  </Button>
-                  <StyledMenu
-                    id="customized-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    <StyledMenuItem>
-                      <Link to={"/signin"} className="w-full">
-                        {/* <ArrowForwardIcon fontSize="small" /> */}
-                        <ListItemText primary="Đăng nhập" />
-                      </Link>
-                    </StyledMenuItem>
-                    <StyledMenuItem>
-                      <Link to={"/signup"} className="w-full">
-                        {/* <PersonAddIcon fontSize="small" /> */}
-                        <ListItemText primary="Đăng ký" />
-                      </Link>
-                    </StyledMenuItem>
-                  </StyledMenu>
-                </div>
-              </li>
+              {isLoggedIn ? (
+                <li>
+                  <div>
+                    <Button
+                      onClick={handleClickLogin}
+                      endIcon={<ExpandMoreIcon />}
+                    >
+                      {user && user.firstName + " " + user.lastName}
+                    </Button>
+                    <StyledMenu
+                      id="customized-menu"
+                      anchorEl={anchorEl1}
+                      keepMounted
+                      open={Boolean(anchorEl1)}
+                      onClose={handleClose}
+                    >
+                      <StyledMenuItem>
+                        <Link to={"/signin"} className="w-full">
+                          <ListItemText primary="Thông tin" />
+                        </Link>
+                      </StyledMenuItem>
+                      <StyledMenuItem>
+                        <Link
+                          to={"/signin"}
+                          onClick={Logout}
+                          className="w-full"
+                        >
+                          <ListItemText primary="Đăng xuất" />
+                        </Link>
+                      </StyledMenuItem>
+                    </StyledMenu>
+                  </div>
+                </li>
+              ) : (
+                <li
+                >
+                  <div>
+                    <Button onClick={handleClick} endIcon={<ExpandMoreIcon />}>
+                      Tài khoản
+                    </Button>
+                    <StyledMenu
+                      id="customized-menu"
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl)}
+                      onClose={handleClose}
+                    >
+                      <StyledMenuItem>
+                        <Link to={"/signin"} className="w-full">
+                          {/* <ArrowForwardIcon fontSize="small" /> */}
+                          <ListItemText primary="Đăng nhập" />
+                        </Link>
+                      </StyledMenuItem>
+                      <StyledMenuItem>
+                        <Link to={"/signup"} className="w-full">
+                          {/* <PersonAddIcon fontSize="small" /> */}
+                          <ListItemText primary="Đăng ký" />
+                        </Link>
+                      </StyledMenuItem>
+                    </StyledMenu>
+                  </div>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
@@ -259,5 +255,11 @@ function Header() {
     </header>
   );
 }
-
-export default Header;
+function mapStateToProps(state) {
+  const { isLoggedIn, user } = state.auth;
+  return {
+    isLoggedIn,
+    user,
+  };
+}
+export default connect(mapStateToProps)(Header);
