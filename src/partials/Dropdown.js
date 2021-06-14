@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "./Menu.css"
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,7 +34,7 @@ function Dropdown() {
                         <Link className="pt-4 pb-4" to={'/list/id/' + item.id}> {item.name}</Link>
                         <ul  style={{display:item.subCategories.length>0?"block":"none"}} className="submenu">
                           {item.subCategories.map(sub => (
-                            <li key={sub.id}>
+                            <li key={sub.id} className="hover:bg-gray-200">
                               <Link  to={'/list/id/' + sub.id}>{sub.name}</Link>
                             </li>
                           ))}

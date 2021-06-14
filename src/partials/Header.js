@@ -63,6 +63,7 @@ function Header() {
   let history = useHistory();
   const state = store.getState();
   const classes = useStyles();
+  const [isLogin, setIsLogin] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl1, setAnchorEl1] = React.useState(null);
 
@@ -97,6 +98,8 @@ function Header() {
   });
   const [countCart, setcountCart] = React.useState(0);
   useEffect(() => {
+  if (localStorage.getItem('token') != '' && localStorage.getItem('token') != null && localStorage.getItem('token') != undefined){
+    setIsLogin(true)
     instance
       .get(
         "https://localhost:44377/api/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100"
@@ -105,7 +108,10 @@ function Header() {
         setcountCart(response.data.result.totalCount);
         return;
       });
+}
+
   }, []);
+  
 
   return (
     <header
@@ -186,8 +192,7 @@ function Header() {
               </li>
               <li
                 style={{
-                  display:
-                    localStorage.getItem("token") != "" ? "block" : "none",
+                  display:isLogin ? "block" : "none",
                 }}
               >
                 <div>
@@ -222,8 +227,7 @@ function Header() {
               </li>
               <li
                 style={{
-                  display:
-                    localStorage.getItem("token") == "" ? "block" : "none",
+                  display:!isLogin ? "block" : "none",
                 }}
               >
                 <div>

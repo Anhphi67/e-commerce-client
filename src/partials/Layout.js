@@ -7,7 +7,7 @@ import instance from "../https";
 
 const Layout = ({ children }) => {
   const [state, setStates] = useState(store.getState())
-  if (localStorage.getItem('token') != '') {
+  if (localStorage.getItem('token') != '' && localStorage.getItem('token') != null && localStorage.getItem('token') != undefined) {
     if (state.todos.length==0){
       function addTodo(Obj) {
         return {

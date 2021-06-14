@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from "../partials/Layout";
 import instance from "../https";
+import MessageLogin from "../popup/MessageLogin.js";
 
 import { GridList, GridListTile } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -15,19 +16,18 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import '../css/ListProduct.css';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import Tooltip from '@material-ui/core/Tooltip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   useParams,
+  useHistory,
   Link
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    margin: theme.spacing(1),
   },
   '& > *': {
     marginTop: theme.spacing(2),
@@ -40,8 +40,6 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '1rem'
   },
   heading: {
-    fontSize: theme.typography.pxToRem(20),
-    fontWeight: theme.typography.fontWeightRegular,
   },
   detailAcc: {
     display: 'block !important',
@@ -59,6 +57,12 @@ const useStyles = makeStyles((theme) => ({
 function List() {
   const ref = React.useRef()
   let { id } = useParams();
+  let history = useHistory();
+  const [msg, setMsg] = React.useState({
+    show:false,
+    msg:'',
+    title:''
+  });
   const [page, setPage] = React.useState(1);
   const [list, setList] = React.useState([]);
   const [category, setCategory] = React.useState({});
@@ -85,18 +89,28 @@ function List() {
   }, [id, page]);
 
   function AddToCart(id) {
-    var obj = {
-      "quantity": 1,
-      "productId": id
-    }
-    instance.post(
-      'https://localhost:44377/api/Cart', obj
-    ).then(res => {
-      alert("Thêm sản phẩm vào giỏ hàng thành công")
-    })
-      .catch(err => {
-        alert(err.response.data.errors)
+    if (localStorage.getItem('token') != ''){
+      var obj = {
+        "quantity": 1,
+        "productId": id
+      }
+      instance.post(
+        'https://localhost:44377/api/Cart', obj
+      ).then(res => {
+        alert("Thêm sản phẩm vào giỏ hàng thành công")
       })
+        .catch(err => {
+          alert(err.response.data.errors)
+        })
+    }
+    else{
+      setMsg({
+        show:true,
+        msg:'Bạn chưa đăng nhập - Đăng nhập để có thể mua hàng ?',
+        title:'Thông báo'
+      })
+    }
+    
   }
   const handleChange = (event, value) => {
     setPage(value);
@@ -134,8 +148,15 @@ function List() {
               </Link>
             </Breadcrumbs>
           </div>
+          <div>
+            <div className="pt-1 pb-4 md:pt-1 ">
+              <div className="text-center ">
+                <img className="relative w-full h-64 " src="//file.hstatic.net/1000090040/collection/banner_group_web_-_300kb-1_b62a85c844de479b94a49aed50567baa_1024x1024.jpg" alt="Testimonial 01" />
+              </div>
+          </div>
+          </div>
           <div className="w-full flex mx-auto pt-2">
-            <div className="w-1/4 h-auto mr-2 pt-10">
+            <div className="w-1/4 h-auto mr-2 pt-4">
             </div>
             <div className="flex w-3/4 h-auto justify-between breakcrum pb-2 border-b">
               <div className="pt-2 font-bold">
@@ -167,7 +188,7 @@ function List() {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >
-                    <Typography className={classes.heading}>Chủ đề </Typography>
+                    <Typography className="font-bold text-xl">CHỦ ĐỀ </Typography>
                   </AccordionSummary>
                   <AccordionDetails className={classes.detailAcc} >
                     <Typography>
@@ -187,7 +208,7 @@ function List() {
                     aria-controls="panel2a-content"
                     id="panel2a-header"
                   >
-                    <Typography className={classes.heading}>Giá</Typography>
+                    <Typography className="font-bold text-xl">GIÁ</Typography>
                   </AccordionSummary>
                   <AccordionDetails className={classes.detailAcc}>
                     <Typography>
@@ -207,7 +228,7 @@ function List() {
                     aria-controls="panel3a-content"
                     id="panel3a-header"
                   >
-                    <Typography className={classes.heading}>Nhãn dán</Typography>
+                    <Typography className="font-bold text-xl">NHÃN DÁN</Typography>
                   </AccordionSummary>
                 </Accordion>
 
@@ -217,12 +238,21 @@ function List() {
                   {list.map((item) => (
                     <GridListTile key={item.id} cols={item.cols || 1}>
                       <div className="text-center">
-                        <div className="">
+                        {/* <div className="">
                           <div style={{ display: item.isProductSale ? "block" : "none" }} className="discount-label gray"> <span>-30%</span>
                           </div>
-                          {/* <img className="imgproduct1" src={img1} alt={item.title} /> */}
+                         
                           <img className="imgproduct1" alt={item.name} src={link + item.avatarUrl} />
-                        </div>
+                        </div> */}
+                         <div className="WrapImg w-full">
+                                <img  className="relative flex flex-col items-center bg-white shadow-xl w-full image " alt={item.name} src={link + item.avatarUrl}  alt="Testimonial 01" />
+                                <div className="overlay">
+                                    <div className="text">
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                    </div>
+                                </div>
+
+                            </div>
                         <div className="elipisis pt-2">
                           <Link
                             to={'/detail/id/' + item.id} >
@@ -235,17 +265,9 @@ function List() {
                         </span>
                         </div>
                         <div>
-                          <Tooltip disableFocusListener disableTouchListener title={item.name}>
-                            <Button
-                              variant="outlined"
-                              className={classes.button}
-                              startIcon={<AddShoppingCartIcon />}
-                              onClick={event => AddToCart(item.id)}
-                            >
-                              Mua ngay
-                      </Button>
-                          </Tooltip>
-
+                          <button onClick={e=>AddToCart(item.id)} className="outline-none bg-transparent hover:bg-red-500 font-semibold hover:text-white py-2 px-4 border border-yellow-1000 hover:border-transparent rounded w-full">
+                                          Mua Ngay
+                          </button>
                         </div>
                       </div>
                     </GridListTile>
@@ -257,6 +279,9 @@ function List() {
               </div>
             </div>
           </section>
+          <div>
+          <MessageLogin obj={msg} handleChange={()=>{setMsg({...msg,show:false})}} />
+        </div>
 
         </main>
       </Layout>

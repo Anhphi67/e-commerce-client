@@ -48,11 +48,14 @@ function handleChange(){
 }
     const [list, setList] = React.useState([]);
     useEffect(() => {
-        instance.get('https://localhost:44377/api/Cart/GetCurrentCartItem?Page=1&RowsPerPage=10')
-        .then(response => {
-            setList(response.data.result.results)
-          return 
-        });
+        debugger
+        if (localStorage.getItem('token') != '' && localStorage.getItem('token') != null && localStorage.getItem('token') != undefined){
+                instance.get('https://localhost:44377/api/Cart/GetCurrentCartItem?Page=1&RowsPerPage=10')
+                .then(response => {
+                    setList(response.data.result.results)
+                return 
+                });
+            }
       }, [reload]);
         
 
@@ -89,7 +92,7 @@ function handleChange(){
 
 
     return (
-        <div className="flex flex-col min-h-screen overflow-hidden">
+        <div className="px-24 flex flex-col min-h-screen overflow-hidden">
             <Layout>
                 <main  style={{ display: !ispayment  ? "block" : "none" }} className="flex-grow">
                     <div className="w-full flex mx-auto px-4 sm:px-6 justify-center text-3xl">
