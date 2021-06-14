@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Link, useHistory, Redirect } from "react-router-dom";
-import { createStore } from "redux";
 import { connect } from "react-redux";
-import store from "../store/index";
 import { login } from "../store/actions/auth";
 import Header from "../partials/Header";
 

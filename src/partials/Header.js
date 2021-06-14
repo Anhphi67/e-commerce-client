@@ -13,9 +13,10 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Badge from "@material-ui/core/Badge";
 import store from "../store/index";
-import axios from "axios";
 import { connect } from "react-redux";
 import { logout } from "../store/actions/auth";
+import instance from "../https";
+
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
@@ -92,10 +93,7 @@ function Header({ isLoggedIn, user, dispatch }) {
     return () => window.removeEventListener("scroll", scrollHandler);
   }, [top]);
 
-  const instance = axios.create({
-    baseURL: "https://localhost:44377/api/",
-    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-  });
+  
   const [countCart, setcountCart] = React.useState(0);
   useEffect(() => {
     instance

@@ -48,7 +48,6 @@ function handleChange(){
 }
     const [list, setList] = React.useState([]);
     useEffect(() => {
-        debugger
         if (localStorage.getItem('token') != '' && localStorage.getItem('token') != null && localStorage.getItem('token') != undefined){
                 instance.get('https://localhost:44377/api/Cart/GetCurrentCartItem?Page=1&RowsPerPage=10')
                 .then(response => {
