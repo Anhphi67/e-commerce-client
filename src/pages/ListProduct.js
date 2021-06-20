@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from "../partials/Layout";
 import instance from "../https";
 import MessageLogin from "../popup/MessageLogin.js";
-
+import config from '../../src/config'
 import { GridList, GridListTile } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -126,7 +126,7 @@ function List() {
     minimumFractionDigits: 0
   })
 
-  var link = "https://localhost:44377/images/"
+  var link =config.Image
 
   const classes = useStyles();
 

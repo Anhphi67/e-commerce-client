@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
+import config from '../../src/config'
 import instance from "../https";
 import Footer from '../partials/Footer';
 import Header from '../partials/Header';
@@ -108,18 +108,19 @@ function List() {
    const [detail, setDetail] = React.useState([]);
    const [imgUrl, setimgUrl] = React.useState("");
    useEffect(() => {
-     const fetchData = async () => {
-       const result = await axios(
+       instance.get(
          '/Product/GetDetail?id='+id+'',
-       );
+       ).then(result=>{
+         debugger
+        setDetail(result.data.result);
+        setParent(result.data.result.productCategory.id)
+        setGrandBr(result.data.result.productCategory.parentCategory.id)
+        setimgUrl(config.Image+result.data.result.avatarUrl)
+       });
         
-       setDetail(result.data.result);
-       setParent(result.data.result.productCategory.id)
-       setGrandBr(result.data.result.productCategory.parentCategory.id)
-       setimgUrl("/UploadPicture/ShowPicture?name="+result.data.result.avatarUrl+"")
-     };
+        
+      
  
-     fetchData();
    }, []);
    //
   const [grandBr, setGrandBr] = React.useState(1);
