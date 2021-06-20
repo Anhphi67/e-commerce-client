@@ -17,6 +17,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import location from '../data/location.json';
 import NumberFormat from 'react-number-format';
 import store from "../store/index"
+import { connect } from "react-redux";
+
 
 import {
     BrowserRouter as Router,
@@ -33,10 +35,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function List() {
+function List({ isLoggedIn, user, dispatch }) {
     var i
     var sum = 0
-    const user = store.getState();
+    console.log(user)
+    // const user = store.getState();
     const [name, setName] = React.useState(""); 
     const [email, setEmail] = React.useState(""); 
     const [phone, setPhone] = React.useState(""); 
@@ -72,7 +75,7 @@ function List() {
     const [list, setList] = React.useState([]);
     const [total, setTotal] = React.useState(0);
     useEffect(() => {
-        instance.get('https://localhost:44377/api/Cart/GetCurrentCartItem?Page=1&RowsPerPage=10')
+        instance.get('/Cart/GetCurrentCartItem?Page=1&RowsPerPage=10')
         .then(response => {
             setList(response.data.result.results)
             for (i =0;i<response.data.result.results.length;i++){
@@ -96,10 +99,10 @@ function List() {
                             </div>
                             <div className="pt-3">
                                 <div className="flex">
-                                    <TextField id="outlined-basic" fullWidth={true} value={user.todos.result&&user.todos.result.firstName +" "+ user.todos.result.lastName || ''} onChange={e=>{setName(e.target.value)}} size="small" label="Họ và Tên" variant="outlined" />
+                                    <TextField id="outlined-basic" fullWidth={true} value={user&&user.firstName +" "+ user.lastName || ''} onChange={e=>{setName(e.target.value)}} size="small" label="Họ và Tên" variant="outlined" />
                                 </div>
                                 <div className="flex pt-3">
-                                    <TextField id="outlined-basic" className="w-3/5 " value={user.todos.result&&user.todos.result.email || ''} size="small" onChange={e=>{setEmail(e.target.value)}} label="Email" variant="outlined" />
+                                    <TextField id="outlined-basic" className="w-3/5 " value={user&&user.email || ''} size="small" onChange={e=>{setEmail(e.target.value)}} label="Email" variant="outlined" />
                                     <TextField id="outlined-basic" className="w-2/5" size="small" onChange={e=>{setPhone(e.target.value)}} label="Số điện thoại" variant="outlined" />
                                 </div>
                                 <div className="pt-3">
@@ -256,4 +259,12 @@ function List() {
     );
 }
 
-export default List;
+// export default List;
+function mapStateToProps(state) {
+    const { isLoggedIn, user } = state.auth;
+    return {
+      isLoggedIn,
+      user,
+    };
+  }
+  export default connect(mapStateToProps)(List);

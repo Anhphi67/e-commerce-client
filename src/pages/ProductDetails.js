@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import instance from "../https";
 import Footer from '../partials/Footer';
 import Header from '../partials/Header';
 import Menu from '../partials/Menu';
@@ -109,13 +110,13 @@ function List() {
    useEffect(() => {
      const fetchData = async () => {
        const result = await axios(
-         'https://localhost:44377/api/Product/GetDetail?id='+id+'',
+         '/Product/GetDetail?id='+id+'',
        );
         
        setDetail(result.data.result);
        setParent(result.data.result.productCategory.id)
        setGrandBr(result.data.result.productCategory.parentCategory.id)
-       setimgUrl("https://localhost:44377/api/UploadPicture/ShowPicture?name="+result.data.result.avatarUrl+"")
+       setimgUrl("/UploadPicture/ShowPicture?name="+result.data.result.avatarUrl+"")
      };
  
      fetchData();
@@ -131,18 +132,13 @@ function List() {
     setValue(newValue);
   };
   const classes = useStyles();
-  const instance = axios.create({
-    baseURL: 'https://localhost:44377/api/',
-    headers: { 'Authorization': 'Bearer ' + localStorage.getItem("token") }
-  });
-
   function AddToCart(id){
     var obj ={
       "quantity": count,
       "productId": id
     }
       instance.post(
-        'https://localhost:44377/api/Cart', obj
+        '/Cart', obj
       ).then(res => {
           alert("Thêm sản phẩm vào giỏ hàng thành công")
       })

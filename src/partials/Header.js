@@ -98,7 +98,7 @@ function Header({ isLoggedIn, user, dispatch }) {
   useEffect(() => {
     instance
       .get(
-        "https://localhost:44377/api/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100"
+        "/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100"
       )
       .then((response) => {
         setcountCart(response.data.result.totalCount);

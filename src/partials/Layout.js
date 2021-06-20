@@ -17,7 +17,6 @@ const Layout = ({ children }) => {
       }
       instance.get('/User/GetCurrentUserAsync')
         .then(response => {
-          debugger
           store.dispatch(addTodo(response.data))
           setStates(store.getState())
           return 

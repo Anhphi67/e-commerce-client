@@ -1,6 +1,7 @@
 {
   "name": "simple-light-react",
   "version": "0.1.0",
+  "homepage":"http://www.phivan097.byethost9.com",
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.9.0",
