@@ -165,7 +165,11 @@ function Header({ isLoggedIn, user, dispatch }) {
           <nav className="flex">
             <ul className="flex flex-grow justify-end flex-wrap items-center">
               <li>
-                <Button startIcon={<AssignmentIcon />}>
+                <Button startIcon={<AssignmentIcon />}
+                onClick={() => {
+                  history.push("/orderHis");
+                }}
+                >
                   Theo dõi đơn hàng
                 </Button>
               </li>

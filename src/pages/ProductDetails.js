@@ -33,12 +33,16 @@ import MyLocationIcon from '@material-ui/icons/MyLocation';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { connect } from "react-redux";
+import MessageLogin from "../popup/MessageLogin.js";
+
+
 //
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useParams,
+  useParams,useHistory,
   Link
 } from "react-router-dom";
 
@@ -102,7 +106,13 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-function List() {
+function List({ isLoggedIn, user, dispatch }) {
+  let history = useHistory();
+  const [msg, setMsg] = React.useState({
+    show:false,
+    msg:'',
+    title:''
+  });
    //get data
    let { id } = useParams();
    const [detail, setDetail] = React.useState([]);
@@ -111,7 +121,6 @@ function List() {
        instance.get(
          '/Product/GetDetail?id='+id+'',
        ).then(result=>{
-         debugger
         setDetail(result.data.result);
         setParent(result.data.result.productCategory.id)
         setGrandBr(result.data.result.productCategory.parentCategory.id)
@@ -134,18 +143,27 @@ function List() {
   };
   const classes = useStyles();
   function AddToCart(id){
-    var obj ={
-      "quantity": count,
-      "productId": id
-    }
+    if (isLoggedIn){
+      var obj = {
+        "quantity": count,
+        "productId": id
+      }
       instance.post(
         '/Cart', obj
       ).then(res => {
-          alert("Thêm sản phẩm vào giỏ hàng thành công")
+        alert("Thêm sản phẩm vào giỏ hàng thành công")
       })
         .catch(err => {
           alert(err.response.data.errors)
         })
+    }
+    else{
+      setMsg({
+        show:true,
+        msg:'Bạn chưa đăng nhập - Đăng nhập để có thể mua hàng ?',
+        title:'Thông báo'
+      })
+    }
   }
 
   return (
@@ -178,7 +196,7 @@ function List() {
           <div className=" w-full flex mx-auto px-4 sm:px-6">
             <div className="w-1/2 h-auto mr-2 pt-10">
             <img className="imgproduct2" alt={detail.name} src={imgUrl}/>
-              <div className='flex'>
+              {/* <div className='flex'>
                 <GridList cellHeight={150} className={classes.content} cols={5}>
                   {tileData.map((tile) => (
                     <GridListTile key={tile.id} cols={tile.cols || 1}>
@@ -190,7 +208,7 @@ function List() {
                     </GridListTile>
                   ))}
                 </GridList>
-              </div>
+              </div> */}
             </div>
             <div className="w-1/2 h-auto ">
               <span className="pt-8 font-bold text-xl" >{detail.name}</span>
@@ -279,9 +297,9 @@ Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn 
                           value={rate}
                           readOnly 
                         />
-                        <span>Dựa trên 10 đánh giá</span>
+                        <span>/ 10 đánh giá</span>
                       </div>
-                      <div> <Button
+                      <div className="float-right"> <Button
                         variant="outlined"
                         className={classes.button}
                         startIcon={<FeedbackIcon />}
@@ -297,7 +315,12 @@ Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn 
                         >
                           Đặt câu hỏi
                       </Button></div>
+                      
                     </div>
+                    <div>
+                      
+                    </div>
+                    
                     <div style={{display:raq?"block":"none"}}>
                       <div className="flex justify-around">
                         <TextField id="outlined-basic" size="small" label="Họ và Tên" variant="outlined" />
@@ -366,6 +389,7 @@ Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn 
               </div>
 
             </div>
+            <MessageLogin obj={msg} handleChange={()=>{setMsg({...msg,show:false})}} />
           </div>
         </section>
 
@@ -375,4 +399,12 @@ Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn 
   );
 }
 
-export default List;
+// export default List;
+function mapStateToProps(state) {
+  const { isLoggedIn, user } = state.auth;
+  return {
+    isLoggedIn,
+    user,
+  };
+}
+export default connect(mapStateToProps)(List);

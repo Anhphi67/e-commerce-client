@@ -18,6 +18,8 @@ import ResetPassword from './pages/ResetPassword';
 import ProductDetails from './pages/ProductDetails';
 import CartList from './pages/CartList';
 import Payment from './pages/Payment';
+import OrderHistory from './pages/OrderHistory';
+import OrderDetail from './pages/OrderDetail';
 import ReactDOM from "react-dom";
 
 function App() {
@@ -67,7 +69,12 @@ function App() {
         <Route path="/payment">
           <Payment />
         </Route>
-       
+        <Route path="/orderHis">
+          <OrderHistory />
+        </Route>
+        <Route path="/orderDetail">
+          <OrderDetail />
+        </Route>
       </Switch>
     </>
   );

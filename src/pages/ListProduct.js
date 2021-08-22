@@ -4,9 +4,7 @@ import instance from "../https";
 import MessageLogin from "../popup/MessageLogin.js";
 import config from '../../src/config'
 import { GridList, GridListTile } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Pagination from '@material-ui/lab/Pagination';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -17,6 +15,9 @@ import '../css/ListProduct.css';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { connect } from "react-redux";
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function List() {
+function List({ isLoggedIn, user, dispatch }) {
   const ref = React.useRef()
   let { id } = useParams();
   let history = useHistory();
@@ -69,7 +70,7 @@ function List() {
   useEffect(() => {
     const fetchData = async () => {
       instance.get(
-        'https://localhost:44377/api/Product/GetUiList?Page=' + page + '&RowsPerPage=12&ProductCategoryId=' + id + '',
+        '/Product/GetUiList?Page=' + page + '&RowsPerPage=12&ProductCategoryId=' + id + '',
       ).then(res => {
         setList(res.data.result.results);
       })
@@ -77,7 +78,7 @@ function List() {
           alert(err.response.data.errors)
         })
       instance.get(
-        'https://localhost:44377/api/ProductCategory/' + id + '',
+        '/ProductCategory/' + id + '',
       ).then(res => {
         setCategory(res.data);
       })
@@ -89,13 +90,13 @@ function List() {
   }, [id, page]);
 
   function AddToCart(id) {
-    if (localStorage.getItem('token') != ''){
+    if (isLoggedIn){
       var obj = {
         "quantity": 1,
         "productId": id
       }
       instance.post(
-        'https://localhost:44377/api/Cart', obj
+        '/Cart', obj
       ).then(res => {
         alert("Thêm sản phẩm vào giỏ hàng thành công")
       })
@@ -234,7 +235,7 @@ function List() {
 
               </div>
               <div className="w-3/4 h-auto ">
-                <GridList cellHeight={360} className={classes.content} cols={4}>
+                <GridList cellHeight={360} className={classes.content + " min-h-1/2"} cols={4}>
                   {list.map((item) => (
                     <GridListTile key={item.id} cols={item.cols || 1}>
                       <div className="text-center">
@@ -289,5 +290,11 @@ function List() {
 
   );
 }
-
-export default List;
+function mapStateToProps(state) {
+  const { isLoggedIn, user } = state.auth;
+  return {
+    isLoggedIn,
+    user,
+  };
+}
+export default connect(mapStateToProps)(List);
