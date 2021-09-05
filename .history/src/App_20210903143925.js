@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-    Switch,
+  Switch,
   Route,
   useLocation
 } from 'react-router-dom';
@@ -20,7 +20,6 @@ import CartList from './pages/CartList';
 import Payment from './pages/Payment';
 import OrderHistory from './pages/OrderHistory';
 import OrderDetail from './pages/OrderDetail';
-import UserProfile from './pages/UserProfile';
 import ReactDOM from "react-dom";
 
 function App() {
@@ -76,10 +75,6 @@ function App() {
         <Route path="/orderDetail/id/:id">
           <OrderDetail />
         </Route>
-        <Route path="/profile">
-          <UserProfile />
-        </Route>
-        
       </Switch>
     </>
   );

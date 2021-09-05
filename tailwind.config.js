@@ -17,6 +17,7 @@ module.exports = {
         '92/100': '92%',
         '91/100': '91%',
       },
+      
       colors: {
         gray: {
           100: '#FBFBFB',
@@ -60,6 +61,7 @@ module.exports = {
         '9/16': '56.25%',
         '3/4': '75%',
         '1/1': '100%',
+        '128': '32rem'
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif']

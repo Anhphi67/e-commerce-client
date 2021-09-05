@@ -72,7 +72,7 @@ function FeaturesBlocks() {
                                     <span className="text-blue-600  font-bold">1000,000 đ</span>
                                 </div>
                                 <div className="text-center pb-2">
-                                    <button class="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
+                                    <button className="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
                                         Mua Ngay
 </button>
                                 </div>
@@ -132,7 +132,7 @@ function FeaturesBlocks() {
                                     <span className="text-blue-600  font-bold">1000,000 đ</span>
                                 </div>
                                 <div className="text-center pb-2">
-                                    <button class="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
+                                    <button className="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
                                         Mua Ngay
 </button>
                                 </div>
@@ -154,7 +154,7 @@ function FeaturesBlocks() {
                                     <span className="text-blue-600  font-bold">1000,000 đ</span>
                                 </div>
                                 <div className="text-center pb-2">
-                                    <button class="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
+                                    <button className="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
                                         Mua Ngay
 </button>
                                 </div>
@@ -176,7 +176,7 @@ function FeaturesBlocks() {
                                     <span className="text-blue-600  font-bold">1000,000 đ</span>
                                 </div>
                                 <div className="text-center pb-2">
-                                    <button class="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
+                                    <button className="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
                                         Mua Ngay
 </button>
                                 </div>
@@ -198,7 +198,7 @@ function FeaturesBlocks() {
                                     <span className="text-blue-600  font-bold">1000,000 đ</span>
                                 </div>
                                 <div className="text-center pb-2">
-                                    <button class="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
+                                    <button className="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
                                         Mua Ngay
 </button>
                                 </div>
@@ -236,7 +236,7 @@ function FeaturesBlocks() {
                                     <span className="text-blue-600  font-bold">1000,000 đ</span>
                                 </div>
                                 <div className="text-center pb-2">
-                                    <button class="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
+                                    <button className="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
                                         Mua Ngay
 </button>
                                 </div>
@@ -258,7 +258,7 @@ function FeaturesBlocks() {
                                     <span className="text-blue-600  font-bold">1000,000 đ</span>
                                 </div>
                                 <div className="text-center pb-2">
-                                    <button class="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
+                                    <button className="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
                                         Mua Ngay
 </button>
                                 </div>
@@ -280,7 +280,7 @@ function FeaturesBlocks() {
                                     <span className="text-blue-600  font-bold">1000,000 đ</span>
                                 </div>
                                 <div className="text-center pb-2">
-                                    <button class="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
+                                    <button className="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
                                         Mua Ngay
 </button>
                                 </div>
@@ -302,7 +302,7 @@ function FeaturesBlocks() {
                                     <span className="text-blue-600  font-bold">1000,000 đ</span>
                                 </div>
                                 <div className="text-center pb-2">
-                                    <button class="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
+                                    <button className="bg-transparent hover:bg-red-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded w-full">
                                         Mua Ngay
 </button>
                                 </div>

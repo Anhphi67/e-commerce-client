@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-    Switch,
+  Switch,
   Route,
   useLocation
 } from 'react-router-dom';
@@ -20,7 +20,6 @@ import CartList from './pages/CartList';
 import Payment from './pages/Payment';
 import OrderHistory from './pages/OrderHistory';
 import OrderDetail from './pages/OrderDetail';
-import UserProfile from './pages/UserProfile';
 import ReactDOM from "react-dom";
 
 function App() {
@@ -36,12 +35,12 @@ function App() {
     });
   });
 
-  useEffect(() => {
-    document.querySelector('html').style.scrollBehavior = 'auto'
-    window.scroll({ top: 0 })
-    document.querySelector('html').style.scrollBehavior = ''
-    focusHandling('outline');
-  }, [location.pathname]); // triggered on route change
+  // useEffect(() => {
+  //   document.querySelector('html').style.scrollBehavior = 'auto'
+  //   window.scroll({ top: 0 })
+  //   document.querySelector('html').style.scrollBehavior = ''
+  //   focusHandling('outline');
+  // }, [location.pathname]); // triggered on route change
 
   return (
     <>
@@ -76,10 +75,6 @@ function App() {
         <Route path="/orderDetail/id/:id">
           <OrderDetail />
         </Route>
-        <Route path="/profile">
-          <UserProfile />
-        </Route>
-        
       </Switch>
     </>
   );

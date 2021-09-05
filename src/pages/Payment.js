@@ -21,11 +21,7 @@ import { connect } from "react-redux";
 
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useParams,
-    Link
+    useHistory
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 function List({ isLoggedIn, user, dispatch }) {
     var i
     var sum = 0
-    // const user = store.getState();
+    let history = useHistory();
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [phone, setPhone] = React.useState("");
@@ -122,6 +118,8 @@ function List({ isLoggedIn, user, dispatch }) {
                 '/Order', obj
             ).then(res => {
                 alert("Create Sucessfull")
+                history.push("/orderHis")
+
             })
                 .catch(err => {
                     alert(err.response.data.errors)
@@ -131,7 +129,7 @@ function List({ isLoggedIn, user, dispatch }) {
     }
     const classes = useStyles();
     return (
-        <div className="flex flex-col min-h-screen overflow-hidden">
+        <div className="px-24 flex flex-col min-h-screen overflow-hidden">
             <Layout>
                 <main className="flex-grow pt-5">
                     <div className="w-full flex mx-auto px-4 sm:px-6 ">

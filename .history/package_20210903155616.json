@@ -1,11 +1,10 @@
 {
   "name": "simple-light-react",
   "version": "0.1.0",
-  "homepage": "http://phivan097.byethost9.com/",
+  "homepage": "http://localhost:3000/",
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.9.0",
-    "@headlessui/react": "^1.4.1",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
@@ -18,7 +17,6 @@
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
     "cruip-js-toolkit": "^1.0.2",
-    "heroicons-react": "^1.4.1",
     "node-sass": "^4.14.1",
     "postcss-cli": "^7.1.2",
     "react": "^16.13.1",

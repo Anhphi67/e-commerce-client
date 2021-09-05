@@ -65,6 +65,7 @@ function List({ isLoggedIn, user, dispatch }) {
     title:''
   });
   const [page, setPage] = React.useState(1);
+  const [maxpage, setMaxPage] = React.useState(1);
   const [list, setList] = React.useState([]);
   const [category, setCategory] = React.useState({});
   useEffect(() => {
@@ -73,6 +74,7 @@ function List({ isLoggedIn, user, dispatch }) {
         '/Product/GetUiList?Page=' + page + '&RowsPerPage=12&ProductCategoryId=' + id + '',
       ).then(res => {
         setList(res.data.result.results);
+        setMaxPage((res.data.result.totalCount / 5)+1)
       })
         .catch(err => {
           alert(err.response.data.errors)
@@ -152,7 +154,7 @@ function List({ isLoggedIn, user, dispatch }) {
           <div>
             <div className="pt-1 pb-4 md:pt-1 ">
               <div className="text-center ">
-                <img className="relative w-full h-64 " src="//file.hstatic.net/1000090040/collection/banner_group_web_-_300kb-1_b62a85c844de479b94a49aed50567baa_1024x1024.jpg" alt="Testimonial 01" />
+                <img className="relative w-full h-64 " src="https://intphcm.com/data/upload/banner-la-gi.jpg" alt="Testimonial 01" />
               </div>
           </div>
           </div>
@@ -249,7 +251,7 @@ function List({ isLoggedIn, user, dispatch }) {
                                 <img  className="relative flex flex-col items-center bg-white shadow-xl w-full image " alt={item.name} src={link + item.avatarUrl}  alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src={link + item.imageUrl} alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -275,7 +277,7 @@ function List({ isLoggedIn, user, dispatch }) {
                   ))}
                 </GridList>
                 <div className={classes.root}>
-                  <Pagination count={10} page={page} onChange={handleChange} />
+                  <Pagination count={maxpage} page={page} onChange={handleChange} />
                 </div>
               </div>
             </div>

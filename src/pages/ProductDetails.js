@@ -34,7 +34,8 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import { connect } from "react-redux";
-import MessageLogin from "../popup/MessageLogin.js";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 
 //
@@ -158,11 +159,21 @@ function List({ isLoggedIn, user, dispatch }) {
         })
     }
     else{
-      setMsg({
-        show:true,
-        msg:'Bạn chưa đăng nhập - Đăng nhập để có thể mua hàng ?',
-        title:'Thông báo'
-      })
+      confirmAlert({
+        title: 'Thông báo',
+        message: 'Bạn chưa đăng nhập - Đăng nhập để có thể mua hàng ?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+              history.push("/signin")
+            }
+          },
+          {
+            label: 'No',
+          }
+        ]
+      });
     }
   }
 
@@ -389,7 +400,6 @@ Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn 
               </div>
 
             </div>
-            <MessageLogin obj={msg} handleChange={()=>{setMsg({...msg,show:false})}} />
           </div>
         </section>
 

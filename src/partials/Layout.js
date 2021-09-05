@@ -5,6 +5,7 @@ import Footer from '../partials/Footer';
 import store from "../store/index"
 import instance from "../https";
 
+
 const Layout = ({ children }) => {
   const [state, setStates] = useState(store.getState())
   if (localStorage.getItem('token') != '') {
@@ -31,8 +32,9 @@ const Layout = ({ children }) => {
         <div>
           <Header />
         </div>
-        <div className="justify-around  mx-auto px-5 sm:px-6 mt-20 flex">
+        <div className="justify-around  mx-auto px-5 sm:px-6 flex">
           <Menu />
+          
         </div>
       </div>
       <main>{children}</main>
