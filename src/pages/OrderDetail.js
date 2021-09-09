@@ -74,7 +74,7 @@ function OrderDetail({ isLoggedIn, user, dispatch }) {
                     var obj = {
                         "id": id    
                     }
-                    instance.put(
+                    instance.post(
                         '/Order/Cancel', obj
                     ).then(res => {
                         alert("Cancel Sucessfull")

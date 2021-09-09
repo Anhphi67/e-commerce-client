@@ -251,7 +251,7 @@ function List({ isLoggedIn, user, dispatch }) {
                                 <img  className="relative flex flex-col items-center bg-white shadow-xl w-full image " alt={item.name} src={link + item.avatarUrl}  alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src={link + item.imageUrl} alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full image " src={link + item.imageUrl} alt="Testimonial 01" />
                                     </div>
                                 </div>
 

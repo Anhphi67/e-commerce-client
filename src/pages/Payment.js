@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import instance from "../https";
 import Layout from "../partials/Layout";
+import config from '../../src/config'
 
 
-import img1 from '../images/design.jpg';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import '../css/ListProduct.css';
@@ -16,7 +16,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import location from '../data/location.json';
 import NumberFormat from 'react-number-format';
-import store from "../store/index"
 import { connect } from "react-redux";
 
 
@@ -33,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 function List({ isLoggedIn, user, dispatch }) {
     var i
+    var link = config.Image
     var sum = 0
     let history = useHistory();
     const [name, setName] = React.useState("");
@@ -259,7 +259,7 @@ function List({ isLoggedIn, user, dispatch }) {
 
                                     {list.map(item => (
                                         <div key={item.id} className="flex items-center justify-between pt-2" >
-                                            <img className="imgPayment h-16 rounded-md shadow-xs" src={"https://localhost:44377/api/UploadPicture/ShowPicture?name=" + item.product.avatarUrl} />
+                                            <img className="imgPayment h-16 rounded-md shadow-xs" src={link + item.product.avatarUrl} />
                                             <span className="pl-2 w-6/12 font-serif">{item.product.name}</span>
                                             <span className="font-serif">x{item.quantity}</span>
                                             <span className="font-serif">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import MessengerCustomerChat from 'react-messenger-customer-chat';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 function Footer() {
   return (
@@ -151,10 +151,10 @@ function Footer() {
               </Link>
             </li>
           </ul>
-          {/* <MessengerCustomerChat
+          <MessengerCustomerChat
             pageId="777339822403967"
             appId="2943963155841604"
-          /> */}
+          />
           {/* Copyrights note */}
           <div className="text-sm text-gray-600 mr-4">Made by <a className="text-blue-600 hover:underline" href="https://cruip.com/">Cruip</a>. All rights reserved.</div>
 

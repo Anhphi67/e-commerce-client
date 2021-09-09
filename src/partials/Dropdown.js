@@ -7,16 +7,23 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import instance from "../https";
+
+import config from '../../src/config'
 
 function Dropdown() {
   const ref = React.useRef()
   const [menus, setMenu] = React.useState({ result: [] });
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(
-        'https://localhost:44377/api/ProductCategory/GetUiList',
-      );
-      setMenu(result.data);
+      instance.get(
+        '/ProductCategory/GetUiList',
+    ).then(res => {
+      setMenu(res.data);
+    })
+        .catch(err => {
+        })
+      
     };
     fetchData();
   }, []);
@@ -26,7 +33,7 @@ function Dropdown() {
         <div className="container">
           <div className="row align-items-center">
             <div className="d-flex  col-xl-12 col-lg-12 col-md-12">
-              <div className="main-menu f-right d-none d-lg-block">
+              <div className="main-menu d-none d-lg-block">
                 <nav>
                   <ul id="navigation">
                     {menus.result.map(item => (

@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-    Switch,
-  Route,
-  useLocation
-} from 'react-router-dom';
+
 
 import './css/style.scss';
 
@@ -22,10 +18,20 @@ import OrderHistory from './pages/OrderHistory';
 import OrderDetail from './pages/OrderDetail';
 import UserProfile from './pages/UserProfile';
 import ReactDOM from "react-dom";
+import {HashRouter,
+  Switch,
+Route,
+useLocation
+} from 'react-router-dom';
 
 function App() {
 
   const location = useLocation();
+  const loading = (
+    <div className="pt-3 text-center">
+      <div className="sk-spinner sk-spinner-pulse"></div>
+    </div>
+  )
 
   useEffect(() => {
     AOS.init({
@@ -45,42 +51,45 @@ function App() {
 
   return (
     <>
+    <HashRouter>
+          <React.Suspense fallback={loading}>
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/signin">
+        <Route  exact path="/signin">
           <SignIn />
         </Route>
-        <Route path="/signup">
+        <Route exact path="/signup">
           <SignUp />
         </Route>
-        <Route path="/reset-password">
+        <Route exact path="/reset-password">
           <ResetPassword />
         </Route>
-        <Route path="/list/id/:id">
+        <Route exact path="/list/id/:id">
           <List />
         </Route>
         <Route path="/detail/id/:id">
           <ProductDetails />
         </Route>
-        <Route path="/cart">
+        <Route exact path="/cart">
           <CartList />
         </Route>
-        <Route path="/payment">
+        <Route exact path="/payment">
           <Payment />
         </Route>
-        <Route path="/orderHis">
+        <Route exact path="/orderHis">
           <OrderHistory />
         </Route>
-        <Route path="/orderDetail/id/:id">
+        <Route exact path="/orderDetail/id/:id">
           <OrderDetail />
         </Route>
-        <Route path="/profile">
+        <Route exact path="/profile">
           <UserProfile />
         </Route>
-        
       </Switch>
+      </React.Suspense>
+      </HashRouter>
     </>
   );
 }

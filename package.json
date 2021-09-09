@@ -1,4 +1,5 @@
 {
+  "start": "webpack-dev-server --inline --content-base . --history-api-fallback",
   "name": "simple-light-react",
   "version": "0.1.0",
   "homepage": "http://phivan097.byethost9.com/",
@@ -24,6 +25,7 @@
     "react": "^16.13.1",
     "react-accessible-dropdown-menu-hook": "^2.2.0",
     "react-confirm-alert": "^2.7.0",
+    "react-datepicker": "^4.2.1",
     "react-dom": "^16.13.1",
     "react-jquery-plugin": "^1.1.7",
     "react-messenger-customer-chat": "^0.8.0",
