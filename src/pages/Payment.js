@@ -6,7 +6,6 @@ import config from '../../src/config'
 
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import '../css/ListProduct.css';
 import TextField from '@material-ui/core/TextField';
 import PaymentIcon from '@material-ui/icons/Payment';
 import Radio from '@material-ui/core/Radio';

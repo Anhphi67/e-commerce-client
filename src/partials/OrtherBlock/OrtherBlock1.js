@@ -14,10 +14,10 @@ function FeaturesBlocks() {
                     <div className="max-w-sm mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none pt-4">
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit" src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -36,10 +36,10 @@ function FeaturesBlocks() {
                         </div>
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit" src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -58,10 +58,10 @@ function FeaturesBlocks() {
                         </div>
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit" src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -80,10 +80,10 @@ function FeaturesBlocks() {
                         </div>
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit" src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -118,10 +118,10 @@ function FeaturesBlocks() {
                     <div className="max-w-sm mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none pt-4">
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -140,10 +140,10 @@ function FeaturesBlocks() {
                         </div>
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -162,10 +162,10 @@ function FeaturesBlocks() {
                         </div>
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -184,10 +184,10 @@ function FeaturesBlocks() {
                         </div>
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit" src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -222,10 +222,10 @@ function FeaturesBlocks() {
                     <div className="max-w-sm mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none pt-4">
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit" src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit" src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -244,10 +244,10 @@ function FeaturesBlocks() {
                         </div>
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit" src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit" src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -266,10 +266,10 @@ function FeaturesBlocks() {
                         </div>
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 
@@ -288,10 +288,10 @@ function FeaturesBlocks() {
                         </div>
                         <div>
                             <div className="WrapImg w-full">
-                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
+                                <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_3_c09957e72a264be5bd2c4d22421e1200_large.jpg" alt="Testimonial 01" />
                                 <div className="overlay">
                                     <div className="text">
-                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
+                                        <img className="relative flex flex-col items-center bg-white shadow-xl w-full h-fit " src="//product.hstatic.net/1000090040/product/product_image_1_be18699db84c4543a743c65d8ab741c5_large.jpg" alt="Testimonial 01" />
                                     </div>
                                 </div>
 

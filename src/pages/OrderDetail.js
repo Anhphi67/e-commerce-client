@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import instance from "../https";
 import Layout from "../partials/Layout";
-
 import config from '../../src/config'
 
 import { connect } from "react-redux";
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 
 
 
@@ -117,7 +117,7 @@ function OrderDetail({ isLoggedIn, user, dispatch }) {
 
     const [ispayment, setPayment] = useState(false)
     return (
-        <div className="px-24 flex flex-col min-h-screen overflow-hidden">
+        <div>
             <Layout>
                 <main className="flex-grow">
                     <div className="w-full mx-auto px-4 sm:px-6 ">

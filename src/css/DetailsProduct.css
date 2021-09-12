@@ -1,30 +1,7 @@
-.imgproduct{
+.imgproduct2{
     max-width: 80%;
+    width:  100%;
     height:30rem;
     cursor: pointer;
 }
-.imgproduct:hover{
-    max-width: 95%;
-    height:30rem;
-    border-radius: 2px;
-    cursor: pointer;
-}
-.smallimage{
-    max-width: 80%;
-    margin-left: 10%;
-    margin-top: 5%;
-    height:8.5rem;
-    cursor: pointer;
-}
-/* .buttonpri{
-    outline: none;
-    border: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 1rem !important;
-    max-width: 1rem;
-} */
-.borderright{
-    border-right: 1px solid grey;
-}
+

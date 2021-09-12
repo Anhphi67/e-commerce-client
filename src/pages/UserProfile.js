@@ -84,7 +84,7 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
         })
 }, []);
   return (
-    <div className="px-24 flex flex-col min-h-screen overflow-hidden">
+    <div>
       <Layout>
         <main className="flex-grow">
         <div className="w-full mx-auto px-4 sm:px-6 ">

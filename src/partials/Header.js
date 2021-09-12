@@ -120,7 +120,7 @@ function Header({ isLoggedIn, user, dispatch }) {
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2">
-          <div className="grid grid-cols-12 gap-4 relative items-center justify-between h-16">
+            <div className="grid grid-cols-12 gap-4 relative items-center justify-between h-16">
               <div className="col-span-1">
                 <div className="flex-shrink-0 flex items-center">
                   <img
@@ -136,7 +136,7 @@ function Header({ isLoggedIn, user, dispatch }) {
                 </div>
               </div>
               <div className="xl:col-span-9 sm:col-span-10">
-              <div className="hidden sm:block sm:ml-6">
+                <div className="hidden sm:block sm:ml-6">
                   <div className="grid grid-cols-12">
                     <div className="xl:col-span-7 sm:col-span-5">
                       <div className="bg-white flex items-center rounded-full shadow-sm h-12">
@@ -168,122 +168,122 @@ function Header({ isLoggedIn, user, dispatch }) {
                           goToCart()
                         }}
                       >
-                        Giỏ hàng
-                      </Button>
+                         Giỏ hàng
+                         </Button>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="xl:col-span-2 sm:col-span-1 flex justify-end">
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:pr-0">
-              {isLoggedIn? (
-                <span className="mr-2">{user && user.firstname}</span>
-              ):(
-                <span className="mr-2">User</span>
-
-              )}
-
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative">
-                  <div>
-                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                      <span className="sr-only">Open user menu</span>
-                      {(isLoggedIn && user.image!=null) ? (
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src={link+user.image}
-                        alt=""
-                      />):(
-                        <img
-                        className="h-8 w-8 rounded-full"
-                        src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQHBg0QEBIPEA4QEBEQFRgQDRcQExAaFhUWFiATFRUYHSggGB4lGxgWITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NFQ0NDy0ZFRkrLSs3Ky0tLisrKzctNy0rNystLS0rKysrKy0rLSsrKysrKysrKysrKysrKysrKysrK//AABEIAOEA4QMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAwQFAgYBB//EADQQAQACAAMFBQcCBwEAAAAAAAABAgMEEQUSITFhQVFxgbETIlKRocHRFDQyQnKCkuHxJP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A/TAGkAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAHVKTiW0iJmegOX2I1nSOM9F2mzL25zWv1lo5fLVy9eEce2Z5yauMzC2de8cdKx15/KE9dld9p8qtITVZ07Kj4p/wAUd9l2jlaJ8Y0aoaMHFyl8LnWdO+OMIHpVTNZGuNEzHu2747fGDUxijvFwpwbzW0aT69YcKgAAAAAAAAAAAAAAAAAA3Mjl/YYMfFPGfwx8vTfzFI77Q9ClWACKAAAAAAgzmXjMYWn80cpYUxuzMTzjg9IyNq4W5jxaOVo+sLEqiAqAAAAAAAAAAAAAAAALOz41zlPP0luMPZv7yvn6S3EqwARQAAAAABS2rTeyuvwzE/b7rqttGf8Ax316esAwwGmQAAAAAAAAAAAAAAAFrZ37ynn6S22FkJ0zlPH7S3UqwARQAAAAABibStM5u0azpGmnHlwhtsHPTrnL+P2WCABWQAAAAAAAAAAAAAAAE+SiZzNJiJmItHZybyHJ03MtSI7on5pkrQAgAAAAAAMDNxP6m+sTGtp5xz4t9U2nTeylp7Y0mPmsGKArIAAAAAAAAAAAAAAADc2fffylOnD5LLN2PicL1/uj0/DSZaAAAAAAAAFLa193LafFMR8uK6ydr4m9jVr8MeqwUAFZAAAAAAAAABQAAAAAEmXxpwMWLR/1t5XH/UYMW005xprrowGnsfE4Xr/d9vwlGkAigAAAAAIM3mP02Frprx056MPExJxMSbTzmdWhti/GlfGft+Wa1EAAAAAAAAAAABAAAAAABNlMb2GPW3ZynwlCA9LE6wKWysSb5eYn+WdIXWWgAAAAFbaN5plLadI+YMrOYvtszaezlHhCAGkABAAAAAAAAAAAAAAAAAAGxsmNMtPW0+kLqts+m5k6ddZ+c6rLLQAAAArbRjXJ38p+sLKPMU38C8d9Zj6A88A0yAAAAAAAAAAAAAAAAAAOqV37xEc5nQpSb20iJmejVyGS9jO9b+L0FXaxu1iO6NH0GVAAAAAAefzWH7LMWjrrHhKJt57KfqK6xwtHLr0lj4mHOFbS0TEtRHAAgAAAAAAAAAAAAPsRvTpHGei9l9mzfjf3Y7o5/wChVGtd+2kRMz0X8vsybcbzpHdHP5tHBwK4NdKxEes+aRNMR4WDXBrpWIhICKAAAAAAAAOcTDjErpaImOroBmZjZnbSfKftLPxMOcO2lomJ6vRuMTDjFrpaImOq6jzo0cxszTjSdek/aVC9JpbSYmJ6qOQBAAAAAH2OMg+LeVyNsbjPu1+s+ELeSyG5EWvxt2R2R+ZX01cRYGXrgR7sce+eMz5pQRQAAAAAAAAAAAAAAABHjYNcaulo19Y80gDIzOzpw+Nfej6x+VF6VTzmRjHiZrwv9J8VlTGMOrVmlpieEw5VAABpbKy2vvz4V/LOrG9aIjnM6PRYVPZ4cVjlEaFWOgGVAAAAAAAAAAAAAAAAAAAAAAUdqZffw9+P4q8+sMh6WY1h57Hw/ZY1q90rEqMBUTZX9zh/1R6t8EqwARQAAAAAAAAAAAAAAAAAAAAABibS/eW8vSAWJVUBUf/Z"
-                        alt=""
-                      />
-                      )}
-                      
-                    </Menu.Button>
-                  </div>
-
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:pr-0">
                   {isLoggedIn ? (
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-
-                      <Menu.Items className="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-
-                        <Menu.Item>
-                          <a
-                            onClick={()=>{history.push("/profile")}}
-                            className='cursor-pointer hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
-                          >
-                            Thông tin
-                          </a>
-                        </Menu.Item>
-                        <Menu.Item>
-                          <a
-                            href="#"
-                            className='cursor-pointer hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
-                          >
-                            Cài đặt
-                          </a>
-                        </Menu.Item>
-                        <Menu.Item c>
-                          <a
-                            onClick={()=>{history.push("/signin")}}
-                            className=' cursor-pointer  hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
-                            onClick={Logout}
-                          >
-                            Đăng xuất
-                          </a>
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Transition>
-
-
+                    <span className="mr-2">{user && user.firstname}</span>
                   ) : (
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
+                    <span className="mr-2">User</span>
 
-                      <Menu.Items className="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-
-                        <Menu.Item>
-                          <a
-                             onClick={()=>{history.push("/signup")}}
-                            className='hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
-                          >
-                            Tạo tài khoản
-                          </a>
-                        </Menu.Item>
-                        <Menu.Item>
-                          <a
-                            onClick={()=>{history.push("/signin")}}
-                            className=' hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
-                          >
-                            Đăng nhập
-                          </a>
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Transition>
                   )}
-                </Menu>
+
+                  {/* Profile dropdown */}
+                  <Menu as="div" className="relative">
+                    <div>
+                      <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <span className="sr-only">Open user menu</span>
+                        {(isLoggedIn && user.image != null) ? (
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src={link + user.image}
+                            alt=""
+                          />) : (
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQHBg0QEBIPEA4QEBEQFRgQDRcQExAaFhUWFiATFRUYHSggGB4lGxgWITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NFQ0NDy0ZFRkrLSs3Ky0tLisrKzctNy0rNystLS0rKysrKy0rLSsrKysrKysrKysrKysrKysrKysrK//AABEIAOEA4QMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAwQFAgYBB//EADQQAQACAAMFBQcCBwEAAAAAAAABAgMEEQUSITFhQVFxgbETIlKRocHRFDQyQnKCkuHxJP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A/TAGkAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAHVKTiW0iJmegOX2I1nSOM9F2mzL25zWv1lo5fLVy9eEce2Z5yauMzC2de8cdKx15/KE9dld9p8qtITVZ07Kj4p/wAUd9l2jlaJ8Y0aoaMHFyl8LnWdO+OMIHpVTNZGuNEzHu2747fGDUxijvFwpwbzW0aT69YcKgAAAAAAAAAAAAAAAAAA3Mjl/YYMfFPGfwx8vTfzFI77Q9ClWACKAAAAAAgzmXjMYWn80cpYUxuzMTzjg9IyNq4W5jxaOVo+sLEqiAqAAAAAAAAAAAAAAAALOz41zlPP0luMPZv7yvn6S3EqwARQAAAAABS2rTeyuvwzE/b7rqttGf8Ax316esAwwGmQAAAAAAAAAAAAAAAFrZ37ynn6S22FkJ0zlPH7S3UqwARQAAAAABibStM5u0azpGmnHlwhtsHPTrnL+P2WCABWQAAAAAAAAAAAAAAAE+SiZzNJiJmItHZybyHJ03MtSI7on5pkrQAgAAAAAAMDNxP6m+sTGtp5xz4t9U2nTeylp7Y0mPmsGKArIAAAAAAAAAAAAAAADc2fffylOnD5LLN2PicL1/uj0/DSZaAAAAAAAAFLa193LafFMR8uK6ydr4m9jVr8MeqwUAFZAAAAAAAAABQAAAAAEmXxpwMWLR/1t5XH/UYMW005xprrowGnsfE4Xr/d9vwlGkAigAAAAAIM3mP02Frprx056MPExJxMSbTzmdWhti/GlfGft+Wa1EAAAAAAAAAAABAAAAAABNlMb2GPW3ZynwlCA9LE6wKWysSb5eYn+WdIXWWgAAAAFbaN5plLadI+YMrOYvtszaezlHhCAGkABAAAAAAAAAAAAAAAAAAGxsmNMtPW0+kLqts+m5k6ddZ+c6rLLQAAAArbRjXJ38p+sLKPMU38C8d9Zj6A88A0yAAAAAAAAAAAAAAAAAAOqV37xEc5nQpSb20iJmejVyGS9jO9b+L0FXaxu1iO6NH0GVAAAAAAefzWH7LMWjrrHhKJt57KfqK6xwtHLr0lj4mHOFbS0TEtRHAAgAAAAAAAAAAAAPsRvTpHGei9l9mzfjf3Y7o5/wChVGtd+2kRMz0X8vsybcbzpHdHP5tHBwK4NdKxEes+aRNMR4WDXBrpWIhICKAAAAAAAAOcTDjErpaImOroBmZjZnbSfKftLPxMOcO2lomJ6vRuMTDjFrpaImOq6jzo0cxszTjSdek/aVC9JpbSYmJ6qOQBAAAAAH2OMg+LeVyNsbjPu1+s+ELeSyG5EWvxt2R2R+ZX01cRYGXrgR7sce+eMz5pQRQAAAAAAAAAAAAAAABHjYNcaulo19Y80gDIzOzpw+Nfej6x+VF6VTzmRjHiZrwv9J8VlTGMOrVmlpieEw5VAABpbKy2vvz4V/LOrG9aIjnM6PRYVPZ4cVjlEaFWOgGVAAAAAAAAAAAAAAAAAAAAAAUdqZffw9+P4q8+sMh6WY1h57Hw/ZY1q90rEqMBUTZX9zh/1R6t8EqwARQAAAAAAAAAAAAAAAAAAAAABibS/eW8vSAWJVUBUf/Z"
+                            alt=""
+                          />
+                        )}
+
+                      </Menu.Button>
+                    </div>
+
+                    {isLoggedIn ? (
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+
+                        <Menu.Items className="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+
+                          <Menu.Item>
+                            <a
+                              onClick={() => { history.push("/profile") }}
+                              className='cursor-pointer hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
+                            >
+                              Thông tin
+                            </a>
+                          </Menu.Item>
+                          <Menu.Item>
+                            <a
+                              href="#"
+                              className='cursor-pointer hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
+                            >
+                              Cài đặt
+                            </a>
+                          </Menu.Item>
+                          <Menu.Item c>
+                            <a
+                              onClick={() => { history.push("/signin") }}
+                              className=' cursor-pointer  hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
+                              onClick={Logout}
+                            >
+                              Đăng xuất
+                            </a>
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+
+
+                    ) : (
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+
+                        <Menu.Items className="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+
+                          <Menu.Item>
+                            <a
+                              onClick={() => { history.push("/signup") }}
+                              className='hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
+                            >
+                              Tạo tài khoản
+                            </a>
+                          </Menu.Item>
+                          <Menu.Item>
+                            <a
+                              onClick={() => { history.push("/signin") }}
+                              className=' hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'
+                            >
+                              Đăng nhập
+                            </a>
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    )}
+                  </Menu>
+                </div>
+
               </div>
-            
-              </div>
-          </div>
-            
+            </div>
+
           </div>
 
           <Disclosure.Panel className="sm:hidden">
@@ -303,7 +303,7 @@ function Header({ isLoggedIn, user, dispatch }) {
               ))}
             </div>
           </Disclosure.Panel>
-        </>
+          </>
       )}
     </Disclosure>
   );

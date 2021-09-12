@@ -10,7 +10,7 @@ function HeroHome() {
       <div className=" mx-auto">
         <div className="pt-1 pb-12 md:pt-1 ">
           <div className="text-center ">
-            <img className="relative w-full " src="https://theme.hstatic.net/1000090040/1000663762/14/slide2.png?v=1338" alt="Testimonial 01" />
+            <img className="relative w-full h-fit " src="https://theme.hstatic.net/1000090040/1000663762/14/slide2.png?v=1338" alt="Testimonial 01" />
           </div>
         </div>
 

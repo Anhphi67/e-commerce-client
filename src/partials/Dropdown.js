@@ -29,7 +29,7 @@ function Dropdown() {
   }, []);
   return (
     <div className="w-full">
-      <div className="main-header header-sticky">
+      <div className="main-header" >
         <div className="container">
           <div className="row align-items-center">
             <div className="d-flex  col-xl-12 col-lg-12 col-md-12">
@@ -52,9 +52,6 @@ function Dropdown() {
                   </ul>
                 </nav>
               </div>
-            </div>
-            <div className="col-12">
-              <div className="mobile_menu d-block d-lg-none"></div>
             </div>
           </div>
         </div>

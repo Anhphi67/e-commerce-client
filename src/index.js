@@ -8,14 +8,15 @@ import { Provider } from 'react-redux'
 
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
+    <Provider store={store}>
       <Router>
-        <App />
+        <div className="xl:px-24 sm:px-6 flex flex-col min-h-screen overflow-hidden">
+          <App />
+        </div>
       </Router>
-    </React.StrictMode>
   </Provider>,
   document.getElementById('root')
+  
 );
 
 // If you want your app to work offline and load faster, you can change

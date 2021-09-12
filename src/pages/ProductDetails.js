@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
 import config from '../../src/config'
 import instance from "../https";
-import Footer from '../partials/Footer';
-import Header from '../partials/Header';
 import Menu from '../partials/Menu';
-import { GridList, GridListTile } from '@material-ui/core';
-import tileData from '../pages/data2.json';
-import img1 from '../images/design.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -16,6 +11,8 @@ import '../css/DetailsProduct.css';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
+import Layout from "../partials/Layout";
+
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 // Button
@@ -178,12 +175,9 @@ function List({ isLoggedIn, user, dispatch }) {
   }
 
   return (
-    <div className="px-24 flex flex-col min-h-screen overflow-hidden">
-      {/*  Site header */}
-      <Header />
-      {/*  Page content */}
+    <div>
+       <Layout>
       <main className="flex-grow">
-        <Menu />
         <div className="w-full flex mx-auto px-4 sm:px-6 ">
 
           <div className="flex w-full h-auto justify-between breakcrum pb-2">
@@ -404,7 +398,7 @@ Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn 
         </section>
 
       </main>
-      <Footer />
+    </Layout>
     </div>
   );
 }
