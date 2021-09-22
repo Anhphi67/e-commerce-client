@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <div className="xl:px-24 sm:px-6 flex flex-col min-h-screen overflow-hidden">
+        <div className="xl:px-24 sm:px-6 flex flex-col min-h-screen overflow-hidden bg-gray-100">
           <App />
         </div>
       </Router>

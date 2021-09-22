@@ -29,10 +29,9 @@ import {
         const message =
           (error.response &&
             error.response.data &&
-            error.response.data.message) ||
+            error.response.data.errors) ||
           error.message ||
           error.toString();
-  
         dispatch({
           type: REGISTER_FAIL,
         });
@@ -63,7 +62,7 @@ import {
         const message =
           (error.response &&
             error.response.data &&
-            error.response.data.message) ||
+            error.response.data.errors) ||
           error.message ||
           error.toString();
   

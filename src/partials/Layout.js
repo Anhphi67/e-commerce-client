@@ -9,24 +9,6 @@ import instance from "../https";
 
 const Layout = ({ children }) => {
   const [state, setStates] = useState(store.getState())
-  if (localStorage.getItem('token') != '') {
-    if (state.todos && state.todos.length==0){
-      function addTodo(Obj) {
-        return {
-          type: 'User_Info',
-          Obj
-        }
-      }
-      instance.get('/User/GetCurrentUserAsync')
-        .then(response => {
-          store.dispatch(addTodo(response.data))
-          setStates(store.getState())
-          return 
-        })
-    }
-  }
-
-
   return (
     <>
       <div>

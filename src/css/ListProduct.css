@@ -183,7 +183,7 @@ div.text-muted {
 }
 
 #sidebar {
-    width: 25%;
+    width: 20%;
     float: left
 }
 
@@ -240,7 +240,7 @@ div.text-muted {
 }
 
 #products {
-    width: 75%;
+    width: 80%;
     padding-left: 30px;
     margin: 0;
     float: right
@@ -390,4 +390,12 @@ img {
     #mobile-filter {
         clear: both
     }
+}
+
+
+.c-card img {
+    transition: transform 0.3s ease-in-out;
+}
+.c-card:hover img {
+    transform: scale(1.05);
 }

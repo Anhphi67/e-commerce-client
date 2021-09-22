@@ -27,6 +27,7 @@ function Header({ isLoggedIn, user, dispatch }) {
   let history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const [isCartAlert, setisCartAlert] = React.useState(false);
   var link = config.Image
 
   const handleClick = (event) => {
@@ -58,19 +59,47 @@ function Header({ isLoggedIn, user, dispatch }) {
 
   const [countCart, setcountCart] = React.useState(0);
   useEffect(() => {
-    instance
-      .get(
-        "/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100"
-      )
-      .then((response) => {
-        setcountCart(response.data.result.totalCount);
-        return;
-      });
+    if (isLoggedIn) {
+      instance
+        .get(
+          "/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100"
+        )
+        .then((response) => {
+          setcountCart(response.data.result.totalCount);
+          return;
+        });
+    }
   }, []);
 
   function goToCart() {
     if (isLoggedIn) {
-      history.push("/cart");
+
+      if(countCart>0){
+        history.push("/cart");
+      }
+      else{
+        instance
+        .get(
+          "/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100"
+        )
+        .then((response) => {
+          if (response.data.result.totalCount == 0) {
+            setisCartAlert(true)
+            setTimeout(
+              function() {
+                setisCartAlert(false);
+              }
+              .bind(this),
+              500
+          );
+          } else {
+            history.push("/cart");
+          }
+          return;
+        });
+      }
+      
+      
     } else {
       confirmAlert({
         title: 'Thông báo',
@@ -157,7 +186,7 @@ function Header({ isLoggedIn, user, dispatch }) {
                         Theo dõi đơn hàng
                       </Button>
                     </div>
-                    <div className="p-2 xl:col-span-2 sm:col-span-3">
+                    <div className="relative p-2 xl:col-span-2 sm:col-span-3">
                       <Button
                         startIcon={
                           <Badge badgeContent={countCart} color="primary">
@@ -168,8 +197,24 @@ function Header({ isLoggedIn, user, dispatch }) {
                           goToCart()
                         }}
                       >
-                         Giỏ hàng
-                         </Button>
+                        Giỏ hàng
+                      </Button>
+                      {isCartAlert ? (
+                        <div className="absolute z-50 w-64">
+                         <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                              <div class="flex">
+                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                <div>
+                                  <p class="font-bold">Bạn chưa có sản phẩm nào trong giỏ hàng.</p>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      ) : (
+                        <span className="hidden"></span>
+                      )}
+
+
                     </div>
                   </div>
                 </div>
@@ -177,12 +222,10 @@ function Header({ isLoggedIn, user, dispatch }) {
               <div className="xl:col-span-2 sm:col-span-1 flex justify-end">
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:pr-0">
                   {isLoggedIn ? (
-                    <span className="mr-2">{user && user.firstname}</span>
+                    <span className="mr-2">{user.firstName||''}</span>
                   ) : (
                     <span className="mr-2">User</span>
-
                   )}
-
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative">
                     <div>
@@ -303,7 +346,7 @@ function Header({ isLoggedIn, user, dispatch }) {
               ))}
             </div>
           </Disclosure.Panel>
-          </>
+        </>
       )}
     </Disclosure>
   );

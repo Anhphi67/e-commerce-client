@@ -26,16 +26,16 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
   const [startDate, setStartDate] = useState(new Date());
   const [selectedFiles, setSelectedFiles] = useState(undefined);
   const [userDtl, setuserDtl] = useState({
-    id: "string",
-    email: "string",
+    id: "",
+    email: "",
     birthday: "2021-09-05",
     gender: 0,
-    firstName: "string",
-    lastName: "string",
-    address: "string",
-    image: "string",
-    phone_No: "string",
-    password: "string"
+    firstName: "",
+    lastName: "",
+    address: "",
+    image: "",
+    phone_No: "",
+    password: ""
     });
   let formData = new FormData();
   const onFileChange = event => {
@@ -68,16 +68,18 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
     instance.get(
         '/User/GetForEdit?id=' + user.id + '',
     ).then(res => {
+
       setuserDtl({...userDtl,id:user.id,
         email:res.data.email,
-        birthday: res.data.birthday.substring(0,10),
-        gender: res.data.gender,
+        birthday: res.data.birthday==null?"":res.data.birthday.substring(0,10),
+        gender: res.data.gender==null?0:res.data.gender,
         firstName: res.data.firstName,
         lastName:res.data.lastName,
-        address: res.data.address,
-        image: res.data.image,
-        phone_No: res.data.phone_No,
+        address: res.data.address==null?"":res.data.address,
+        image: res.data.image==null?"":res.data.image,
+        phone_No: res.data.phone_No?"":res.data.phone_No,
       })
+      
     })
         .catch(err => {
           alert("Có lỗi xãy ra")
@@ -157,23 +159,23 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Gender</div>
                         <div className="px-4 py-2">
-                        <label class="inline-flex items-center">
-                            <input type="radio" class="form-radio" name="accountType" value="1" onChange={event => { setuserDtl({...userDtl,gender:event.target.value}) }} checked={userDtl.gender=='1'}/>
-                            <span class="ml-2">Male</span>
+                        <label className="inline-flex items-center">
+                            <input type="radio" className="form-radio" name="accountType" value="1" onChange={event => { setuserDtl({...userDtl,gender:event.target.value}) }} checked={userDtl.gender=='1'}/>
+                            <span className="ml-2">Male</span>
                           </label>
-                          <label class="inline-flex items-center ml-6">
-                            <input type="radio" class="form-radio" name="accountType" value="0" onChange={event => { setuserDtl({...userDtl,gender:event.target.value}) }} checked={userDtl.gender=='0'}/>
-                            <span class="ml-2">Female</span>
+                          <label className="inline-flex items-center ml-6">
+                            <input type="radio" className="form-radio" name="accountType" value="0" onChange={event => { setuserDtl({...userDtl,gender:event.target.value}) }} checked={userDtl.gender=='0'}/>
+                            <span className="ml-2">Female</span>
                           </label>
                         </div>
                       </div>
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Contact No.</div>
-                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.phone_No} onChange={event => { setuserDtl({...userDtl,phone_No:event.target.value}) }} type="text" placeholder="Contact No."></input></div>
+                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.phone_No || ''} onChange={event => { setuserDtl({...userDtl,phone_No:event.target.value}) }} type="text" placeholder="Contact No."></input></div>
                       </div>
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Current Address</div>
-                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={userDtl.address} id="username" onChange={event => { setuserDtl({...userDtl,address:event.target.value}) }} type="text" placeholder="Current Address"></input></div>
+                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={userDtl.address|| ''} id="username" onChange={event => { setuserDtl({...userDtl,address:event.target.value}) }} type="text" placeholder="Current Address"></input></div>
                       </div>
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Permanant Address</div>

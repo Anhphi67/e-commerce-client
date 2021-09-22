@@ -12,7 +12,7 @@ import {
     Link
 } from "react-router-dom";
 
-function History({ isLoggedIn, user, dispatch }) {
+function OrderHistory({ isLoggedIn, user, dispatch }) {
     let history = useHistory();
     const [page, setPage] = React.useState(1);
     const [list, setList] = React.useState([]);
@@ -56,7 +56,7 @@ function History({ isLoggedIn, user, dispatch }) {
         setPage(value);
     };
     return (
-        <div className="px-24 flex flex-col min-h-screen overflow-hidden">
+        <div>
             <Layout>
                 <main className="flex-grow">
                     <div className="w-full mx-auto px-4 sm:px-6 ">
@@ -153,7 +153,7 @@ function History({ isLoggedIn, user, dispatch }) {
                         <div className="w-3/4 h-auto pt-4 mt-2 mb-2 bg-gray-100 shadow-sm">
                             <div className="min-h-1/2">
                                 {list.map((lst) => (
-                                    <div className="w-98/100  h-auto pt-2 ml-2 mr-2 bg-white shadow-sm mb-4">
+                                    <div key={lst.id} className="w-98/100  h-auto pt-2 ml-2 mr-2 bg-white shadow-sm mb-4">
                                         <div className="flex border-b">
                                             <div className="ml-2 w-2/3">
                                                 <label><b>Mã đơn hàng</b>  : </label> <a className="text-blue-600">{lst.code}</a>
@@ -177,7 +177,7 @@ function History({ isLoggedIn, user, dispatch }) {
                                             </div>
                                             <div className="w-1/2 flex justify-end mt-1 mb-1 mr-2">
                                                 <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-2 rounded inline-flex items-center">
-                                                    <svg className="h-8 w-8 text-black" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <line x1="5" y1="12" x2="19" y2="12" />  <line x1="15" y1="16" x2="19" y2="12" />  <line x1="15" y1="8" x2="19" y2="12" /></svg>
+                                                    <svg className="h-8 w-8 text-black" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <line x1="5" y1="12" x2="19" y2="12" />  <line x1="15" y1="16" x2="19" y2="12" />  <line x1="15" y1="8" x2="19" y2="12" /></svg>
                                                     <span onClick={() => { history.push("/orderDetail/id/" + lst.id) }} >Order Detail</span>
                                                 </button>
                                             </div>
@@ -209,4 +209,4 @@ function mapStateToProps(state) {
         user,
     };
 }
-export default connect(mapStateToProps)(History);
+export default connect(mapStateToProps)(OrderHistory);
