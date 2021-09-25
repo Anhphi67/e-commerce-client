@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import instance from "../https";
 import Layout from "../partials/Layout";
-import { makeStyles } from '@material-ui/core/styles';
 import { Link, useHistory, Redirect } from 'react-router-dom';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+
 
 import config from '../../src/config'
 
@@ -57,7 +58,7 @@ function List() {
     const rows = [
     ];
     for (i = 0; i < list.length; i++) {
-        rows.push(createRow(list[i].id, list[i].product.name, list[i].quantity, list[i].product.oldPrice))
+        rows.push(createRow(list[i].id, list[i].product.name, list[i].quantity, list[i].product.retailPrice))
     }
 
     const invoiceSubtotal = subtotal(rows);
@@ -74,9 +75,22 @@ function List() {
         <div>
             <Layout>
                 <main className="flex-grow">
-                    <div className="container mx-auto">
-                        <div className="flex shadow-md">
-                            <div className="w-3/4 bg-white px-10 pb-10">
+                <div className="w-full mx-auto px-4 sm:px-6 ">
+                        <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-3 sm:px-6 ">
+                            <Breadcrumbs aria-label="breadcrumb">
+                                <Link color="inherit" to={"/"}>
+                                    Trang chủ
+                                </Link>
+                                <Link color="inherit" to={"/cart"} >
+                                    Giỏ hàng của tôi
+                                </Link>
+                            </Breadcrumbs>
+
+                        </div>
+                    </div>
+                    <div className="container mx-auto mt-2">
+                        <div className="md:flex shadow-md">
+                            <div className="md:w-3/4 w-full bg-white md:px-10 px-4 pb-10">
                                 <div className="flex justify-between border-b pb-8">
                                     <h1 className="font-semibold text-2xl">Shopping Cart</h1>
                                     <h2 className="font-semibold text-2xl">{numItem} Items</h2>
@@ -88,10 +102,10 @@ function List() {
                                     <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
                                 </div>
                                 {list.map((row) => (
-                                    <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+                                    <div key={row.id} className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                                         <div className="flex w-2/5"> {/* product */}
                                             <div className="w-20">
-                                                <img className="h-24 w-full" src={link+row.product.imageUrl} alt="" />
+                                                <img className="h-24 w-full" src={link+row.product.avatarUrl} alt="" />
                                             </div>
                                             <div className="flex flex-col justify-between ml-4 flex-grow">
                                                 <span className="font-bold text-sm">{row.product.name}</span>
@@ -102,8 +116,8 @@ function List() {
                                         <div className="flex justify-center w-1/5">
                                             <span className="text-center w-1/5 font-semibold text-sm">{row.quantity}</span>
                                         </div>
-                                        <span className="text-center w-1/5 font-semibold text-sm">{formatter.format(row.product.oldPrice)}</span>
-                                        <span className="text-center w-1/5 font-semibold text-sm">{formatter.format(row.product.oldPrice * row.quantity)}</span>
+                                        <span className="text-center w-1/5 font-semibold text-sm">{formatter.format(row.product.retailPrice)}</span>
+                                        <span className="text-center w-1/5 font-semibold text-sm">{formatter.format(row.product.retailPrice * row.quantity)}</span>
                                     </div>
                                 ))}
                                 <a href="/" className="cursor-pointer flex font-semibold text-indigo-600 text-sm mt-10">
@@ -111,7 +125,7 @@ function List() {
                                     Continue Shopping
                                 </a>
                             </div>
-                            <div id="summary" className="w-1/4 px-8 pb-10">
+                            <div id="summary" className=" md:w-1/4 w-full px-8 pb-10">
                                 <h1 className="font-semibold text-2xl border-b pb-8">Order Summary</h1>
                                 <div className="flex justify-between mt-10 mb-2">
                                     <span className="font-semibold text-sm uppercase">Items {numItem}</span>

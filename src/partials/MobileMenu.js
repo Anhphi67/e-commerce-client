@@ -38,14 +38,14 @@ export default function Navbar({ fixed }) {
         };
         fetchData();
     }, []);
-    const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-black transition ease transform duration-300`;
+    const genericHamburgerLine = `h-1 w-5 my-1 rounded-full bg-gray-600 transition ease transform duration-300`;
     return (
         <>
             <nav className="relative flex flex-wrap items-center justify-between px-2 py-3  mb-3">
                 <div className="px-2 mx-auto flex flex-wrap items-center justify-between">
-                    <div className="w-full relative flex justify-between lg:w-auto lg:static  lg:block lg:justify-start">
+                    <div className="w- relative flex justify-between lg:w-auto lg:static  lg:block lg:justify-start">
                         <button
-                            className="flex flex-col h-12 w-12 border-2 border-black rounded justify-center items-center group"
+                            className="flex flex-col h-10 w-10 border border-gray-600 rounded justify-center items-center group"
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             <div

@@ -136,6 +136,7 @@ label {
     border-radius: 3px
 }
 
+
 .tick:hover input~.check {
     background-color: #f3f3f3
 }

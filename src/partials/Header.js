@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Badge from "@material-ui/core/Badge";
@@ -11,6 +12,8 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import config from '../../src/config'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
+import MobileMenu from '../partials/MobileMenu';
+
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -28,6 +31,7 @@ function Header({ isLoggedIn, user, dispatch }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl1, setAnchorEl1] = React.useState(null);
   const [isCartAlert, setisCartAlert] = React.useState(false);
+  const [isSearch, setIsSearch] = React.useState(false);
   var link = config.Image
 
   const handleClick = (event) => {
@@ -74,32 +78,32 @@ function Header({ isLoggedIn, user, dispatch }) {
   function goToCart() {
     if (isLoggedIn) {
 
-      if(countCart>0){
+      if (countCart > 0) {
         history.push("/cart");
       }
-      else{
+      else {
         instance
-        .get(
-          "/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100"
-        )
-        .then((response) => {
-          if (response.data.result.totalCount == 0) {
-            setisCartAlert(true)
-            setTimeout(
-              function() {
-                setisCartAlert(false);
-              }
-              .bind(this),
-              500
-          );
-          } else {
-            history.push("/cart");
-          }
-          return;
-        });
+          .get(
+            "/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100"
+          )
+          .then((response) => {
+            if (response.data.result.totalCount == 0) {
+              setisCartAlert(true)
+              setTimeout(
+                function () {
+                  setisCartAlert(false);
+                }
+                  .bind(this),
+                500
+              );
+            } else {
+              history.push("/cart");
+            }
+            return;
+          });
       }
-      
-      
+
+
     } else {
       confirmAlert({
         title: 'Thông báo',
@@ -148,10 +152,10 @@ function Header({ isLoggedIn, user, dispatch }) {
     <Disclosure as="nav" className="">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2">
+          <div className="max-w-7xl mx-auto px-2 ">
             <div className="grid grid-cols-12 gap-4 relative items-center justify-between h-16">
-              <div className="col-span-1">
-                <div className="flex-shrink-0 flex items-center">
+              <div className="col-span-1 hidden md:block">
+                <div className="flex-shrink-0 flex items-center ">
                   <img
                     className="block lg:hidden h-8 w-auto cursor-pointer"
                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
@@ -164,17 +168,93 @@ function Header({ isLoggedIn, user, dispatch }) {
                   />
                 </div>
               </div>
-              <div className="xl:col-span-9 sm:col-span-10">
+              <div className="col-span-2 block md:hidden">
+                <div className="flex justify-start">
+                  <MobileMenu />
+                </div>
+
+              </div>
+              <div className="col-span-8 block md:hidden">
+                <div className="flex">
+                  <div className="p-2 xl:col-span-3 sm:col-span-4">
+                    <Button startIcon={<SearchIcon className="w-8 h-8" />}
+                      onClick={() => {
+                        setIsSearch(!isSearch)
+                      }}
+                    >
+                    </Button>
+                    {isSearch ? (
+                      <div className="absolute z-50 w-72">
+                        <div className="bg-white  px-4 py-2 shadow-md" role="alert">
+                          <div className="pt-2 relative mx-auto text-gray-600">
+                            <input className="w-full border border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Search" />
+                            <button type="submit" className="absolute right-0 top-0 mt-5 mr-4"
+                              onClick={() => {
+                                setIsSearch(!isSearch)
+                              }}
+                            >
+                              <svg className="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style={{ enableBackground: 'new 0 0 56.966 56.966' }} xmlSpace="preserve" width="512px" height="512px">
+                                <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ) : null}
+
+                  </div>
+                  <div className="p-2 xl:col-span-3 sm:col-span-4">
+                    <Button startIcon={<AssignmentIcon className="w-8 h-8" />}
+                      onClick={() => {
+                        goToOrderList()
+                      }}
+                    >
+                    </Button>
+                  </div>
+                  <div className="relative p-2 xl:col-span-2 sm:col-span-3">
+                    <Button
+                      startIcon={
+                        <Badge badgeContent={countCart} color="primary">
+                          <ShoppingCartIcon className="w-8 h-8" />
+                        </Badge>
+                      }
+                      onClick={() => {
+                        goToCart()
+                      }}
+                    >
+                    </Button>
+                    {isCartAlert ? (
+                      <div className="absolute z-50 w-64">
+                        <div className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                          <div className="flex">
+                            <div className="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" /></svg></div>
+                            <div>
+                              <p className="font-bold">Bạn chưa có sản phẩm nào trong giỏ hàng.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <span className="hidden"></span>
+                    )}
+
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="xl:col-span-9 sm:col-span-10 hidden md:block">
                 <div className="hidden sm:block sm:ml-6">
                   <div className="grid grid-cols-12">
                     <div className="xl:col-span-7 sm:col-span-5">
-                      <div className="bg-white flex items-center rounded-full shadow-sm h-12">
-                        <input className="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none h-12" id="search" type="text" placeholder="Search" />
-                        <div className="p-4">
-                          <button className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-16 h-8 flex items-center justify-center">
-                            Search
-                          </button>
-                        </div>
+                      <div className="pt-2 relative mx-auto text-gray-600">
+                        <input className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full" type="search" name="search" placeholder="Search" />
+                        <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
+                          <svg className="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style={{ enableBackground: 'new 0 0 56.966 56.966' }} xmlSpace="preserve" width="512px" height="512px">
+                            <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                          </svg>
+                        </button>
                       </div>
                     </div>
                     <div className="p-2 xl:col-span-3 sm:col-span-4">
@@ -201,14 +281,14 @@ function Header({ isLoggedIn, user, dispatch }) {
                       </Button>
                       {isCartAlert ? (
                         <div className="absolute z-50 w-64">
-                         <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
-                              <div class="flex">
-                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-                                <div>
-                                  <p class="font-bold">Bạn chưa có sản phẩm nào trong giỏ hàng.</p>
-                                </div>
+                          <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                            <div class="flex">
+                              <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" /></svg></div>
+                              <div>
+                                <p class="font-bold">Bạn chưa có sản phẩm nào trong giỏ hàng.</p>
                               </div>
                             </div>
+                          </div>
                         </div>
                       ) : (
                         <span className="hidden"></span>
@@ -222,7 +302,7 @@ function Header({ isLoggedIn, user, dispatch }) {
               <div className="xl:col-span-2 sm:col-span-1 flex justify-end">
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:pr-0">
                   {isLoggedIn ? (
-                    <span className="mr-2">{user.firstName||''}</span>
+                    <span className="mr-2">{user.firstName || ''}</span>
                   ) : (
                     <span className="mr-2">User</span>
                   )}
@@ -276,7 +356,7 @@ function Header({ isLoggedIn, user, dispatch }) {
                               Cài đặt
                             </a>
                           </Menu.Item>
-                          <Menu.Item c>
+                          <Menu.Item>
                             <a
                               onClick={() => { history.push("/signin") }}
                               className=' cursor-pointer  hover:bg-gray-200 block px-4 py-2 text-sm text-gray-700'

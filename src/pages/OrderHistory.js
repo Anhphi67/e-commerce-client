@@ -72,8 +72,8 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
 
                         </div>
                     </div>
-                    <div className="w-full flex mx-auto px-4 sm:px-6 ">
-                        <div className="w-1/4 h-auto mr-2 pt-4 mt-2 mb-2 bg-gray-100  shadow-sm" >
+                    <div className="w-full md:flex mx-auto px-4 sm:px-6 ">
+                        <div className="md:w-1/4 w-full h-auto mr-2 pt-4 mt-2 mb-2 bg-gray-100  shadow-sm" >
                             <div id="dash-content" className="bg-gray-100 py-6 lg:py-0 w-full lg:max-w-sm flex flex-wrap content-start">
 
                                 <div className="cursor-pointer w-1/2 lg:w-full">
@@ -87,7 +87,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                                 </div>
                                             </div>
                                             <div className="flex-1">
-                                                <h3 className="font-bold text-2xl font-mono ">{formatter.format(rpt.totalPrice)} đ</h3>
+                                                <h3 className="font-bold md:text-2xl text-xl font-mono ">{formatter.format(rpt.totalPrice)} đ</h3>
                                                 <h5 className="font-bold text-gray-500">Tổng chi tiêu</h5>
                                             </div>
                                         </div>
@@ -105,7 +105,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                                 </div>
                                             </div>
                                             <div className="flex-1">
-                                                <h3 className="font-bold text-3xl text-center font-mono">{rpt.totalOrder}</h3>
+                                                <h3 className="font-bold text-2xl text-center font-mono">{rpt.totalOrder}</h3>
                                                 <h5 className="font-bold text-gray-500" >Đơn đang xử lý</h5>
                                             </div>
                                         </div>
@@ -123,7 +123,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                                 </div>
                                             </div>
                                             <div className="flex-1">
-                                                <h3 className="font-bold text-3xl text-center font-mono">{rpt.cancelOrder} </h3>
+                                                <h3 className="font-bold text-2xl text-center font-mono">{rpt.cancelOrder} </h3>
                                                 <h5 className="font-bold text-gray-500" >Đơn đã hủy</h5>
                                             </div>
                                         </div>
@@ -141,8 +141,8 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                                 </div>
                                             </div>
                                             <div className="flex-1">
-                                                <h3 className="font-bold text-3xl text-center font-mono">{rpt.finnishOrder}</h3>
-                                                <h5 className="font-bold text-gray-500" >Đơn đã hoàn thành</h5>
+                                                <h3 className="font-bold text-2xl text-center font-mono">{rpt.finnishOrder}</h3>
+                                                <h5 className="font-bold text-gray-500" >Đơn hoàn thành</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -150,12 +150,12 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
 
                             </div>
                         </div>
-                        <div className="w-3/4 h-auto pt-4 mt-2 mb-2 bg-gray-100 shadow-sm">
+                        <div className="md:w-3/4 w-full h-auto pt-4 mt-2 mb-2 bg-gray-100 shadow-sm">
                             <div className="min-h-1/2">
                                 {list.map((lst) => (
                                     <div key={lst.id} className="w-98/100  h-auto pt-2 ml-2 mr-2 bg-white shadow-sm mb-4">
-                                        <div className="flex border-b">
-                                            <div className="ml-2 w-2/3">
+                                        <div className="md:flex border-b">
+                                            <div className="ml-2 md:w-2/3">
                                                 <label><b>Mã đơn hàng</b>  : </label> <a className="text-blue-600">{lst.code}</a>
                                                 <br />
                                                 <label><b>Người nhận</b> : {lst.receivingPerson}</label>
@@ -163,7 +163,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                                 <label><b>Địa chỉ nhận</b> : </label> <label><i>{lst.receivingAddress}</i></label>
 
                                             </div>
-                                            <div className="w-1/3">
+                                            <div className="ml-2 md:ml-0 md:w-1/3">
                                                 <span ><b>Đặt ngày</b> : </span><span className="text-blue-600">{formatDate(lst.s_CreatedDate)}</span>
                                                 <br />
                                                 <span><b>Số điện thoại</b> : </span><span className="text-blue-600"> {lst.receivingPhone}</span>

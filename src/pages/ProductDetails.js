@@ -213,7 +213,7 @@ function List({ isLoggedIn, user, dispatch }) {
                 </div>
                 <div className='relative w-full h-32 leading-4 p-1 mt-3' >
                   {dtlImage.map((item)=>(
-                    <div className="inline-block w-1/5 box-border p-1 hover:border-red-500 border rounded-none border-white" onClick={() => { setimgUrl(config.Image+item) }}>
+                    <div key={item} className="inline-block w-1/5 box-border p-1 hover:border-red-500 border rounded-none border-white" onClick={() => { setimgUrl(config.Image+item) }}>
                     <div className="relative">
                       <div className="relative">
                         <div className="w-full  bg-1/2">

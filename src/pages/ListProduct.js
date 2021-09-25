@@ -150,7 +150,7 @@ function List({ isLoggedIn, user, dispatch }) {
         </div>
         <div className="wrapper">
           <div className="d-lg-flex align-items-lg-center pt-2">
-            <div className="form-inline d-flex align-items-center my-2 mr-lg-2 radio bg-light border"> <label className="options">Most Popular <input type="radio" name="radio" checked={!isCheap} onClick={() => { setisCheap(false) }} /> <span className="checkmark" /> </label> <label className="options">Cheapest <input type="radio" name="radio" checked={isCheap} onClick={() => { setisCheap(true) }} /> <span className="checkmark" /> </label> </div>
+            <div className="form-inline d-flex align-items-center my-2 mr-lg-2 radio bg-light border"> <label className="options">Most Popular <input type="radio" name="radio" value={!isCheap} onClick={() => { setisCheap(false) }} /> <span className="checkmark" /> </label> <label className="options">Cheapest <input type="radio" name="radio" checked={isCheap} onClick={() => { setisCheap(true) }} /> <span className="checkmark" /> </label> </div>
           </div>
           <div id="mobile-filter">
             {/* <div className="py-3">

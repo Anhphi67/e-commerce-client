@@ -18,13 +18,11 @@ const Layout = ({ children }) => {
         <div className="justify-around md:block sm:hidden  mx-auto md:px-5 sm:px-0">
           <Menu />
         </div>
-        <div className=" relative md:hidden sm:block">
+        {/* <div className=" relative md:hidden sm:block">
           <div className="flex justify-end">
-          <MobileMenu />
-
+            <MobileMenu />
           </div>
-        </div>
-        
+        </div> */}
       </div>
       <main>{children}</main>
       <div>

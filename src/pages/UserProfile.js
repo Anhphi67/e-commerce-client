@@ -25,6 +25,7 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
   var link = config.Image
   const [startDate, setStartDate] = useState(new Date());
   const [selectedFiles, setSelectedFiles] = useState(undefined);
+  const [isChangePass, setIsChangePass] = useState(false);
   const [userDtl, setuserDtl] = useState({
     id: "",
     email: "",
@@ -36,72 +37,74 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
     image: "",
     phone_No: "",
     password: ""
-    });
+  });
   let formData = new FormData();
   const onFileChange = event => {
     setSelectedFiles({ selectedFile: event.target.files[0] });
-    setuserDtl({...userDtl,
+    setuserDtl({
+      ...userDtl,
       image: event.target.files[0].name
     })
   };
   const onFileUpload = () => {
-    if (selectedFiles !=undefined){
+    if (selectedFiles != undefined) {
       const formData = new FormData();
       formData.append("file", selectedFiles.selectedFile);
       instance.post("/UploadPicture/UploadFile", formData)
     }
-    
+
   };
-  function UpdateProfile(){
+  function UpdateProfile() {
     onFileUpload()
     instance.post(
-      '/User/Update',userDtl
-  ).then(res => {
-    alert("Cập nhật thông tin thành công.")
-    window.location.reload();
-  })
+      '/User/Update', userDtl
+    ).then(res => {
+      alert("Cập nhật thông tin thành công.")
+      window.location.reload();
+    })
       .catch(err => {
         alert("Có lỗi xãy ra, kiểm tra lại các trường thông tin ngày tháng ...")
       })
   }
   useEffect(() => {
     instance.get(
-        '/User/GetForEdit?id=' + user.id + '',
+      '/User/GetForEdit?id=' + user.id + '',
     ).then(res => {
 
-      setuserDtl({...userDtl,id:user.id,
-        email:res.data.email,
-        birthday: res.data.birthday==null?"":res.data.birthday.substring(0,10),
-        gender: res.data.gender==null?0:res.data.gender,
+      setuserDtl({
+        ...userDtl, id: user.id,
+        email: res.data.email,
+        birthday: res.data.birthday == null ? "" : res.data.birthday.substring(0, 10),
+        gender: res.data.gender == null ? 0 : res.data.gender,
         firstName: res.data.firstName,
-        lastName:res.data.lastName,
-        address: res.data.address==null?"":res.data.address,
-        image: res.data.image==null?"":res.data.image,
-        phone_No: res.data.phone_No?"":res.data.phone_No,
+        lastName: res.data.lastName,
+        address: res.data.address == null ? "" : res.data.address,
+        image: res.data.image == null ? "" : res.data.image,
+        phone_No: res.data.phone_No ? "" : res.data.phone_No,
       })
-      
+
     })
-        .catch(err => {
-          alert("Có lỗi xãy ra")
-        })
-}, []);
+      .catch(err => {
+        alert("Có lỗi xãy ra")
+      })
+  }, []);
   return (
     <div>
       <Layout>
         <main className="flex-grow">
-        <div className="w-full mx-auto px-4 sm:px-6 ">
-                        <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-3 sm:px-6 ">
-                            <Breadcrumbs aria-label="breadcrumb">
-                                <Link color="inherit" to={"/"}>
-                                    Trang chủ
-                                </Link>
-                                <Link color="inherit" to={"/orderHis"} >
-                                    Thông tin cá nhân 
-                                </Link>
-                            </Breadcrumbs>
+          <div className="w-full mx-auto px-4 sm:px-6 ">
+            <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-3 sm:px-6 ">
+              <Breadcrumbs aria-label="breadcrumb">
+                <Link color="inherit" to={"/"}>
+                  Trang chủ
+                </Link>
+                <Link color="inherit" to={"/orderHis"} >
+                  Thông tin cá nhân
+                </Link>
+              </Breadcrumbs>
 
-                        </div>
-                    </div>
+            </div>
+          </div>
           <div className="container mx-auto my-5 p-5 pt-0">
             <div className="md:flex no-wrap md:-mx-2 ">
               {/* Left Side */}
@@ -109,16 +112,16 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
                 {/* Profile Card */}
                 <div className="bg-white p-3 border-t-4 border-green-400">
                   <div className="image overflow-hidden">
-                    <img className="h-64 w-full mx-auto" src={link+userDtl.image} alt="" />
+                    <img className="h-64 w-full mx-auto" src={link + userDtl.image} alt="" />
                   </div>
                   <label className="pt-2">Choose Image</label>
                   <div className="input-group">
                     <div className="custom-file">
-                      <input type="file" className="custom-file-input" onChange={onFileChange}  id="inputGroupFile04" ></input>
+                      <input type="file" className="custom-file-input" onChange={onFileChange} id="inputGroupFile04" ></input>
                       <label className="custom-file-label overflow-hidden" placeholder="Choose file" >{selectedFiles && selectedFiles.selectedFile.name}</label>
                     </div>
                   </div>
-                  <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{userDtl.lastName+" "+userDtl.firstName}</h1>
+                  <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{userDtl.lastName + " " + userDtl.firstName}</h1>
                   <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                     <li className="flex items-center py-3">
                       <span>Status</span>
@@ -128,11 +131,18 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
                       <span>Member since</span>
                       <span className="ml-auto">Nov 07, 2016</span>
                     </li>
+                    <li className="flex items-center ">
+                      <span>Change Your Password</span>
+                      <label className="container-checkbox ml-auto">
+                        <input type="checkbox" value={isChangePass} onClick={()=>setIsChangePass(!isChangePass)} className="h-5 w-5 mt-3" />
+                      </label>
+
+                    </li>
                   </ul>
                 </div>
               </div>
               {/* Right Side */}
-              <div className="w-full md:w-9/12 mx-2 h-64">
+              <div className="w-full md:w-9/12 mx-2 h-auto">
                 {/* Profile tab */}
                 {/* About Section */}
                 <div className="bg-white p-3 shadow-sm rounded-sm">
@@ -149,33 +159,33 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">First Name</div>
                         <div className="px-4 py-2">
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.firstName} onChange={event => { setuserDtl({...userDtl,firstName:event.target.value}) }} type="text" placeholder="First Name"></input>
+                          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.firstName} onChange={event => { setuserDtl({ ...userDtl, firstName: event.target.value }) }} type="text" placeholder="First Name"></input>
                         </div>
                       </div>
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Last Name</div>
-                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.lastName} onChange={event => { setuserDtl({...userDtl,lastName:event.target.value}) }} type="text" placeholder="Last Name"></input></div>
+                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.lastName} onChange={event => { setuserDtl({ ...userDtl, lastName: event.target.value }) }} type="text" placeholder="Last Name"></input></div>
                       </div>
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Gender</div>
                         <div className="px-4 py-2">
-                        <label className="inline-flex items-center">
-                            <input type="radio" className="form-radio" name="accountType" value="1" onChange={event => { setuserDtl({...userDtl,gender:event.target.value}) }} checked={userDtl.gender=='1'}/>
+                          <label className="inline-flex items-center">
+                            <input type="radio" className="form-radio" name="accountType" value="1" onChange={event => { setuserDtl({ ...userDtl, gender: event.target.value }) }} checked={userDtl.gender == '1'} />
                             <span className="ml-2">Male</span>
                           </label>
                           <label className="inline-flex items-center ml-6">
-                            <input type="radio" className="form-radio" name="accountType" value="0" onChange={event => { setuserDtl({...userDtl,gender:event.target.value}) }} checked={userDtl.gender=='0'}/>
+                            <input type="radio" className="form-radio" name="accountType" value="0" onChange={event => { setuserDtl({ ...userDtl, gender: event.target.value }) }} checked={userDtl.gender == '0'} />
                             <span className="ml-2">Female</span>
                           </label>
                         </div>
                       </div>
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Contact No.</div>
-                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.phone_No || ''} onChange={event => { setuserDtl({...userDtl,phone_No:event.target.value}) }} type="text" placeholder="Contact No."></input></div>
+                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.phone_No || ''} onChange={event => { setuserDtl({ ...userDtl, phone_No: event.target.value }) }} type="text" placeholder="Contact No."></input></div>
                       </div>
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Current Address</div>
-                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={userDtl.address|| ''} id="username" onChange={event => { setuserDtl({...userDtl,address:event.target.value}) }} type="text" placeholder="Current Address"></input></div>
+                        <div className="px-4 py-2"><input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={userDtl.address || ''} id="username" onChange={event => { setuserDtl({ ...userDtl, address: event.target.value }) }} type="text" placeholder="Current Address"></input></div>
                       </div>
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Permanant Address</div>
@@ -185,21 +195,57 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
                         <div className="px-4 py-2 font-semibold flex align-items-center">Email.</div>
                         <div className="px-4 py-2">
                           <div className="text-blue-800" >
-                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Email" value={userDtl.email} type="text" onChange={event => { setuserDtl({...userDtl,email:event.target.value}) }} placeholder="Username"></input></div>
+                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Email" value={userDtl.email} type="text" onChange={event => { setuserDtl({ ...userDtl, email: event.target.value }) }} placeholder="Username"></input></div>
                         </div>
                       </div>
                       <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold flex align-items-center">Birthday</div>
                         <div className="px-4 py-2">
-                          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.birthday}  onChange={event => { setuserDtl({...userDtl,birthday:event.target.value}) }} type="text" placeholder="Birthday (yyyy-MM-dd)">
+                          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" value={userDtl.birthday} onChange={event => { setuserDtl({ ...userDtl, birthday: event.target.value }) }} type="text" placeholder="Birthday (yyyy-MM-dd)">
                           </input>
-                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4" onClick={UpdateProfile} >Save
                     Full Information</button>
+                    {
+                      isChangePass?(
+                        <div className="col-span-12 lg:col-span-8 xxl:col-span-9">
+                    {/* BEGIN: Change Password */}
+                    <div className="intro-y box lg:mt-5">
+                      <div className="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                        <h2 className="font-medium text-base mr-auto">
+                          Change Password
+                        </h2>
+                      </div>
+                      <div className="p-5 w-full md:w-1/2 md:ml-1/4  justify-items-center">
+                        <div>
+                          <label htmlFor="change-password-form-1" className=" py-2 font-semibold flex align-items-center">Old Password</label>
+                          <input id="change-password-form-1" type="password" className="form-control" placeholder="Old Password" />
+                        </div>
+                        <div className="mt-3">
+                          <label htmlFor="change-password-form-2" className=" py-2 font-semibold flex align-items-center">New Password</label>
+                          <input id="change-password-form-2" type="password" className="form-control" placeholder="New Password" />
+                        </div>
+                        <div className="mt-3">
+                          <label htmlFor="change-password-form-3" className=" py-2 font-semibold flex align-items-center">Confirm New Password</label>
+                          <input id="change-password-form-3" type="password" className="form-control" placeholder="Confirm New Password" />
+                        </div>
+                        <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4" onClick={UpdateProfile} >
+                          Update Your Password</button>
+                      </div>
+                    </div>
+                    {/* END: Change Password */}
+                  </div>
+                      ):null
+                    }
+                  
+
+
                 </div>
+
+
               </div>
             </div>
           </div>
