@@ -79,11 +79,11 @@ export default function Navbar({ fixed }) {
                             id="panel1a-header"
                             className="h-0 hover:bg-gray-400"
                         >
-                            <Typography className={classes.heading} onClick={()=>{history.push('/list/id/' + item.id)}}>{item.name}</Typography>
+                            <Typography className={classes.heading} onClick={()=>{history.push('/list/' + item.id)}}>{item.name}</Typography>
                         </AccordionSummary>
                         {item.subCategories.map(sub => (
                             <div key={sub.id} className="hover:bg-gray-200 ml-4">
-                                <a className="text-left block borde rounded py-2 px-4 hover:bg-gray-400" onClick={()=>{history.push('/list/id/' + sub.id) 
+                                <a className="text-left block borde rounded py-2 px-4 hover:bg-gray-400" onClick={()=>{history.push('/list/' + sub.id) 
                                 setIsOpen(false)}}> {"-> "+sub.name}</a>
                             </div>
                         ))}

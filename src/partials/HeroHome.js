@@ -1,22 +1,61 @@
 import React, { useState } from 'react';
-import Modal from '../utils/Modal';
+import { Carousel } from 'react-carousel-minimal';
 
 function HeroHome() {
 
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const data = [
+    {
+      image: "https://api.pichistudio.vn/images/Slide_1.png",
+    },
+    {
+      image: "https://api.pichistudio.vn/images/Slide_2.png",
+    },
+    {
+      image: "https://api.pichistudio.vn/images/Slide_3.png",
+    }
+  ];
 
+  const captionStyle = {
+    fontSize: '2em',
+    fontWeight: 'bold',
+  }
+  const slideNumberStyle = {
+    fontSize: '20px',
+    fontWeight: 'bold',
+  }
   return (
-    <section className="relative">
-      <div className=" mx-auto">
-        <div className="pt-1 pb-12 md:pt-1 ">
-          <div className="text-center ">
-            <img className="relative w-full h-fit " src="https://theme.hstatic.net/1000090040/1000663762/14/slide2.png?v=1338" alt="Testimonial 01" />
-          </div>
+    <div>
+      <div style={{ textAlign: "center" }}>
+        <div>
+          <Carousel
+            data={data}
+            time={2000}
+            width="100%"
+            height="400px"
+            captionStyle={captionStyle}
+            slideNumber={false}
+            slideNumberStyle={slideNumberStyle}
+            captionPosition="bottom"
+            automatic={true}
+            dots={true}
+            pauseIconColor="white"
+            pauseIconSize="40px"
+            slideBackgroundColor="darkgrey"
+            slideImageFit="cover"
+            thumbnails={false}
+            thumbnailWidth="100px"
+            style={{
+              textAlign: "center",
+              maxWidth: "100%",
+              maxHeight: "400px",
+              margin: "0px auto 20px auto",
+            }}
+          />
         </div>
-
       </div>
-    </section>
+    </div>
   );
 }
+
 
 export default HeroHome;

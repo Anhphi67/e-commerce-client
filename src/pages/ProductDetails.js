@@ -17,14 +17,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 // Button
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 //
 //Icon
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import SendIcon from '@material-ui/icons/Send';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
@@ -34,12 +31,10 @@ import { connect } from "react-redux";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
+import "react-responsive-carousel/lib/styles/carousel.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
-//
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   useParams, useHistory,
   Link
 } from "react-router-dom";
@@ -104,24 +99,27 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
+
+
 const formatter = new Intl.NumberFormat({
   style: 'currency',
   currency: 'VND',
   minimumFractionDigits: 0
 })
 
+
 function List({ isLoggedIn, user, dispatch }) {
   let history = useHistory();
-  const [msg, setMsg] = React.useState({
-    show: false,
-    msg: '',
-    title: ''
-  });
+
   //get data
   let { id } = useParams();
   const [detail, setDetail] = React.useState([]);
   const [imgUrl, setimgUrl] = React.useState("");
   useEffect(() => {
+    // async function fetchData() {
+    //   setdtlImage(await getData());
+    // }
+    // fetchData();
     instance.get(
       '/Product/GetDetail?id=' + id + '',
     ).then(result => {
@@ -129,13 +127,25 @@ function List({ isLoggedIn, user, dispatch }) {
       setParent(result.data.result.productCategory.id)
       setGrandBr(result.data.result.productCategory.parentCategory.id)
       setimgUrl(config.Image + result.data.result.avatarUrl)
-      setdtlImage(result.data.result.imageUrl.split(","))
+      setdtlImage((result.data.result.avatarUrl + "," + result.data.result.imageUrl).split(","))
     });
-
-
-
-
   }, []);
+  var arr = undefined
+
+  async function getData() {
+    try {
+      const response = await instance.get(
+        '/Product/GetDetail?id=' + id + '')
+      arr = response.data.result.imageUrl.split(",")
+      for (var i = 0; i < arr.length; i++) {
+        arr[i] = config.Image + arr[i]
+      }
+      return await arr.map((image) => ({ image }))
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   //
   const [dtlImage, setdtlImage] = React.useState([]);
   const [grandBr, setGrandBr] = React.useState(1);
@@ -180,14 +190,24 @@ function List({ isLoggedIn, user, dispatch }) {
         ]
       });
     }
+
+
   }
+  const captionStyle = {
+    fontSize: '2em',
+    fontWeight: 'bold',
+  }
+  const slideNumberStyle = {
+    fontSize: '20px',
+    fontWeight: 'bold',
+  }
+
 
   return (
     <div>
       <Layout>
         <main className="flex-grow">
           <div className="w-full flex mx-auto px-4 sm:px-6 ">
-
             <div className="flex w-full h-auto justify-between breakcrum pb-2">
               <div className="pt-2 ">
                 <Breadcrumbs aria-label="breadcrumb" className="uppercase">
@@ -197,7 +217,7 @@ function List({ isLoggedIn, user, dispatch }) {
                   <Link color="inherit" to="/" >
                     {detail.productCategory && detail.productCategory && detail.productCategory.parentCategory.name}
                   </Link>
-                  <Link color="inherit" to={"/list/id/" + parent} >
+                  <Link color="inherit" to={"/list/" + parent} >
                     {detail.productCategory && detail.productCategory.name}
                   </Link>
                   <Typography color="textPrimary">{detail.name}</Typography>
@@ -207,39 +227,20 @@ function List({ isLoggedIn, user, dispatch }) {
           </div>
           <section className="bg-white-to-b from-gray-100 to-white">
             <div className="w-full md:flex mx-auto px-4 sm:px-6">
-              <div className="md:w-1/2 sm:full h-auto mr-2 pt-10">
-                <div className="w-11/12 m-auto h-3/4">
-                  <img className="m-auto w-full h-full" alt={detail.name} src={imgUrl} />
-                </div>
-                <div className='relative w-full h-32 leading-4 p-1 mt-3' >
-                  {dtlImage.map((item)=>(
-                    <div key={item} className="inline-block w-1/5 box-border p-1 hover:border-red-500 border rounded-none border-white" onClick={() => { setimgUrl(config.Image+item) }}>
-                    <div className="relative">
-                      <div className="relative">
-                        <div className="w-full  bg-1/2">
-                          <img className="w-full h-full min-h-1/115" alt={""} src={config.Image+item} />
-                        </div>
-                      </div>
+              <div className="md:w-1/2 sm:full h-auto mr-2 pt-10 ">
+                <Carousel interval="2000" showStatus={false} transitionTime="1000" thumbWidth="18.8%" className="w-full h-full">
+                  {dtlImage.map((item) => (
+                    <div key={item} className="w-full  m-auto h-3/4 md:min-h-120 md:max-h-120">
+                      <img className="h-full object-cover w-full" src={config.Image + item} />
                     </div>
-                  </div>
                   ))}
-                  
-                  <button className="bg-btnDtl-100 absolute top-2/5 left-5 hover:bg-gray-400 text-white font-bold py-2 px-1 rounded inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button className="bg-btnDtl-100 absolute top-2/5 right-5 hover:bg-gray-400 text-white font-bold py-2 px-1 rounded inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
+                </Carousel>
+
               </div>
-              <div className="md:w-1/2 sm:full h-auto ">
+              <div className="md:w-1/2 ml-4 sm:full h-auto ">
                 <span className="pt-8 font-bold text-xl" >{detail.name}</span>
                 <div className=" text-red-600 mt-2">
-                    <span className="mt-2 mb-2 font-bold text-lg font-sans"> {formatter.format(count * detail.oldPrice)} VNĐ</span>
+                  <span className="mt-2 mb-2 font-bold text-lg font-sans"> {formatter.format(count * detail.retailPrice)} VNĐ</span>
                 </div>
                 <div className="flex items-center mt-2 mb-2">
                   {/* <ButtonGroup  >
@@ -329,7 +330,7 @@ function List({ isLoggedIn, user, dispatch }) {
                     <Tab className="font-bold" label="Giao hàng và thanh toán" {...a11yProps(1)} />
                     <Tab className="font-bold" label="Đánh giá" {...a11yProps(2)} />
                   </Tabs>
-                  <TabPanel value={value} index={0}>
+                  <TabPanel value={value} index={0} className="bg-white">
                     <ul>
                       <li>Chất liệu: decal Vinyl cán màn nhám (Matte)</li>
                       <li>Mực in: cao cấp an toàn cho sức khỏe cho màu in sắc nét, rực rỡ.</li>
@@ -339,25 +340,25 @@ function List({ isLoggedIn, user, dispatch }) {
                       <li>Kích thước: 10x15cm / sheet, từ 5-7cm / sticker</li>
                     </ul>
                   </TabPanel>
-                  <TabPanel value={value} index={1}>
+                  <TabPanel value={value} index={1} className="bg-white">
                     <ul>
                       <li>I. PHẠM VI GIAO HÀNG:</li>
                       <li>VIETNAM OUTFITTER Áp dụng hình thức giao hàng (ship) cho khách trên toàn quốc với đơn hàng từ 100.000 Đồng.
                         Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn hàng, sau khi giảm, giá trị đơn hàng cũng phải từ 100.000 Đồng .</li>
                     </ul>
                   </TabPanel>
-                  <TabPanel value={value} index={2} >
-                    <div className="border-gray-200 border-solid border bg-white">
+                  <TabPanel value={value} index={2} className="border-gray-200 border-solid border bg-white">
+                    <div >
                       <div className="">
-                        <div className=" flex w-full md:justify-end justify-center "> 
-                        <Button
-                          variant="outlined"
-                          className={classes.button}
-                          startIcon={<FeedbackIcon />}
-                          onClick={() => { setRaq(true) }}
-                        >
-                          Đánh giá
-                        </Button>
+                        <div className=" flex w-full md:justify-end justify-center ">
+                          <Button
+                            variant="outlined"
+                            className={classes.button}
+                            startIcon={<FeedbackIcon />}
+                            onClick={() => { setRaq(true) }}
+                          >
+                            Đánh giá
+                          </Button>
                           <Button
                             variant="outlined"
                             className={classes.button}
@@ -395,7 +396,9 @@ function List({ isLoggedIn, user, dispatch }) {
                               rows="5" cols="33">
                             </textarea>
                           </div>
-                          <div className="float-right">
+                          
+                        </div>
+                        <div className="flex justify-end">
                             <Button
                               variant="outlined"
                               className={classes.button}
@@ -404,10 +407,10 @@ function List({ isLoggedIn, user, dispatch }) {
                               Gửi đánh giá
                             </Button>
                           </div>
-                        </div>
+
                       </div>
                       <div style={{ display: !raq ? "block" : "none" }}>
-                      <div className="md:flex justify-around p-2">
+                        <div className="md:flex justify-around p-2">
                           <TextField id="outlined-basic" className="w-full pb-2 md:pb-0" size="small" label="Họ và Tên" variant="outlined" />
                           <TextField id="outlined-basic" className="w-full" size="small" label="Số điện thoại" variant="outlined" />
                         </div>

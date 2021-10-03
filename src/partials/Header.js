@@ -32,6 +32,7 @@ function Header({ isLoggedIn, user, dispatch }) {
   const [anchorEl1, setAnchorEl1] = React.useState(null);
   const [isCartAlert, setisCartAlert] = React.useState(false);
   const [isSearch, setIsSearch] = React.useState(false);
+  const [isEndSession, setsEndSession] = React.useState(false);
   var link = config.Image
 
   const handleClick = (event) => {
@@ -63,21 +64,23 @@ function Header({ isLoggedIn, user, dispatch }) {
 
   const [countCart, setcountCart] = React.useState(0);
   useEffect(() => {
-    if (isLoggedIn) {
+    if(isLoggedIn){
       instance
         .get(
           "/Cart/GetCurrentCartItem?Page=1&RowsPerPage=100"
         )
         .then((response) => {
           setcountCart(response.data.result.totalCount);
-          return;
-        });
+        }) .catch(err => {
+          if (err.status="401"){
+            setsEndSession(true)
+          }
+      });
     }
   }, []);
 
   function goToCart() {
-    if (isLoggedIn) {
-
+    if (isLoggedIn && !isEndSession ) {
       if (countCart > 0) {
         history.push("/cart");
       }
@@ -102,46 +105,85 @@ function Header({ isLoggedIn, user, dispatch }) {
             return;
           });
       }
-
-
-    } else {
-      confirmAlert({
-        title: 'Thông báo',
-        message: 'Bạn cần đăng nhập để có thể xem giỏ hàng !',
-        buttons: [
-          {
-            label: 'Yes',
-            onClick: () => {
-              history.push("/signin")
+    } 
+    else {
+      if (isEndSession){
+        confirmAlert({
+          title: 'Thông báo',
+          message: 'Phiên đăng nhập hết hạn, vui lòng đăng nhập lại !',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {
+                history.push("/signin")
+              }
+            },
+            {
+              label: 'No',
             }
-          },
-          {
-            label: 'No',
-          }
-        ]
-      });
+          ]
+        });
+      }else{
+        confirmAlert({
+          title: 'Thông báo',
+          message: 'Bạn cần đăng nhập để có thể xem giỏ hàng !',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {
+                history.push("/signin")
+              }
+            },
+            {
+              label: 'No',
+            }
+          ]
+        });
+
+      }
+      
+      
     }
   }
 
   function goToOrderList() {
-    if (isLoggedIn) {
+    if (isLoggedIn && !isEndSession ) {
       history.push("/orderHis");
     } else {
-      confirmAlert({
-        title: 'Thông báo',
-        message: 'Bạn cần đăng nhập để có thể xem danh sách đơn hàng ?',
-        buttons: [
-          {
-            label: 'Yes',
-            onClick: () => {
-              history.push("/signin")
+      if (isEndSession){
+        confirmAlert({
+          title: 'Thông báo',
+          message: 'Phiên đăng nhập hết hạn, vui lòng đăng nhập lại !',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {
+                history.push("/signin")
+              }
+            },
+            {
+              label: 'No',
             }
-          },
-          {
-            label: 'No',
-          }
-        ]
-      });
+          ]
+        });
+      }else{
+        confirmAlert({
+          title: 'Thông báo',
+          message: 'Bạn cần đăng nhập để có thể xem giỏ hàng !',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {
+                history.push("/signin")
+              }
+            },
+            {
+              label: 'No',
+            }
+          ]
+        });
+
+      }
     }
   }
 

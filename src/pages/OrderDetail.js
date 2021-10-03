@@ -108,7 +108,7 @@ function OrderDetail({ isLoggedIn, user, dispatch }) {
     const rows = [
     ];
     for (i = 0; i < list.length; i++) {
-        rows.push(createRow(list[i].id, list[i].product.name, list[i].product.avatarUrl, list[i].quantity, list[i].oldPrice))
+        rows.push(createRow(list[i].id, list[i].product.name, list[i].product.avatarUrl, list[i].quantity, list[i].retailPrice))
     }
 
     const invoiceSubtotal = subtotal(rows);

@@ -7,32 +7,35 @@ import AOS from 'aos';
 import { focusHandling } from 'cruip-js-toolkit';
 
 import Home from './pages/Home';
-import List from './pages/ListProduct';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import ResetPassword from './pages/ResetPassword';
-import ProductDetails from './pages/ProductDetails';
-import CartList from './pages/CartList';
-import Payment from './pages/Payment';
-import OrderHistory from './pages/OrderHistory';
-import OrderDetail from './pages/OrderDetail';
-import UserProfile from './pages/UserProfile';
-import ReactDOM from "react-dom";
-import {HashRouter,
+import routes from './routes';
+import {createBrowserHistory} from 'history';
+import {
+  HashRouter, BrowserRouter as Router,
   Switch,
-Route,
-useLocation
+  Route,
+  useLocation
 } from 'react-router-dom';
 
+const browserHistory = createBrowserHistory({
+  basename: process.env.PUBLIC_URL
+});
+function RouteWithSubRoutes(route) {
+  return (
+    <Route
+      path={route.path}
+      render={props => (
+        <route.component {...props} routes={route.routes} />
+      )}
+    />
+  );
+}
 function App() {
-
   const location = useLocation();
   const loading = (
     <div className="pt-3 text-center">
       <div className="sk-spinner sk-spinner-pulse"></div>
     </div>
   )
-
   useEffect(() => {
     AOS.init({
       once: true,
@@ -51,47 +54,20 @@ function App() {
 
   return (
     <>
-    <HashRouter>
-          <React.Suspense fallback={loading}>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route  exact path="/signin">
-          <SignIn />
-        </Route>
-        <Route exact path="/signup">
-          <SignUp />
-        </Route>
-        <Route exact path="/reset-password">
-          <ResetPassword />
-        </Route>
-        <Route exact path="/list/id/:id">
-          <List />
-        </Route>
-        <Route path="/detail/id/:id">
-          <ProductDetails />
-        </Route>
-        <Route exact path="/cart">
-          <CartList />
-        </Route>
-        <Route exact path="/payment">
-          <Payment />
-        </Route>
-        <Route exact path="/orderHis">
-          <OrderHistory />
-        </Route>
-        <Route exact path="/orderDetail/id/:id">
-          <OrderDetail />
-        </Route>
-        <Route exact path="/profile">
-          <UserProfile />
-        </Route>
-      </Switch>
+      <Router>
+      <React.Suspense fallback={loading}>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          {routes.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))}
+        </Switch>
       </React.Suspense>
-      </HashRouter>
+
+      </Router>
     </>
   );
 }
-
 export default App;

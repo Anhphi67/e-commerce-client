@@ -1,19 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter} from "react-router-dom";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store/index';
 import { Provider } from 'react-redux'
 
-
 ReactDOM.render(
     <Provider store={store}>
-      <Router>
+      <BrowserRouter>
         <div className="xl:px-24 sm:px-6 flex flex-col min-h-screen overflow-hidden bg-gray-100">
           <App />
         </div>
-      </Router>
+      </BrowserRouter>
   </Provider>,
   document.getElementById('root')
   

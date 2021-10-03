@@ -38,11 +38,11 @@ function Dropdown() {
                   <ul id="navigation">
                     {menus.result.map(item => (
                       <li key={item.id}>
-                        <Link className="pt-4 pb-4" to={'/list/id/' + item.id}> {item.name}</Link>
+                        <Link className="pt-4 pb-4" to={'/list/' + item.id}> {item.name}</Link>
                         <ul  style={{display:item.subCategories.length>0?"block":"none"}} className="submenu">
                           {item.subCategories.map(sub => (
                             <li key={sub.id} className="hover:bg-gray-200">
-                              <Link  to={'/list/id/' + sub.id}>{sub.name}</Link>
+                              <Link  to={'/list/' + sub.id}>{sub.name}</Link>
                             </li>
                           ))}
                         </ul>

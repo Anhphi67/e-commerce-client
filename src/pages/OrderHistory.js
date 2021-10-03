@@ -39,7 +39,11 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
 
             })
                 .catch(err => {
-                    alert(err.response.data.errors)
+                    if (err.status="401"){
+                        alert("Phiên đăng nhập hết hạn, vui lòng đăng nhập lại ")
+                    }else{
+                        alert(err.data.errors)
+                    }
                 })
             instance.get(
                 '/Order/GetOderReport?userId=' + user.id + '',
@@ -178,7 +182,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                             <div className="w-1/2 flex justify-end mt-1 mb-1 mr-2">
                                                 <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-2 rounded inline-flex items-center">
                                                     <svg className="h-8 w-8 text-black" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <line x1="5" y1="12" x2="19" y2="12" />  <line x1="15" y1="16" x2="19" y2="12" />  <line x1="15" y1="8" x2="19" y2="12" /></svg>
-                                                    <span onClick={() => { history.push("/orderDetail/id/" + lst.id) }} >Order Detail</span>
+                                                    <span onClick={() => { history.push("/orderDetail/" + lst.id) }} >Order Detail</span>
                                                 </button>
                                             </div>
                                         </div>
