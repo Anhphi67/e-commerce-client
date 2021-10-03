@@ -20,6 +20,7 @@ module.exports = {
       },
       height: {
         'fit': 'fit-content',
+        'max': 'max-content',
       },
       
       colors: {

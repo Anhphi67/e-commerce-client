@@ -141,7 +141,7 @@ function List({ isLoggedIn, user, dispatch }) {
             <Link color="inherit" to={"/"}>
               Trang chủ
             </Link>
-            <Link color="inherit" to={"/list/" + category.id} >
+            <Link  color="inherit" to={"/list/" + category.id} >
               {
                 category.name
               }

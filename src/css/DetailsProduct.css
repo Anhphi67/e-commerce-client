@@ -20,5 +20,11 @@
     .carousel.carousel-slider{
         height: 29rem;
     }
+    li.MuiBreadcrumbs-li{
+        max-width: 30%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
   }
 

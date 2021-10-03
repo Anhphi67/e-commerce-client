@@ -214,9 +214,9 @@ function List({ isLoggedIn, user, dispatch }) {
                   <Link color="inherit" to="/">
                     Trang chủ
                   </Link>
-                  <Link color="inherit" to="/" >
+                  {/* <Link color="inherit" to="/" >
                     {detail.productCategory && detail.productCategory && detail.productCategory.parentCategory.name}
-                  </Link>
+                  </Link> */}
                   <Link color="inherit" to={"/list/" + parent} >
                     {detail.productCategory && detail.productCategory.name}
                   </Link>

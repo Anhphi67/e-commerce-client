@@ -5,12 +5,18 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store/index';
 import { Provider } from 'react-redux'
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+
 
 ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <div className="xl:px-24 sm:px-6 flex flex-col min-h-screen overflow-hidden bg-gray-100">
           <App />
+          <MessengerCustomerChat
+            pageId="777339822403967"
+            appId="2943963155841604"
+          />
         </div>
       </BrowserRouter>
   </Provider>,

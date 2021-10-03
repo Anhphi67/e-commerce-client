@@ -29,7 +29,7 @@ function HeroHome() {
         <div>
           <Carousel
             data={data}
-            time={2000}
+            time={5000}
             width="100%"
             height="400px"
             captionStyle={captionStyle}
