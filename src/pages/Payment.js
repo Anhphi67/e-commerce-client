@@ -130,7 +130,7 @@ function List({ isLoggedIn, user, dispatch }) {
         <div>
             <Layout>
                 <main className="flex-grow pt-5">
-                <div className="w-full mx-auto px-4 sm:px-6 ">
+                    <div className="w-full mx-auto px-4 sm:px-6 ">
                         <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-3 sm:px-6 ">
                             <Breadcrumbs aria-label="breadcrumb">
                                 <Link color="inherit" to={"/"}>
@@ -150,25 +150,49 @@ function List({ isLoggedIn, user, dispatch }) {
                                 </h2>
                                 <div className="justify-center w-full mx-auto">
                                     <div>
-                                        <div className="space-x-0 lg:flex lg:space-x-4">
-                                            <div className="w-full lg:w-1/2">
-                                                <label htmlFor="firstName" className="block mb-3 text-sm font-semibold text-gray-500">Họ và tên đệm
-                                                </label>
+                                        <div className="space-x-1 flex lg:space-x-4">
+                                            <div className="w-1/2">
+                                                <div className="flex">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
+                                                    <label htmlFor="firstName" className="block mb-1 text-sm font-semibold text-gray-500">Họ và tên đệm
+                                                    </label>
+                                                </div>
+
                                                 <input name="firstName" type="text" placeholder="Họ" className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" />
                                             </div>
-                                            <div className="w-full lg:w-1/2 ">
-                                                <label htmlFor="firstName" className="block mb-3 text-sm font-semibold text-gray-500">
-                                                    Tên</label>
+                                            <div className="w-1/2 ">
+                                                <div className="flex">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                                    </svg>
+                                                    <label htmlFor="firstName" className="block mb-1 text-sm font-semibold text-gray-500">
+                                                        Tên</label>
+                                                </div>
+
                                                 <input name="Last Name" type="text" placeholder="Tên " className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" />
                                             </div>
                                         </div>
-                                        <div className="mt-4 space-x-0 lg:flex lg:space-x-4">
-                                            <div className="w-full lg:w-1/2">
-                                                <label htmlFor="Email" className="block mb-3 text-sm font-semibold text-gray-500">Email</label>
+                                        <div className="mt-4 space-x-1 flex lg:space-x-4">
+                                            <div className="w-1/2">
+                                                <div className="flex">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                                    </svg>
+                                                    <label htmlFor="Email" className="block text-sm mb-1 font-semibold text-gray-500">Email</label>
+
+                                                </div>
                                                 <input name="Last Name" type="text" placeholder="Email" className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" />
                                             </div>
-                                            <div className="w-full lg:w-1/2">
-                                                <label htmlFor="Phone Number" className="block mb-3 text-sm font-semibold text-gray-500">Số điện thoại</label>
+                                            <div className="w-1/2">
+                                                <div className="flex">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 3l-6 6m0 0V4m0 5h5M5 3a2 2 0 00-2 2v1c0 8.284 6.716 15 15 15h1a2 2 0 002-2v-3.28a1 1 0 00-.684-.948l-4.493-1.498a1 1 0 00-1.21.502l-1.13 2.257a11.042 11.042 0 01-5.516-5.517l2.257-1.128a1 1 0 00.502-1.21L9.228 3.683A1 1 0 008.279 3H5z" />
+                                                    </svg>
+                                                    <label htmlFor="Phone Number" className="block mb-1 text-sm font-semibold text-gray-500">Số điện thoại</label>
+
+                                                </div>
                                                 <input name="Phone Number" type="text" placeholder="Phone Number" className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" />
                                             </div>
 
@@ -176,13 +200,25 @@ function List({ isLoggedIn, user, dispatch }) {
                                         </div>
                                         <div className="mt-4">
                                             <div className="w-full">
-                                                <label htmlFor="Address" className="block mb-3 text-sm font-semibold text-gray-500">Địa chỉ nhận hàng</label>
+                                                <div className="flex">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                                                    </svg>
+                                                    <label htmlFor="Address" className="block mb-1 text-sm font-semibold text-gray-500">Địa chỉ nhận hàng</label>
+
+                                                </div>
                                                 <textarea className="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" name="Address" cols={20} rows={4} placeholder="Số nhà / Tên đường" defaultValue={""} />
                                             </div>
                                         </div>
                                         <div className="mt-4">
                                             <div className="w-full">
-                                                <label htmlFor="Address" className="block mb-3 text-sm font-semibold text-gray-500">Tỉnh / Thành phố</label>
+                                            <div className="flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+</svg>
+<label htmlFor="Address" className="block mb-1 text-sm font-semibold text-gray-500">Tỉnh / Thành phố</label>
+
+                                            </div>
                                                 <div className="" onChange={e => renderDistrict(e.target.value)} >
                                                     <select id="" className="form-select mt-1 block w-full pt-2 pb-2" onChange={e => setcityName(e.target.options[e.target.selectedIndex].text)} id="" >
                                                         <option value="0">Choose</option>
@@ -194,9 +230,15 @@ function List({ isLoggedIn, user, dispatch }) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="space-x-0 lg:flex lg:space-x-4 mt-4">
-                                            <div className="w-full lg:w-1/2">
-                                                <label htmlFor="city" className="block mb-3 text-sm font-semibold text-gray-500">Quận Huyện</label>
+                                        <div className="space-x-1 flex lg:space-x-4 mt-4">
+                                            <div className="w-1/2">
+                                            <div className="flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+  <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clipRule="evenodd" />
+</svg>
+<label htmlFor="city" className="block mb-1 text-sm font-semibold text-gray-500">Quận Huyện</label>
+
+                                            </div>
                                                 <div className="" onChange={e => renderVillage(e.target.value)} >
 
                                                     <select id="" className="form-select mt-1 block w-full pt-2 pb-2" onChange={e => setdistrictName(e.target.options[e.target.selectedIndex].text)} id="">
@@ -207,9 +249,15 @@ function List({ isLoggedIn, user, dispatch }) {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="w-full lg:w-1/2 ">
-                                                <label htmlFor="postcode" className="block mb-3 text-sm font-semibold text-gray-500">
+                                            <div className="w-1/2 ">
+                                            <div className="flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+  <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd" />
+</svg>
+                                                <label htmlFor="postcode" className="block mb-1 text-sm font-semibold text-gray-500">
                                                     Phường / Xã</label>
+                                            </div>
+                                                
                                                 <div className="" >
                                                     <select id="" className="form-select mt-1 block w-full pt-2 pb-2" onChange={e => setvillageName(e.target.options[e.target.selectedIndex].text)} id="">
                                                         <option value="0">Choose</option>
@@ -220,8 +268,16 @@ function List({ isLoggedIn, user, dispatch }) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="relative pt-3 xl:pt-6"><label htmlFor="note" className="block mb-3 text-sm font-semibold text-gray-500"> Notes
-                                            (Optional)</label><textarea name="note" className="flex items-center w-full px-4 py-3 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-600" rows={4} placeholder="Notes for delivery" defaultValue={""} />
+                                        <div className="relative pt-3 xl:pt-6">
+                                            <div className="flex">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                                </svg>
+                                                <label htmlFor="note" className="block mb-1 text-sm font-semibold text-gray-500"> Notes
+                                                </label>
+                                            </div>
+
+                                            <textarea name="note" className="flex items-center w-full px-4 py-3 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-600" rows={4} placeholder="Notes for delivery" defaultValue={""} />
                                         </div>
                                         <div className="pt-3">
                                             <FormControl component="fieldset">

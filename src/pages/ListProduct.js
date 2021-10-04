@@ -149,19 +149,24 @@ function List({ isLoggedIn, user, dispatch }) {
           </Breadcrumbs>
         </div>
         <div className="wrapper">
-          <div className="d-lg-flex align-items-lg-center pt-2">
+          <div className="flex justify-around border-b py-1 border-t items-center md:hidden">
+            <div className="hover:text-red-500"><span className="font-mono">Phổ biến</span></div>
+            <hr className="w-px h-6 bg-gray-200 mx-3" />
+            <div className="hover:text-red-500"><span className="font-mono" >Mới nhất</span></div>
+            <hr className="w-px h-6 bg-gray-200 mx-3" />
+            <div className="hover:text-red-500"><span className="font-mono">Bán chạy</span></div>
+            <hr className="w-px h-6 bg-gray-200 mx-3" />
+            <div className="flex items-center hover:text-red-500">
+              <span className="font-mono">Giá</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+              </svg>
+            </div>
+          </div>
+          <div className=" align-items-lg-center pt-2 md:flex hidden">
             <div className="form-inline d-flex align-items-center my-2 mr-lg-2 radio bg-light border"> <label className="options">Most Popular <input type="radio" name="radio" checked={!isCheap} onClick={() => { setisCheap(false) }} /> <span className="checkmark" /> </label> <label className="options">Cheapest <input type="radio" name="radio" checked={isCheap} onClick={() => { setisCheap(true) }} /> <span className="checkmark" /> </label> </div>
           </div>
-          <div id="mobile-filter">
-            {/* <div className="py-3">
-                  <h5 className="font-weight-bold">Categories</h5>
-                  <ul className="list-group">
-                    <li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> vegetables <span className="badge badge-primary badge-pill">328</span> </li>
-                    <li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Fruits <span className="badge badge-primary badge-pill">112</span> </li>
-                    <li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Kitchen Accessories <span className="badge badge-primary badge-pill">32</span> </li>
-                    <li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Chefs Tips <span className="badge badge-primary badge-pill">48</span> </li>
-                  </ul>
-                </div> */}
+          <div id="mobile-filter" className="hidden">
             <div className="py-3 border-b border-gray-300">
               <h5 className="font-weight-bold">Giá</h5>
               <ul className="list-group">
@@ -216,15 +221,6 @@ function List({ isLoggedIn, user, dispatch }) {
           </div>
           <div className="content py-md-0 py-3">
             <section id="sidebar">
-              {/* <div className="py-3">
-                    <h5 className="font-weight-bold">Categories</h5>
-                    <ul className="list-group">
-                      <li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> vegetables <span className="badge badge-primary badge-pill">328</span> </li>
-                      <li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Fruits <span className="badge badge-primary badge-pill">112</span> </li>
-                      <li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Kitchen Accessories <span className="badge badge-primary badge-pill">32</span> </li>
-                      <li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Chefs Tips <span className="badge badge-primary badge-pill">48</span> </li>
-                    </ul>
-                  </div> */}
               <div className="py-3 border-b border-gray-300">
                 <h5 className="font-weight-bold">Giá</h5>
                 <ul className="list-group ">
@@ -278,39 +274,11 @@ function List({ isLoggedIn, user, dispatch }) {
               </div>
             </section> {/* Products Section */}
             <section id="products">
-              {/* <div className="container min-h-1/625 py-3">
-                <div className="row">
-                  {list.map((row) => (
-                    <div key={row.id} className="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-md-0 pt-4" onClick={() => { history.push("/detail/id/" + row.id) }}>
-                      <div className="card"> <img className="card-img-top" src={link + row.avatarUrl} />
-                        <div className="card-body">
-                          <h6 className="font-weight-bold pt-1">{row.name}</h6>
-                          <div className="text-muted description">Space for small product description</div>
-                          <div className="d-flex align-items-center product">
-                            <span className="fas fa-star text-#fb0" />
-                            <span className="fas fa-star text-#fb0" />
-                            <span className="fas fa-star text-#fb0" />
-                            <span className="fas fa-star text-#fb0" />
-                            <span className="far fa-star" />
-                          </div>
-                          <div className="d-flex align-items-center justify-content-between pt-3">
-                            <div className="d-flex flex-column">
-                              <div className="h6 font-weight-bold text-orange-500">{formatter.format(row.retailPrice)} đ</div>
-                              <div className="text-muted rebate line-through">{formatter.format(row.oldPrice)} đ</div>
-                            </div>
-                            <div className="btn btn-primary">Buy now</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div> */}
               <div className="container mx-auto min-h-1/625">
                 <div className="flex flex-wrap -mx-4">
                   {list.map((row) => (
 
-                    <div key={row.id} className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4 cursor-pointer" onClick={() => { history.push("/detail/" + row.id) }}>
+                    <div key={row.id} className="w-1/2 md:w-1/3 xl:w-1/4  p-1 md:p-4 cursor-pointer" onClick={() => { history.push("/detail/" + row.id) }}>
                       <a className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
                         <div className="relative pb-48 overflow-hidden">
                           <img className="absolute inset-0 h-full w-full object-cover" src={link + row.avatarUrl} alt="" />
@@ -318,7 +286,7 @@ function List({ isLoggedIn, user, dispatch }) {
                         <div className="p-4">
                           <span className="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
                           <h2 className="mt-2 mb-2  font-bold">{row.name}</h2>
-                          <p className="text-sm"> {row.description}</p>
+                          <p className="text-sm truncate"> {row.description}</p>
                           <div className="mt-3 flex items-center">
                             <span className="font-bold text-xl">{formatter.format(row.retailPrice)} <u className="text-xl text-black">đ</u></span>
                           </div>
@@ -338,12 +306,11 @@ function List({ isLoggedIn, user, dispatch }) {
                           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 fill-current text-yellow-500"><path fill={((row.productFeedBack.reduce((a,v) =>  a = a + v.rateNumber , 0 ))/row.productFeedBack.length>=2.5 || row.productFeedBack.length==0)?"#ffbb00":""} d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z" /></svg>
                           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 fill-current text-yellow-500"><path fill={((row.productFeedBack.reduce((a,v) =>  a = a + v.rateNumber , 0 ))/row.productFeedBack.length>=3.5 || row.productFeedBack.length==0)?"#ffbb00":""} d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z" /></svg>
                           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 fill-current text-gray-400"><path fill={((row.productFeedBack.reduce((a,v) =>  a = a + v.rateNumber , 0 ))/row.productFeedBack.length>=4.5 || row.productFeedBack.length==0)?"#ffbb00":""} d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z" /></svg>
-                          <span className="ml-2">{row.productFeedBack.length} đánh giá</span>
+                          <span className="ml-2 hidden md:block">{row.productFeedBack.length} đánh giá</span>
                         </div>
                       </a>
                     </div>
                   ))}
-
                 </div>
               </div>
               <div className="mb-2">

@@ -17,9 +17,6 @@
     .thumb img{
         height:3rem !important;
     }
-    .carousel.carousel-slider{
-        height: 29rem;
-    }
     li.MuiBreadcrumbs-li{
         max-width: 30%;
         overflow: hidden;

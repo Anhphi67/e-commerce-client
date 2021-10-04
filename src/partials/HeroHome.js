@@ -6,12 +6,16 @@ function HeroHome() {
   const data = [
     {
       image: "https://api.pichistudio.vn/images/Slide_1.png",
+      caption: ""
     },
     {
       image: "https://api.pichistudio.vn/images/Slide_2.png",
+      caption: ""
+
     },
     {
       image: "https://api.pichistudio.vn/images/Slide_3.png",
+      caption: ""
     }
   ];
 

@@ -14,9 +14,8 @@ const Layout = ({ children }) => {
         <div>
           <Header />
         </div>
-        <div className="justify-around md:block sm:hidden  mx-auto md:px-5 sm:px-0">
-          <Menu />
-        </div>
+        {/* <div className="justify-around md:block sm:hidden  mx-auto md:px-5 sm:px-0">
+        </div> */}
       </div>
       <main>{children}</main>
       <div>

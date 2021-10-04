@@ -54,11 +54,11 @@ function SignUp({message, dispatch}) {
       <main className="flex-grow">
         <section className="bg-gradient-to-b from-gray-100 to-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+            <div className="pt-4 pb-6 md:pb-20">
               {/* Page header */}
-              <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+              <div className="max-w-3xl mx-auto text-center pb-2">
                 <h1 className="h1">
-                  Welcome. We exist to make entrepreneurism easier.
+                  Welcome to Pichistudio
                 </h1>
               </div>
 
