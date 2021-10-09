@@ -93,7 +93,7 @@ function UserProfile({ isLoggedIn, user, dispatch }) {
       <Layout>
         <main className="flex-grow">
           <div className="w-full mx-auto px-4 sm:px-6 ">
-            <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-3 sm:px-6 ">
+            <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-2 sm:px-6 ">
               <Breadcrumbs aria-label="breadcrumb">
                 <Link color="inherit" to={"/"}>
                   Trang chủ

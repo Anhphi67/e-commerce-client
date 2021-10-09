@@ -75,8 +75,8 @@ function List() {
         <div>
             <Layout>
                 <main className="flex-grow">
-                <div className="w-full mx-auto px-4 sm:px-6 ">
-                        <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-3 sm:px-6 ">
+                <div className="w-full mx-auto px-4 ">
+                        <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200 p-2 sm:px-6 ">
                             <Breadcrumbs aria-label="breadcrumb">
                                 <Link color="inherit" to={"/"}>
                                     Trang chủ
@@ -92,14 +92,14 @@ function List() {
                         <div className="md:flex shadow-md">
                             <div className="md:w-3/4 w-full bg-white md:px-10 px-4 pb-10">
                                 <div className="flex justify-between border-b pb-8">
-                                    <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-                                    <h2 className="font-semibold text-2xl">{numItem} Items</h2>
+                                    <h1 className="font-semibold text-2xl">Giỏ hàng</h1>
+                                    <h2 className="font-semibold text-2xl">{numItem} sản phẩm</h2>
                                 </div>
                                 <div className="flex mt-10 mb-5">
-                                    <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
-                                    <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">Quantity</h3>
-                                    <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">Price</h3>
-                                    <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
+                                    <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Sản phẩm</h3>
+                                    <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">Số lượng</h3>
+                                    <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">Giá</h3>
+                                    <h3 className="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">Thành tiền</h3>
                                 </div>
                                 {list.map((row) => (
                                     <div key={row.id} className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
@@ -122,13 +122,13 @@ function List() {
                                 ))}
                                 <a href="/" className="cursor-pointer flex font-semibold text-indigo-600 text-sm mt-10">
                                     <svg className="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" /></svg>
-                                    Continue Shopping
+                                    Tiếp tục mua hàng
                                 </a>
                             </div>
                             <div id="summary" className=" md:w-1/4 w-full px-8 pb-10">
-                                <h1 className="font-semibold text-2xl border-b pb-8">Order Summary</h1>
+                                <h1 className="font-semibold text-2xl border-b pb-8">Tổng giỏ hàng</h1>
                                 <div className="flex justify-between mt-10 mb-2">
-                                    <span className="font-semibold text-sm uppercase">Items {numItem}</span>
+                                    <span className="font-semibold text-sm uppercase">{numItem} sản phẩm</span>
                                     <span className="font-semibold text-sm">{formatter.format(invoiceSubtotal)} đ</span>
                                 </div>
                                 <div className="flex justify-between">
@@ -136,15 +136,15 @@ function List() {
                                     <span className="mr-5">+</span>
                                 </div>
                                 <div className="flex justify-between mt-2">
-                                    <span className="font-semibold text-sm">VAT Tax</span>
+                                    <span className="font-semibold text-sm">Thuế VAT</span>
                                     <span className="font-semibold text-sm">{formatter.format(invoiceSubtotal)} * {TAX_RATE*100} %</span>
                                 </div>
                                 <div className="border-t mt-8">
                                     <div className="flex font-semibold justify-between py-6 text-sm">
-                                        <span>Total cost</span>
+                                        <span>Tổng tiền</span>
                                         <span>{formatter.format(invoiceTotal)} đ</span>
                                     </div>
-                                    <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full" onClick={() => { history.push("/payment") }}>Checkout</button>
+                                    <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full" onClick={() => { history.push("/payment") }}>Đến trang thanh toán</button>
                                 </div>
                             </div>
                         </div>

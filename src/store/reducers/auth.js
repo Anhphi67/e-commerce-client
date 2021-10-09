@@ -8,8 +8,8 @@ import {
   
   const user = JSON.parse(localStorage.getItem("user"));
   const initialState = user
-    ? { isLoggedIn: true, user }
-    : { isLoggedIn: false, user: null };
+    ? { isLoggedIn: true, user,cart:0 }
+    : { isLoggedIn: false, user: null,cart:0 };
   
   export default function (state = initialState, action) {
     const { type, payload } = action;

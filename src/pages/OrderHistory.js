@@ -35,13 +35,13 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                 '/Order/getUiList?Page=' + page + '&RowsPerPage=5&FilterKeyword=' + sta,
             ).then(res => {
                 setList(res.data.result.results);
-                setMaxPage((res.data.result.totalCount / 5)+1)
+                setMaxPage(parseInt((res.data.result.totalCount / 10)) + (parseInt((res.data.result.totalCount / 10))==0?1:0))
 
             })
                 .catch(err => {
-                    if (err.status="401"){
+                    if (err.status = "401") {
                         alert("Phiên đăng nhập hết hạn, vui lòng đăng nhập lại ")
-                    }else{
+                    } else {
                         alert(err.data.errors)
                     }
                 })
@@ -64,7 +64,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
             <Layout>
                 <main className="flex-grow">
                     <div className="w-full mx-auto px-4 sm:px-6 ">
-                        <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-3 sm:px-6 ">
+                        <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-2 sm:px-6 ">
                             <Breadcrumbs aria-label="breadcrumb">
                                 <Link color="inherit" to={"/"}>
                                     Trang chủ
@@ -92,7 +92,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                             </div>
                                             <div className="flex-1">
                                                 <h3 className="font-bold md:text-2xl text-xl font-mono ">{formatter.format(rpt.totalPrice)} đ</h3>
-                                                <h5 className="font-bold text-gray-500">Tổng chi tiêu</h5>
+                                                <h5 className="font-bold text-gray-500  text-sm md:text-base">Tổng chi tiêu</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                             </div>
                                             <div className="flex-1">
                                                 <h3 className="font-bold text-2xl text-center font-mono">{rpt.totalOrder}</h3>
-                                                <h5 className="font-bold text-gray-500" >Đơn đang xử lý</h5>
+                                                <h5 className="font-bold text-gray-500  text-sm md:text-base" >Đơn đang xử lý</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                             </div>
                                             <div className="flex-1">
                                                 <h3 className="font-bold text-2xl text-center font-mono">{rpt.cancelOrder} </h3>
-                                                <h5 className="font-bold text-gray-500" >Đơn đã hủy</h5>
+                                                <h5 className="font-bold text-gray-500  text-sm md:text-base" >Đơn đã hủy</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
                                             </div>
                                             <div className="flex-1">
                                                 <h3 className="font-bold text-2xl text-center font-mono">{rpt.finnishOrder}</h3>
-                                                <h5 className="font-bold text-gray-500" >Đơn hoàn thành</h5>
+                                                <h5 className="font-bold text-gray-500 text-sm md:text-base" >Đơn hoàn thành</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -154,45 +154,81 @@ function OrderHistory({ isLoggedIn, user, dispatch }) {
 
                             </div>
                         </div>
-                        <div className="md:w-3/4 w-full h-auto pt-4 mt-2 mb-2 bg-gray-100 shadow-sm">
+                        <div className="md:w-3/4 w-full h-auto pt-0 mt-2 mb-2 shadow-sm">
                             <div className="min-h-1/2">
-                                {list.map((lst) => (
-                                    <div key={lst.id} className="w-98/100  h-auto pt-2 ml-2 mr-2 bg-white shadow-sm mb-4">
-                                        <div className="md:flex border-b">
-                                            <div className="ml-2 md:w-2/3">
-                                                <label><b>Mã đơn hàng</b>  : </label> <a className="text-blue-600">{lst.code}</a>
-                                                <br />
-                                                <label><b>Người nhận</b> : {lst.receivingPerson}</label>
-                                                <br />
-                                                <label><b>Địa chỉ nhận</b> : </label> <label><i>{lst.receivingAddress}</i></label>
-
-                                            </div>
-                                            <div className="ml-2 md:ml-0 md:w-1/3">
-                                                <span ><b>Đặt ngày</b> : </span><span className="text-blue-600">{formatDate(lst.s_CreatedDate)}</span>
-                                                <br />
-                                                <span><b>Số điện thoại</b> : </span><span className="text-blue-600"> {lst.receivingPhone}</span>
-                                                <br />
-                                                <span><b>Trạng thái</b> : </span><span className={lst.status=="Canceled"?"text-red-600":"text-blue-600"}> {lst.status}</span>
-                                            </div>
-                                        </div>
-                                        <div className="flex">
-                                            <div className="ml-2 pt-3 w-1/2">
-                                                <label><b>Tổng tiền</b> : </label> <label className="text-blue-600 font-bold"> {formatter.format(lst.sumPrice)} đ</label>
-                                            </div>
-                                            <div className="w-1/2 flex justify-end mt-1 mb-1 mr-2">
-                                                <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-2 rounded inline-flex items-center">
-                                                    <svg className="h-8 w-8 text-black" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <line x1="5" y1="12" x2="19" y2="12" />  <line x1="15" y1="16" x2="19" y2="12" />  <line x1="15" y1="8" x2="19" y2="12" /></svg>
-                                                    <span onClick={() => { history.push("/orderDetail/" + lst.id) }} >Order Detail</span>
-                                                </button>
+                                <div className="flex justify-center mx-auto pb-2">
+                                    <div className="flex flex-col w-full">
+                                        <div className="w-full overflow-x-auto">
+                                            <div className="border-b border-gray-200 shadow">
+                                                <table>
+                                                    <thead className="bg-gray-100">
+                                                        <tr>
+                                                            <th className=" px-6 py-2 text-xs text-gray-500 whitespace-no-wrap">
+                                                                Mã đơn hàng
+                                                            </th>
+                                                            <th className="px-6 py-2 text-xs text-gray-500 whitespace-no-wrap">
+                                                                Người mua
+                                                            </th>
+                                                            <th className="px-6 py-2 text-xs text-gray-500 whitespace-no-wrap">
+                                                                Địa chỉ
+                                                            </th>
+                                                            <th className="px-6 py-2 text-xs text-gray-500 whitespace-no-wrap">
+                                                                Ngày mua
+                                                            </th>
+                                                            <th className="px-6 py-2 text-xs text-gray-500 whitespace-no-wrap">
+                                                                Tổng tiền
+                                                            </th>
+                                                            <th className="px-6 py-2 text-xs text-gray-500 whitespace-no-wrap">
+                                                                Trạng thái
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="bg-white">
+                                                        {list.map((lst) => (
+                                                            <tr key={lst.id} className="whitespace-nowrap">
+                                                                <td className="px-3 py-4 text-sm text-gray-500">
+                                                                    <a onClick={() => { history.push("/orderDetail/" + lst.id) }} className="cursor-pointer px-4 py-1 text-sm text-blue-400 ">{lst.code}</a>
+                                                                </td>
+                                                                <td className="px-3 py-4">
+                                                                    <div className="text-sm text-gray-900">
+                                                                        {lst.receivingPerson}
+                                                                    </div>
+                                                                </td>
+                                                                <td className="px-3 py-4">
+                                                                    <div className="text-sm text-gray-500"><i>{lst.receivingAddress}</i></div>
+                                                                </td>
+                                                                <td className="px-3 py-4 text-sm text-gray-500">
+                                                                    {formatDate(lst.s_CreatedDate)}
+                                                                </td>
+                                                                <td className="px-3 py-4 text-right">
+                                                                    <span>{formatter.format(lst.sumPrice)}</span>
+                                                                </td>
+                                                                <td className="px-3 py-4">
+                                                                    {lst.status == "Canceled" ? (
+                                                                        <a className="px-4 py-1 text-sm text-white bg-red-400 rounded">{lst.status}</a>
+                                                                    ) : null}
+                                                                    {lst.status == "Processing" ? (
+                                                                        <a className="px-4 py-1 text-sm text-white bg-blue-500 rounded">{lst.status}</a>
+                                                                    ) : null}
+                                                                    {lst.status == "Completed" ? (
+                                                                        <a className="px-4 py-1 text-sm text-white bg-green-500 rounded">{lst.status}</a>
+                                                                    ) : null}
+                                                                    {lst.status == "Received" ? (
+                                                                        <a className="px-4 py-1 text-sm text-white bg-gray-500 rounded">{lst.status}</a>
+                                                                    ) : null}
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
-
-                                ))}
+                                </div>
 
                             </div>
-                            <div className="mb-2">
-                                <Pagination count={10} page={page} onChange={handleChange} />
+                            <div className="mb-2 pb-2">
+                                <Pagination count={maxpage} page={page} onChange={handleChange} />
                             </div>
 
                         </div>

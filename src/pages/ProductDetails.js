@@ -117,10 +117,6 @@ function List({ isLoggedIn, user, dispatch }) {
   const [imgUrl, setimgUrl] = React.useState("");
   const [openTab, setOpenTab] = React.useState(1);
   useEffect(() => {
-    // async function fetchData() {
-    //   setdtlImage(await getData());
-    // }
-    // fetchData();
     instance.get(
       '/Product/GetDetail?id=' + id + '',
     ).then(result => {
@@ -132,20 +128,6 @@ function List({ isLoggedIn, user, dispatch }) {
     });
   }, []);
   var arr = undefined
-
-  async function getData() {
-    try {
-      const response = await instance.get(
-        '/Product/GetDetail?id=' + id + '')
-      arr = response.data.result.imageUrl.split(",")
-      for (var i = 0; i < arr.length; i++) {
-        arr[i] = config.Image + arr[i]
-      }
-      return await arr.map((image) => ({ image }))
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   //
   const [dtlImage, setdtlImage] = React.useState([]);
@@ -160,6 +142,7 @@ function List({ isLoggedIn, user, dispatch }) {
   };
   const classes = useStyles();
   function AddToCart(id) {
+    debugger
     if (isLoggedIn) {
       var obj = {
         "quantity": count,
@@ -209,8 +192,8 @@ function List({ isLoggedIn, user, dispatch }) {
       <Layout>
         <main className="flex-grow">
           <div className="w-full flex mx-auto px-4 sm:px-6 ">
-            <div className="flex w-full h-auto justify-between breakcrum pb-2">
-              <div className="pt-2 ">
+            <div className="flex w-full h-auto justify-between breakcrum pb-2 bg-gray-200 px-6">
+              <div className="pt-2">
                 <Breadcrumbs aria-label="breadcrumb" className="uppercase">
                   <Link color="inherit" to="/">
                     Trang chủ
@@ -228,7 +211,7 @@ function List({ isLoggedIn, user, dispatch }) {
           </div>
           <section className="bg-white-to-b from-gray-100 to-white">
             <div className="w-full md:flex mx-auto px-4 sm:px-6">
-              <div className="md:w-1/2 sm:full h-auto mr-2  pt-2 md:pt-10 ">
+              <div className="md:w-1/2 sm:full h-auto mr-2  pt-2 md:pt-5 ">
                 <Carousel interval="2000" showStatus={false} transitionTime="1000" thumbWidth="18.8%" className="w-full h-full">
                   {dtlImage.map((item) => (
                     <div key={item} className="w-full  m-auto h-full md:min-h-120 md:max-h-120">
@@ -238,40 +221,18 @@ function List({ isLoggedIn, user, dispatch }) {
                 </Carousel>
 
               </div>
-              <div className="md:w-1/2 ml-4 sm:full h-auto ">
-                <span className="pt-8 font-bold text-xl" >{detail.name}</span>
+              <div className="md:w-1/2 ml-4 sm:full h-auto md:pt-5">
+                <span className="font-bold text-xl" >{detail.name}</span>
                 <div className=" text-red-600 mt-2">
                   <span className="mt-2 mb-2 font-bold text-lg font-sans"> {formatter.format(count * detail.retailPrice)} VNĐ</span>
                 </div>
                 <div className="flex items-center mt-2 mb-2">
-                  {/* <ButtonGroup  >
-                    <Button
-                      aria-label="reduce"
-                      onClick={() => {
-                        setCount(Math.max(count - 1, 0));
-                      }}
-                    >
-                      <RemoveIcon fontSize="small" />
-                    </Button>
-                    <TextField id="outlined-basic" color="secondary" className="w-12" size="small" value={count} variant="outlined" />
-                    <Button
-                      aria-label="increase"
-                      onClick={() => {
-                        setCount(count + 1);
-                      }}
-                    >
-                      <AddIcon fontSize="small" />
-                    </Button>
-
-                  </ButtonGroup> */}
-
                   <div className="flex">
                     <button className="text-base  rounded-r-none  hover:scale-110 focus:outline-none items-center flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
         hover:bg-teal-700 hover:text-teal-100 
-        bg-teal-100 
         text-teal-700 
         border duration-200 ease-in-out 
-        border-teal-600 transition"
+         transition"
                       onClick={() => {
                         setCount(count - 1);
                       }}
@@ -283,10 +244,9 @@ function List({ isLoggedIn, user, dispatch }) {
                     <input className="appearance-none border rounded-none w-12 py-2 text-center text-gray-700 leading-tight" onChange={(event) => { setCount(event.target.value) }} type="text" value={count} />
                     <button className="text-base  rounded-l-none items-center hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
         hover:bg-teal-700 hover:text-teal-100 
-        bg-teal-100 
         text-teal-700 
         border duration-200 ease-in-out 
-        border-teal-600 transition"
+         transition"
                       onClick={() => {
                         setCount(count + 1);
                       }}
@@ -326,308 +286,194 @@ function List({ isLoggedIn, user, dispatch }) {
                   </div>
                 </div>
                 <div className="mt-4">
-                  {/* <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                    <Tab className="font-bold" label="Chi tiết" {...a11yProps(0)} />
-                    <Tab className="font-bold" label="Giao hàng và thanh toán" {...a11yProps(1)} />
-                    <Tab className="font-bold" label="Đánh giá" {...a11yProps(2)} />
-                  </Tabs>
-                  <TabPanel value={value} index={0} className="bg-white">
-                    <ul>
-                      <li>Chất liệu: decal Vinyl cán màn nhám (Matte)</li>
-                      <li>Mực in: cao cấp an toàn cho sức khỏe cho màu in sắc nét, rực rỡ.</li>
-                      <li>Lớp keo: không bong tróc, độ bền trên 1 năm hoặc hơn nếu không bị va chạm mạnh. Dễ dàng lột ra và không để lại keo.</li>
-                      <li>Ưu điểm: chống trầy (Anti Scratch), chống thấm nước (Waterproof) 100%, không phai màu dưới ánh nắng (Sun Protection).</li>
-                      <li>Ứng dụng: dán nón bảo hiểm, laptop, xe đạp, xe máy, tủ lạnh, tủ quần áo, vali, ps4, máy tính, laptop,..</li>
-                      <li>Kích thước: 10x15cm / sheet, từ 5-7cm / sticker</li>
-                    </ul>
-                  </TabPanel>
-                  <TabPanel value={value} index={1} className="bg-white">
-                    <ul>
-                      <li>I. PHẠM VI GIAO HÀNG:</li>
-                      <li>VIETNAM OUTFITTER Áp dụng hình thức giao hàng (ship) cho khách trên toàn quốc với đơn hàng từ 100.000 Đồng.
-                        Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn hàng, sau khi giảm, giá trị đơn hàng cũng phải từ 100.000 Đồng .</li>
-                    </ul>
-                  </TabPanel>
-                  <TabPanel value={value} index={2} className="border-gray-200 border-solid border bg-white">
-                    <div >
-                      <div className="">
-                        <div className=" flex w-full md:justify-end justify-center ">
-                          <Button
-                            variant="outlined"
-                            className={classes.button}
-                            startIcon={<FeedbackIcon />}
-                            onClick={() => { setRaq(true) }}
-                          >
-                            Đánh giá
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            className={classes.button}
-                            startIcon={<ContactSupportIcon />}
-                            onClick={() => { setRaq(false) }}
-                          >
-                            Câu hỏi
-                          </Button></div>
 
-                      </div>
-                      <div style={{ display: raq ? "block" : "none" }}>
-                        <div className="md:flex justify-around p-2">
-                          <TextField id="outlined-basic" className="w-full pb-2 md:pb-0" size="small" label="Họ và Tên" variant="outlined" />
-                          <TextField id="outlined-basic" className="w-full" size="small" label="Số điện thoại" variant="outlined" />
-                        </div>
-                        <div className="p-2">
-                          <TextField id="outlined-basic" className="w-full" size="small" label="Email" variant="outlined" />
-                        </div>
-                        <div>
-                          <div className="p-2 flex">
-                            <span>Đánh giá</span>
-                            <Rating className="pl-2"
-                              name="simple-controlled"
-                              value={rate}
-                              onChange={(event, newValue) => {
-                                setRate(newValue);
-                              }}
-                            />
-                          </div>
-                          <div className="p-2">
-                            <TextField id="outlined-basic" fullWidth={true} size="small" label="Tiêu đề đánh giá" variant="outlined" />
-                          </div>
-                          <div className="p-2">
-                            <textarea id="story" name="story" className="w-full rounded-sm border-gray-300 border-solid border"
-                              rows="5" cols="33">
-                            </textarea>
-                          </div>
-                          
-                        </div>
-                        <div className="flex justify-end">
-                            <Button
-                              variant="outlined"
-                              className={classes.button}
-                              startIcon={<SendIcon />}
-                            >
-                              Gửi đánh giá
-                            </Button>
-                          </div>
-
-                      </div>
-                      <div style={{ display: !raq ? "block" : "none" }}>
-                        <div className="md:flex justify-around p-2">
-                          <TextField id="outlined-basic" className="w-full pb-2 md:pb-0" size="small" label="Họ và Tên" variant="outlined" />
-                          <TextField id="outlined-basic" className="w-full" size="small" label="Số điện thoại" variant="outlined" />
-                        </div>
-                        <div className="p-2">
-                          <TextField id="outlined-basic" className="w-full" size="small" label="Email" variant="outlined" />
-                        </div>
-                        <div>
-                          <div className="p-2">
-                            <span>Nội dung câu hỏi</span>
-                          </div>
-                          <div className="p-2">
-                            <textarea id="story" name="story" className="w-full rounded-sm border-gray-300 border-solid border"
-                              rows="5" cols="33">
-                            </textarea>
-                          </div>
-                          <div className="float-right">
-                            <Button
-                              variant="outlined"
-                              className={classes.button}
-                              startIcon={<ContactSupportIcon />}
-                            >
-                              Gửi câu hỏi
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-                  </TabPanel> */}
                   <div className="flex flex-wrap">
-        <div className="w-full">
-          <ul
-            className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
-            role="tablist"
-          >
-            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-              <a
-                className={
-                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
-                  (openTab === 1
-                    ? "text-white bg-gray-600"
-                    : "text-gray-600 bg-white")
-                }
-                onClick={e => {
-                  e.preventDefault();
-                  setOpenTab(1);
-                }}
-                data-toggle="tab"
-                href="#link1"
-                role="tablist"
-              >
-                Chi tiết
-              </a>
-            </li>
-            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-              <a
-                className={
-                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
-                  (openTab === 2
-                    ? "text-white bg-gray-600"
-                    : "text-gray-600 bg-white")
-                }
-                onClick={e => {
-                  e.preventDefault();
-                  setOpenTab(2);
-                }}
-                data-toggle="tab"
-                href="#link2"
-                role="tablist"
-              >
-                 Giao hàng 
-              </a>
-            </li>
-            <li className="-mb-px last:mr-0 flex-auto text-center">
-              <a
-                className={
-                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
-                  (openTab === 3
-                    ? "text-white bg-gray-600"
-                    : "text-gray-600 bg-white")
-                }
-                onClick={e => {
-                  e.preventDefault();
-                  setOpenTab(3);
-                }}
-                data-toggle="tab"
-                href="#link3"
-                role="tablist"
-              >
-                 Đánh giá
-              </a>
-            </li>
-          </ul>
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-            <div className="px-4 py-5 flex-auto">
-              <div className="tab-content tab-space">
-                <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                <ul>
-                      <li>Chất liệu: decal Vinyl cán màn nhám (Matte)</li>
-                      <li>Mực in: cao cấp an toàn cho sức khỏe cho màu in sắc nét, rực rỡ.</li>
-                      <li>Lớp keo: không bong tróc, độ bền trên 1 năm hoặc hơn nếu không bị va chạm mạnh. Dễ dàng lột ra và không để lại keo.</li>
-                      <li>Ưu điểm: chống trầy (Anti Scratch), chống thấm nước (Waterproof) 100%, không phai màu dưới ánh nắng (Sun Protection).</li>
-                      <li>Ứng dụng: dán nón bảo hiểm, laptop, xe đạp, xe máy, tủ lạnh, tủ quần áo, vali, ps4, máy tính, laptop,..</li>
-                      <li>Kích thước: 10x15cm / sheet, từ 5-7cm / sticker</li>
-                    </ul>
-                </div>
-                <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                <ul>
-                      <li>I. PHẠM VI GIAO HÀNG:</li>
-                      <li>VIETNAM OUTFITTER Áp dụng hình thức giao hàng (ship) cho khách trên toàn quốc với đơn hàng từ 100.000 Đồng.
-                        Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn hàng, sau khi giảm, giá trị đơn hàng cũng phải từ 100.000 Đồng .</li>
-                    </ul>
-                </div>
-                <div className={openTab === 3 ? "block" : "hidden"} id="link3">
-                <div >
-                      <div className="">
-                        <div className=" flex w-full md:justify-end justify-between ">
-                          <Button
-                            variant="outlined"
-                            className={classes.button}
-                            startIcon={<FeedbackIcon />}
-                            onClick={() => { setRaq(true) }}
+                    <div className="w-full">
+                      <ul
+                        className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+                        role="tablist"
+                      >
+                        <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                          <a
+                            className={
+                              "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                              (openTab === 1
+                                ? "text-white bg-gray-600"
+                                : "text-gray-600 bg-white")
+                            }
+                            onClick={e => {
+                              e.preventDefault();
+                              setOpenTab(1);
+                            }}
+                            data-toggle="tab"
+                            href="#link1"
+                            role="tablist"
+                          >
+                            Chi tiết
+                          </a>
+                        </li>
+                        <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                          <a
+                            className={
+                              "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                              (openTab === 2
+                                ? "text-white bg-gray-600"
+                                : "text-gray-600 bg-white")
+                            }
+                            onClick={e => {
+                              e.preventDefault();
+                              setOpenTab(2);
+                            }}
+                            data-toggle="tab"
+                            href="#link2"
+                            role="tablist"
+                          >
+                            Giao hàng
+                          </a>
+                        </li>
+                        <li className="-mb-px last:mr-0 flex-auto text-center">
+                          <a
+                            className={
+                              "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                              (openTab === 3
+                                ? "text-white bg-gray-600"
+                                : "text-gray-600 bg-white")
+                            }
+                            onClick={e => {
+                              e.preventDefault();
+                              setOpenTab(3);
+                            }}
+                            data-toggle="tab"
+                            href="#link3"
+                            role="tablist"
                           >
                             Đánh giá
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            className={classes.button}
-                            startIcon={<ContactSupportIcon />}
-                            onClick={() => { setRaq(false) }}
-                          >
-                            Câu hỏi
-                          </Button></div>
+                          </a>
+                        </li>
+                      </ul>
+                      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                        <div className="px-4 py-5 flex-auto">
+                          <div className="tab-content tab-space">
+                            <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+                              <ul>
+                                <li>Chất liệu: decal Vinyl cán màn nhám (Matte)</li>
+                                <li>Mực in: cao cấp an toàn cho sức khỏe cho màu in sắc nét, rực rỡ.</li>
+                                <li>Lớp keo: không bong tróc, độ bền trên 1 năm hoặc hơn nếu không bị va chạm mạnh. Dễ dàng lột ra và không để lại keo.</li>
+                                <li>Ưu điểm: chống trầy (Anti Scratch), chống thấm nước (Waterproof) 100%, không phai màu dưới ánh nắng (Sun Protection).</li>
+                                <li>Ứng dụng: dán nón bảo hiểm, laptop, xe đạp, xe máy, tủ lạnh, tủ quần áo, vali, ps4, máy tính, laptop,..</li>
+                                <li>Kích thước: 10x15cm / sheet, từ 5-7cm / sticker</li>
+                              </ul>
+                            </div>
+                            <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+                              <ul>
+                                <li>I. PHẠM VI GIAO HÀNG:</li>
+                                <li>VIETNAM OUTFITTER Áp dụng hình thức giao hàng (ship) cho khách trên toàn quốc với đơn hàng từ 100.000 Đồng.
+                                  Trường hợp áp dụng mã giảm giá ( nếu có) , thì giá trị đơn hàng, sau khi giảm, giá trị đơn hàng cũng phải từ 100.000 Đồng .</li>
+                              </ul>
+                            </div>
+                            <div className={openTab === 3 ? "block" : "hidden"} id="link3">
+                              <div >
+                                <div className="">
+                                  <div className=" flex w-full md:justify-end justify-between ">
+                                    <Button
+                                      variant="outlined"
+                                      className={classes.button}
+                                      startIcon={<FeedbackIcon />}
+                                      onClick={() => { setRaq(true) }}
+                                    >
+                                      Đánh giá
+                                    </Button>
+                                    <Button
+                                      variant="outlined"
+                                      className={classes.button}
+                                      startIcon={<ContactSupportIcon />}
+                                      onClick={() => { setRaq(false) }}
+                                    >
+                                      Câu hỏi
+                                    </Button></div>
 
-                      </div>
-                      <div style={{ display: raq ? "block" : "none" }}>
-                        <div className="grid md:grid-cols-2 p-2">
-                          <TextField id="outlined-basic" className="w-full md:w-98/100 pb-2 md:pb-0" size="small" label="Họ và Tên" variant="outlined" />
-                          <TextField id="outlined-basic" className="w-full  " size="small" label="Số điện thoại" variant="outlined" />
-                        </div>
-                        <div className="p-2">
-                          <TextField id="outlined-basic" className="w-full" size="small" label="Email" variant="outlined" />
-                        </div>
-                        <div>
-                          <div className="p-2 flex">
-                            <span>Đánh giá</span>
-                            <Rating className="pl-2"
-                              name="simple-controlled"
-                              value={rate}
-                              onChange={(event, newValue) => {
-                                setRate(newValue);
-                              }}
-                            />
-                          </div>
-                          <div className="p-2">
-                            <TextField id="outlined-basic" fullWidth={true} size="small" label="Tiêu đề đánh giá" variant="outlined" />
-                          </div>
-                          <div className="p-2">
-                            <textarea id="story" name="story" className="w-full rounded-sm border-gray-300 border-solid border"
-                              rows="5" cols="33">
-                            </textarea>
-                          </div>
-                          
-                        </div>
-                        <div className="flex justify-end">
-                            <Button
-                              variant="outlined"
-                              className={classes.button}
-                              startIcon={<SendIcon />}
-                            >
-                              Gửi đánh giá
-                            </Button>
-                          </div>
+                                </div>
+                                <div style={{ display: raq ? "block" : "none" }}>
+                                  <div className="grid md:grid-cols-2 p-2">
+                                    <TextField id="outlined-basic" className="w-full md:w-98/100 pb-2 md:pb-0" size="small" label="Họ và Tên" variant="outlined" />
+                                    <TextField id="outlined-basic" className="w-full  " size="small" label="Số điện thoại" variant="outlined" />
+                                  </div>
+                                  <div className="p-2">
+                                    <TextField id="outlined-basic" className="w-full" size="small" label="Email" variant="outlined" />
+                                  </div>
+                                  <div>
+                                    <div className="p-2 flex">
+                                      <span>Đánh giá</span>
+                                      <Rating className="pl-2"
+                                        name="simple-controlled"
+                                        value={rate}
+                                        onChange={(event, newValue) => {
+                                          setRate(newValue);
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="p-2">
+                                      <TextField id="outlined-basic" fullWidth={true} size="small" label="Tiêu đề đánh giá" variant="outlined" />
+                                    </div>
+                                    <div className="p-2">
+                                      <textarea id="story" name="story" className="w-full rounded-sm border-gray-300 border-solid border"
+                                        rows="5" cols="33">
+                                      </textarea>
+                                    </div>
 
-                      </div>
-                      <div style={{ display: !raq ? "block" : "none" }}>
-                        <div className="md:flex justify-around p-2">
-                          <TextField id="outlined-basic" className="w-full pb-2 md:pb-0" size="small" label="Họ và Tên" variant="outlined" />
-                          <TextField id="outlined-basic" className="w-full" size="small" label="Số điện thoại" variant="outlined" />
-                        </div>
-                        <div className="p-2">
-                          <TextField id="outlined-basic" className="w-full" size="small" label="Email" variant="outlined" />
-                        </div>
-                        <div>
-                          <div className="p-2">
-                            <span>Nội dung câu hỏi</span>
-                          </div>
-                          <div className="p-2">
-                            <textarea id="story" name="story" className="w-full rounded-sm border-gray-300 border-solid border"
-                              rows="5" cols="33">
-                            </textarea>
-                          </div>
-                          <div className="float-right">
-                            <Button
-                              variant="outlined"
-                              className={classes.button}
-                              startIcon={<ContactSupportIcon />}
-                            >
-                              Gửi câu hỏi
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
+                                  </div>
+                                  <div className="flex justify-end">
+                                    <Button
+                                      variant="outlined"
+                                      className={classes.button}
+                                      startIcon={<SendIcon />}
+                                    >
+                                      Gửi đánh giá
+                                    </Button>
+                                  </div>
 
+                                </div>
+                                <div style={{ display: !raq ? "block" : "none" }}>
+                                  <div className="md:flex justify-around p-2">
+                                    <TextField id="outlined-basic" className="w-full pb-2 md:pb-0" size="small" label="Họ và Tên" variant="outlined" />
+                                    <TextField id="outlined-basic" className="w-full" size="small" label="Số điện thoại" variant="outlined" />
+                                  </div>
+                                  <div className="p-2">
+                                    <TextField id="outlined-basic" className="w-full" size="small" label="Email" variant="outlined" />
+                                  </div>
+                                  <div>
+                                    <div className="p-2">
+                                      <span>Nội dung câu hỏi</span>
+                                    </div>
+                                    <div className="p-2">
+                                      <textarea id="story" name="story" className="w-full rounded-sm border-gray-300 border-solid border"
+                                        rows="5" cols="33">
+                                      </textarea>
+                                    </div>
+                                    <div className="float-right">
+                                      <Button
+                                        variant="outlined"
+                                        className={classes.button}
+                                        startIcon={<ContactSupportIcon />}
+                                      >
+                                        Gửi câu hỏi
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                  </div>
                 </div>
 
               </div>
             </div>
-          </section>
+         </section>
 
         </main>
       </Layout>

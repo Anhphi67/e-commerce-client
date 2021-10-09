@@ -11,7 +11,7 @@ import MessengerCustomerChat from 'react-messenger-customer-chat';
 ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
-        <div className="md:px-20 px-2 flex flex-col min-h-screen overflow-hidden bg-gray-100">
+        <div className="md:px-20 px-2 flex flex-col min-h-screen overflow-hidden bg-white">
           <App />
           <MessengerCustomerChat
             pageId="777339822403967"

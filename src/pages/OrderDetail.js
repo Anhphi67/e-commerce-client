@@ -121,7 +121,7 @@ function OrderDetail({ isLoggedIn, user, dispatch }) {
             <Layout>
                 <main className="flex-grow">
                     <div className="w-full mx-auto px-4 sm:px-6 ">
-                        <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-3 sm:px-6 ">
+                        <div className="mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 items-start md:max-w-2xl lg:max-w-none bg-gray-200  p-2 sm:px-6 ">
                             <Breadcrumbs aria-label="breadcrumb">
                                 <Link color="inherit" to={"/"}>
                                     Trang chủ
@@ -149,7 +149,7 @@ function OrderDetail({ isLoggedIn, user, dispatch }) {
                                             </div>
                                             <div className="flex-1">
                                                 <h3 className="font-bold md:text-2xl text-xl font-mono ">{formatter.format(rpt.totalPrice)} đ</h3>
-                                                <h5 className="font-bold text-gray-500">Tổng chi tiêu</h5>
+                                                <h5 className="font-bold text-gray-500  text-sm md:text-base">Tổng chi tiêu</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -167,7 +167,7 @@ function OrderDetail({ isLoggedIn, user, dispatch }) {
                                             </div>
                                             <div className="flex-1">
                                                 <h3 className="font-bold text-2xl text-center font-mono">{rpt.totalOrder}</h3>
-                                                <h5 className="font-bold text-gray-500" >Đơn đang xử lý</h5>
+                                                <h5 className="font-bold text-gray-500  text-sm md:text-base" >Đơn đang xử lý</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@ function OrderDetail({ isLoggedIn, user, dispatch }) {
                                             </div>
                                             <div className="flex-1">
                                                 <h3 className="font-bold text-2xl text-center font-mono">{rpt.cancelOrder} </h3>
-                                                <h5 className="font-bold text-gray-500" >Đơn đã hủy</h5>
+                                                <h5 className="font-bold text-gray-500  text-sm md:text-base" >Đơn đã hủy</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@ function OrderDetail({ isLoggedIn, user, dispatch }) {
                                             </div>
                                             <div className="flex-1">
                                                 <h3 className="font-bold text-2xl text-center font-mono">{rpt.finnishOrder}</h3>
-                                                <h5 className="font-bold text-gray-500" >Đơn hoàn thành</h5>
+                                                <h5 className="font-bold text-gray-500  text-sm md:text-base" >Đơn hoàn thành</h5>
                                             </div>
                                         </div>
                                     </div>
